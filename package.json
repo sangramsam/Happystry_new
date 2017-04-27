@@ -1,0 +1,31 @@
+{
+  "name": "happystry",
+  "private": true,
+  "version": "0.1.0",
+  "description": "web application",
+  "main": "app.js",
+  "author": "Anand Tiwari <anandtiwari192@gmail.com>",
+  "contributors": [
+    "Anand Tiwari <anandtiwari192@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anand-tiwari/simplewebapp.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-svg-round-progressbar": "^1.1.0",
+    "angular-ui-router": "0.2.7",
+    "express": "^4.13.4",
+    "jquery": "^3.2.1"
+  },
+  "devDependencies": {},
+  "bugs": {
+    "url": "https://github.com/anand-tiwari/simplewebapp/issues"
+  },
+  "homepage": "https://github.com/anand-tiwari/simplewebapp#readme"
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html ng-app="Happystry">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <title>web application</title>
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="libs/components-font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!--     <link rel="stylesheet" href="app/styles/components.css" /> -->
+
+  </head>
+    <body>
+
+    
+    <div ui-view ></div>
+
+  <!--  <script src="libs/jquery/dist/jquery.js"></script>
+        <script src="libs/bootstrap/dist/js/bootstrap.js"></script> -->
+
+<!-- library -->
+    <script src="https://code.angularjs.org/1.2.27/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.0/angular-ui-router.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/angular-svg-round-progressbar/dist/round-progress.umd.js">
+    </script>
+
+<!-- component -->
+    <script src="app/scripts/shared/app.js"></script>
+    <script src="app/scripts/shared/router.js"></script>
+    <script src="app/scripts/shared/services.js"></script>
+    <script src="app/scripts/shared/directives.js"></script>
+    <script src="app/scripts/shared/controllers.js"></script>
+
+    <script src="app/scripts/directives/sidebardirective.js"></script>
+
+    <script src="app/scripts/config/appConfig.js"></script>
+    <script src="app/scripts/config/appProperties.js"></script>
+
+    <script src="app/scripts/controllers/auth.ctrl.js"></script>
+    <script src="app/scripts/controllers/view.ctrl.js"></script>
+
+    <script src="app/scripts/services/auth.service.js"></script>
+    <script src="app/scripts/services/view.service.js"></script>
+
+  </body>
+</html>
