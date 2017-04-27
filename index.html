@@ -2,24 +2,32 @@
 <html ng-app="Happystry">
   <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-    <title>web application</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>    
+    <meta charset="windows-1252">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="app/styles/images/favicon.png" type="image/x-icon">
+    <title>Happystry</title>
     <base href="/">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <link rel="stylesheet" type="text/css" href="libs/components-font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<!--     <link rel="stylesheet" href="app/styles/components.css" /> -->
+
+<!-- plugins css -->
+    <link rel="stylesheet" href="app/styles/plugins/wow/css/animate.css"/>
+    <link rel="stylesheet" href="app/styles/plugins/slider/css/slider-pro.min.css"/>
+    <link rel="stylesheet" href="app/styles/plugins/fancybox/jquery.fancybox.css"/>
+    <link rel="stylesheet" href="app/styles/plugins/owl_carousel/owl-carousel/owl.carousel.css"/>
+    <link rel="stylesheet" href="app/styles/plugins/owl_carousel/owl-carousel/owl.theme.css"/>
+
+<!-- custom css files -->
+    <link rel="stylesheet" href="app/styles/css/master.css"/>
+    <link rel="stylesheet" href="app/styles/css/responsive.css"/>
+    <link rel="stylesheet" href="app/styles/css/newstyle.css"/>
 
   </head>
     <body>
-
     
     <div ui-view ></div>
-
-  <!--  <script src="libs/jquery/dist/jquery.js"></script>
-        <script src="libs/bootstrap/dist/js/bootstrap.js"></script> -->
 
 <!-- library -->
     <script src="https://code.angularjs.org/1.2.27/angular.js"></script>
@@ -28,6 +36,16 @@
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/node_modules/angular-svg-round-progressbar/dist/round-progress.umd.js">
     </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwinKbVFU3K6hMp-0Xr-RRjXVs95FVgKc&libraries=places"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+
+<!-- javscript plugins-->
+    <script src="app/styles/libs/ng-autocomplete.js"></script>
+    <script src="app/styles/plugins/fancybox/jquery.fancybox.js"></script>
+    <script src="app/styles/plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="app/styles/plugins/slider/js/jquery.sliderPro.min.js"></script>
+    <script src="app/styles/plugins/owl_carousel/owl-carousel/owl.carousel.js"></script>
 
 <!-- component -->
     <script src="app/scripts/shared/app.js"></script>
@@ -46,6 +64,5 @@
 
     <script src="app/scripts/services/auth.service.js"></script>
     <script src="app/scripts/services/view.service.js"></script>
-
   </body>
 </html>

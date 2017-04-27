@@ -1,0 +1,8 @@
+@mixin profile-details($profile-display, $profile-details-width, $profile-vertical-align, $profile-details-padding-left) {
+    width: $profile-details-width;
+    display: $profile-display;
+    vertical-align: $profile-vertical-align;
+    padding-left: $profile-details-padding-left;
+}
+
+

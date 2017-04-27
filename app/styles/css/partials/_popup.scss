@@ -1,0 +1,449 @@
+@font-face {
+    font-family: SFUI-bold;
+    src: url(../fonts/SF-UI-Display/SF-UI-Display-Bold.otf);
+}
+.fancybox-wrap{
+    background: #fff;
+    border-radius: 3px;
+    /*padding: 15px;*/
+    background: #fff;
+    border-radius: 3px;
+    .card{
+        max-width: 350px;
+        max-height: 500px;
+        overflow: auto;
+        padding: 0px 10px;
+        box-shadow:none;
+        .header-hold{
+            border-bottom: 1px solid $border-color-grey;
+            &:last-child{
+                border-bottom: $none;
+            }
+        }
+    }
+    #likes, #leader-board{
+        padding: 15px;
+        .location:after{
+            background: none;
+        }
+    }
+    #likes{
+        min-width: 350px;
+    }
+    #leader-board{
+        padding: 15px 25px 30px 25px;
+    }
+    #likes{
+        .profile-details{
+            width: 86%;
+        }
+    }
+    #login{
+
+        min-width: 450px;
+        .card{
+            max-width: 450px;
+            padding: 0px;
+            background-image: url(../images/login-bg.png);
+            background-repeat: no-repeat;
+            background-position: bottom;
+            background-size: 100%;
+        }
+        .body{
+            text-align: center
+        }
+    }
+    .header{
+        text-align: center;
+        padding-bottom: 20px;
+        border-bottom: 1px solid $border-color-grey;
+    }
+    .body{
+        padding: 30px 0px;
+
+    }
+    .logo{
+        color: #f46f4d;
+        font-weight: bold;
+        font-size: 30px;
+        font-family: SFUI;
+        margin: 0px;
+        margin-top: 20px;
+    }
+    #congrats-reward{
+        min-width: 675px;
+        .card{
+            max-width: 675px;
+            padding: 0px;
+            .header{
+                h3{
+                    font-weight: bold;
+                    font-family: SFUI;
+                    font-size: 29px;
+                }
+
+            }
+            .redeemd{
+                font-size: 15px;
+                font-weight: bold;
+            }
+            .rewardhold{
+                display: table;
+                width: 90%;
+                margin: 30px auto;
+                box-shadow: 0px 0px 30px rgba(138, 194, 114, 0.55);
+                .cell{
+                    display: table-cell;
+                    vertical-align: middle;
+                    &.one{
+                        width: 30%;
+                    }
+                    &.two{
+                        width: 70%;
+                        text-align: left;
+                        padding: 15px;
+                        .requires {
+                            color: #989898;
+                            font-size: 15px;
+                            img {
+                                vertical-align: initial;
+                                margin: 0px 5px;
+                            }
+                            span {
+                                color: #2a8caf;
+                                font-size: 17px;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        .body{
+            text-align: center;
+            padding-bottom: 0px;
+            .fancybox-close{
+                display: inline-block !important;
+                position: relative;
+                background: none;
+                margin-top: 20px;
+                color: #989898;
+                &:hover{
+                    text-decoration: none;
+                }
+            }
+
+        }
+
+    }
+    #followers{
+        .card{
+            max-height: 250px;
+        }
+    }
+    #following{
+        .card{
+            max-height: 250px;
+        }
+    }
+    #leader-board{
+        min-width: 630px;
+        max-height: 420px;
+        .card{
+            max-width: 590px;
+            max-height:310px;
+            .profile-details {
+                /*width: 65%;*/
+                width: 52%;
+                h6{
+                    overflow:hidden;
+                    white-space:nowrap;
+                    -ms-text-overflow:ellipsis;
+                    text-overflow:ellipsis;
+                    width:190px;
+                    a{
+                        color: #346c80;
+                    }
+                }
+            }
+            .profile-holder{
+                &.second{
+                    width: 130px;
+                    span.sprite.percentile-icon{
+                        vertical-align: -webkit-baseline-middle;
+                        margin-right: 10px;
+                    }
+                }
+                img{
+                    border-radius: 0px;
+                    vertical-align: bottom;
+                }
+                &.count{
+                    padding: 0;
+
+                }
+            }
+            .header-hold{
+                width: 90%;
+                float: left;
+                border-bottom: 1px solid #eee;
+                padding: 10px 18px;
+            }
+            .index{
+                width: 10%;
+                float: left;
+                padding: 22px 0px;
+                border-bottom: 1px solid #eee;
+                p{
+                    height: 30px;
+                    width: 30px;
+                    margin: 0;
+                    line-height: 28px;
+                    vertical-align: middle;
+                    text-align: center;
+                    border-radius: 50%;
+                    border: 1px solid #ccc;
+                    font-family: SFUI-bold;
+                    font-size: 14px;
+                    letter-spacing: -.5px;
+
+                }
+            }
+        }
+
+
+    }
+    ::-webkit-scrollbar {
+        width: 4px;
+        max-height: 5px;
+    }
+    /* Track */
+
+    ::-webkit-scrollbar-track {
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+    }
+    /* Handle */
+
+    ::-webkit-scrollbar-thumb {
+        height: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        background: #2b8dae;
+    }
+
+    ::-webkit-scrollbar-track-piece {
+        height: 4px;
+        width: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: #2b8dae;
+    }
+}
+.close-fancybox {
+    display: inline-block;
+    margin-bottom: 25px;
+}
+.bold{
+    font-family: SFUI-bold;
+}
+.black-text{
+    color: #000;
+}
+.green-text{
+    color: #80bd66;
+}
+.fancybox-close{
+    position: fixed !important;
+    top:15px !important;
+    right: 20px !important;
+}
+.fancybox-skin{
+    background: none !important;
+    box-shadow: none !important;
+    padding: 0px !important;
+}
+/*.fancybox-nav{
+    display: none;
+}*/
+.fancybox-overlay{
+    background: rgba(210, 209, 209, 0.72) !important;
+
+}
+.fancybox-inner {
+    border-radius: 3px;
+    box-shadow:  0px 0px 30px 3px rgba(0, 0, 0, 0.09);
+}
+.facebook-login {
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 50px;
+}
+
+
+/**/
+.container {
+    &.small-container{
+        max-width: 880px;
+    }
+}
+.tab-btns {
+    list-style: none;
+    border-right: 1px solid $border-color-grey;
+    li {
+        display: inline-block;
+        a {
+            display: inline-block;
+            padding: 15px;
+            font-weight: 600;
+            font-family:  $font-regular;
+            color: #000;
+            font-size: 16px;
+            text-decoration:none;
+            &.active {
+                border-bottom: 2px solid #ff9000;
+                color: #ff9000;
+            }
+        }
+    }
+}
+.padding-0-15{
+    padding: 0px 15px;
+}
+.tab-hold{
+    .location {
+        padding: 15px;
+        border-right: 1px solid $border-color-grey;
+        select {
+            width: 80%;
+            margin-left: 10px;
+            border: none;
+            font-size: 16px;
+            font-family:  $font-light;;
+            -webkit-appearance: none;
+            outline: none;
+            background: url(../images/down-arrow.png);
+            background-repeat: no-repeat;
+            background-position: 100% 50%;
+            color: #2a8caf;
+        }
+    }
+}
+.points{
+    padding: 9px 0px;
+    margin: 0;
+    font-size: 14px;
+    color: #b3b3b3;
+    text-align: right;
+    font-family: $font-medium;
+    img {
+        margin: 0px 5px;
+    }   
+    span {
+        font-size: 24px;
+        color: #000;
+        vertical-align: middle;
+
+    }
+}
+
+.reward-hold{
+    position: relative;
+    margin-bottom: 30px;
+    .reward-content{
+        padding: 15px;
+
+
+        .reward-title{
+            font-size: 16px;
+            color:#000;
+            margin-bottom: 5px;
+            font-family: $font-medium;
+        }
+        .reward-location {
+            color: #b2b2b2;
+            font-size: 11px;
+
+        }
+        .reward-date {
+            font-size: 13px;
+            margin-bottom: 5px;
+            min-height: 36px;
+            font-family: $font-light;
+        }
+
+    }
+    .redeem-status{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border-radius: 3px;
+        font-size: 10px;
+        margin:0;
+        padding: 3px 6px;
+        &.available{
+            background: #94e35b;
+            color: #467624;
+        }
+        &.redeemed{
+            background: #f74c3a;
+            color:#fff;
+        }
+        &.fast{
+            background: #ffc11b;
+            color: #fff;
+        }
+    }
+}
+.redeemer {
+    overflow: hidden;
+
+    a {
+        display: inline-block;
+        width: 50%;
+        float: left;
+        text-align: center;
+        padding: 10px 0px;
+        vertical-align: middle;
+        border-top: 1px solid $border-color-grey;
+        font-family: $font-bold;
+        &.redeem-count {
+            color: #2a8caf;
+            font-size: 17px;
+            img {
+                vertical-align: baseline;
+            }
+            &.full{
+                width: 100%;
+            }
+        }
+        &.redeem-btn {
+            background: #94e35b;
+            padding: 13px 0px;
+            color: #fff;
+            &.disables{
+                background: #ededed;
+                color: #ccc;
+            }
+        }
+    }
+}
+.card{
+    overflow: hidden;
+}
+.fancybox-wrap{
+    #leader-board{
+        .card{
+            .profile-holder{
+                img.img-loaded{
+                    border-radius: 50%;
+                }
+            }
+        } 
+    }
+} 
+
+#contactInfo{
+    max-width: 800px;
+}

@@ -1,0 +1,83 @@
+/*
+.jssora02l                  (normal)
+.jssora02r                  (normal)
+.jssora02l:hover            (normal mouseover)
+.jssora02r:hover            (normal mouseover)
+.jssora02l.jssora02ldn      (mousedown)
+.jssora02r.jssora02rdn      (mousedown)
+*/
+.jssora02l, .jssora02r {
+    display: block !important; position: absolute;
+    width: 35px; height: 65px;
+    cursor: pointer;
+    background-image:url(../images/sprite.png);
+    overflow: hidden;
+}
+.jssora02l { background-position: 0 -133px; }
+.jssora02r { background-position:-31px -199px; }
+.jssora02l:hover { background-position: -67px -133px; }
+.jssora02r:hover { background-position: -94px -198px }
+.jssora02l.jssora02ldn { background-position:  0 -133px; }
+.jssora02r.jssora02rdn { background-position: -31px -199px; }
+
+/* jssor slider thumbnail navigator skin 03 css */
+/*
+.jssort03 .p            (normal)
+.jssort03 .p:hover      (normal mouseover)
+.jssort03 .pav          (active)
+.jssort03 .pdn          (mousedown)
+*/
+.jssort03 {position: absolute;width: 600px; height: 60px; }
+.jssort03 .p { position: absolute; top: 0; left: 0;width:120px;height:75px; }
+.jssort03 .p.pav:hover:after{
+    
+}
+.jssort03 .p:hover:after{
+    display: inline-block;
+    content: url(../../../images/Play.png);
+    color: #fff;
+    z-index: 4;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    text-align: center;
+    line-height: 0;
+}
+.jssort03 .p.pav:hover {border-color:transparent;}
+.jssort03 .p:hover { position: relative;border-color:rgba(220, 126, 5, 0.5);
+                     background-color: #dc7e05;border-radius: 4px;}
+.jssort03 .p:hover div img{
+    opacity: 0.33;
+}
+.jssort03 .p div img{
+    border-radius: 4px;
+}
+
+.jssort03 .t {position: absolute;top: 0;left: 0;width: 100%; height: 100%; border: none;}
+.jssort03 .w, .jssort03 .pav:hover .w { position: absolute; width: 120px;height: 75px;border: none; border-color:#dc7e05; border-radius: 4px;}
+.jssort03 .pdn .w, .jssort03 .pav .w { border-style: solid !important;border-radius: 4px;}
+.jssort03 .c {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 65px;
+    height: 40px;
+
+    filter: alpha(opacity=45);
+    opacity: .45;
+    transition: opacity .6s;
+    -moz-transition: opacity .6s;
+    -webkit-transition: opacity .6s;
+    -o-transition: opacity .6s;
+}
+.jssort03 .p:hover .c, .jssort03 .pav .c {filter: alpha(opacity=0);opacity: 0;}
+.jssort03 .p:hover .c {transition: none;  -moz-transition: none; -webkit-transition: none;  -o-transition: none; }
+* html .jssort03 .w {  width : 62px; height: 32px;}
+
+#slider2_container{overflow-y:visible !important;}
+.jssort03{bottom:30px !important;}
+.jssora02l{ top: 115px !important;}
+.jssora02r{ top: 115px !important; }
+

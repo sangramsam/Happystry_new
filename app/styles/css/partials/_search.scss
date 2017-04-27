@@ -1,0 +1,188 @@
+
+input.ty-search{
+    //width: 400px!important;
+}
+.search-sec{
+    width: 40px;
+    height: 29px;
+    background-position: -115px -2px;
+    background-image: url(../images/sprite.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #ececec;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+/*.search-sec1{
+    width: 26px;
+    height: 19px;
+    background-position: -122px -141px;
+    background-image: url(../images/sprite.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: -172px;
+    right: 7px;
+    display: inline-block;
+    cursor: pointer;
+}*/
+.list-group{
+    background:#fff;
+    width: 400px!important;
+    margin-top: 25px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 30px 3px rgba(0, 0, 0, 0.09);
+    .user-div{
+        a{
+            display:inline-block;
+        }
+        .user-sec{
+            padding:12px;
+        }
+    }
+    .post-div{
+        a{
+            display:inline-block;
+            cursor:pointer;
+            padding: 12px!important;
+        }
+        img{
+            width:70px;
+            /*height: 60px;*/
+        }
+    }
+    .list-group-item{
+        border-right: none;
+        border-left: none;
+        padding:0px;
+        background-color: #efefef;
+    }
+    .post-sec{
+        display:table;
+        padding: 15px;
+        .post-left{
+            display:table-cell;
+            vertical-align: middle;
+        }
+        .post-right{
+            display:table-cell;
+            vertical-align: top;
+            text-align: left;
+            padding-left: 20px;
+            width: 80%;
+            .desc{
+                font-family: "sf_ui_displaysemibold";
+                color: #346c80;
+                font-size: 12px;
+                width: 280px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                margin-bottom:$none;
+            }
+            .name{
+                font-size: 11px;
+                color: #346c80;
+                margin: 0;
+            }
+            .collection{
+                font-size: 11px;
+                color: #8e8e8e;
+                margin: 0;
+            }
+        }
+    }
+    .card{
+        background-color:#f0f3f7!important;
+        .profile-details{
+            h4{
+                font-size: 12px;
+                padding-bottom: $none;
+                width:280px;
+            }
+        }
+    }
+    .card .header-hold .profile-holder a .progress-wrapper .round-progress-wrapper {
+        position: absolute !important;
+        top: 5px !important;
+        left: 1px !important;
+    }
+    .card .header-hold .profile-holder a .progress-wrapper {
+        display: initial;
+    }
+    .card .profile-holder img {
+        border: 3px solid #fff;
+    }
+    .card .header-hold {
+        padding: 7px 17px;
+    }
+
+}
+
+//For filter
+.filter-div{
+    border: 1px solid #337ab7;
+    padding: 5px 33px;
+    display: inline-block;
+}
+.filter-div-sec{
+    width: 740px!important;
+    .forSale{
+        padding: 0px 24px!important;
+        label{
+            margin-left:10px;
+        }
+    }
+    input{
+        border:none;
+        border-bottom:1px solid #ccc; 
+        border-radius: 0; 
+        -webkit-box-shadow: none ;
+        box-shadow: none; 
+        -webkit-transition: none;
+        -o-transition: none;
+        height:25px;
+        transition: none;
+        width:400px;
+        &:focus{
+            outline:none;
+            border-color: #66afe9;     
+            outline: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none; 
+        }
+
+
+    }
+    .search-holder{
+        padding: 30px 12px;
+    }
+    .btndiv{
+        text-align:right;
+        padding: 0px 28px;
+        margin-bottom: 20px;
+        button{
+            margin-left: 6px;
+            padding: 12px 48px;
+            border:none;
+            background: none;
+            font-size: 16px;
+            font-family: "sf_ui_displaymedium";
+        }
+        .green{
+            background-color: #6dc82c;
+            border: 1px solid #6dc82c; 
+            color:#fff;
+        }
+        .white{
+            background-color: transparent;
+            color: #8e8e8e;
+            border: 1px solid #8e8e8e;
+        }
+    }
+}
+

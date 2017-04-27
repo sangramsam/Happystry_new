@@ -1,1 +1,510 @@
-<h1>Welcome to login page</h1>
+<div ng-init="getData('All', '')" ng-cloak>
+      <style type="text/css">
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+        
+        .firstsec-cont{   
+            padding: 50px 0 0;
+        }
+        .firstsec-cont a.fb {
+            margin-bottom: 30px;
+        }
+        .show{
+            display: block;
+        }
+        .scroll-section{
+            width: 100%;
+            position: relative;
+        }
+        .fb-fixed{
+            position: fixed;
+            bottom: 0;
+            transition: all 0.5s ease;
+            z-index: 2;
+        }
+        .header-new-home{
+            transition: all 0.5s ease;
+        }
+        .header-up{
+            top: -83px;
+        }
+       
+        .first-filter-fixed{
+            top: 0px;
+            position: fixed;
+            z-index: 100;
+            width: 100%;
+            margin: 0 !important;
+        }
+        /*funcitionality*/
+
+        .feed-section{
+            background-color: #efefef;    
+        }
+        /*ul li section */
+        .header-icons{
+            text-align: center;
+        }
+        .header-icons li{
+            display: inline-block;
+            float: none;
+            width: 22%;
+            vertical-align: top;
+        }
+        .dot{
+            width: 3% !important;
+            vertical-align: top;
+            margin-top: 6%;
+        }
+        .header-icons li > img {
+            display: block;
+            margin:0 auto;
+            font-size: 14px;
+            text-align: center;
+        }
+        .header-icons li > p{
+            display: block;
+            margin:0 auto;
+            font-size: 13px;
+            text-align: center;
+                margin-top: 10px;
+        }
+        .google-play-btn{
+            margin-left: 0;
+        }
+        .pad-0{
+            padding: 0 !important;
+        }
+        .play-icon{
+            background-color: #F6903E !important;
+            background-image: url(assets/pages/images/play-button.png) !important;
+            padding-left: 60px !important;
+            cursor: pointer;
+        }
+
+        .fb-more{
+            background-color: #F6903E;
+            color: white;
+            text-align: center;
+            padding: 7px 0;
+            margin-top: 10px;
+            width: 100%;
+            transition: all 0.5s ease;
+        }
+
+        .fb-more a:hover {
+            background-image: url(app/styles/images/fb-color.png) !important;
+        }
+
+        .fb-more a {
+            background-color: white !important;
+            background-image: url(app/styles/images/fb-color.png) !important;
+            color: #F6903E !important;
+            padding: 15px 15px 15px 36px !important;
+        }
+
+        .download-text {
+            text-align: center;
+        }
+
+        .first-filter, .second-filter{
+            text-align: center;
+            padding: 15px 0;
+            margin: 7px 0;
+            background-color: #fff;
+            box-shadow: 1.414px 1.414px 2.13px 0.87px rgba(0, 0, 0, 0.04);
+        }
+        .second-filter{
+            width: 1130px;
+            margin: 0 auto;
+        }
+
+        .first-filter li:hover{
+            background-color: #F7921E;
+            color: white;
+        }
+        .SelectedCollection{
+            background-color: #F7921E;
+            color: white;
+        }
+        .SelectedCollection p {
+            border-top: 8px solid #F7921E !important;
+        }
+
+        .first-filter li, .second-filter li{
+            display: inline-block;
+            float: none;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+        .first-filter li{
+            padding: 8px;
+            border-radius: 2px;
+            margin: 0 9px 0 0;
+            position: relative;
+            -webkit-transition: background-color 100ms ease-in-out;
+            -moz-transition: background-color 100ms ease-in-out;
+            -o-transition: background-color 100ms ease-in-out;
+            -ms-transition: background-color 100ms ease-in-out;
+            transition: background-color 100ms ease-in-out;
+        }
+
+        .second-filter li:hover{
+            color: #2A8CAF;
+        }
+
+        .SelectedHash{
+            color: #2A8CAF;
+        }
+
+        .second-filter li:not(:last-of-type){
+            border-right: 1px solid black;
+        }
+        .in_index li {
+            max-width: 20% !important;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+         
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+            border-radius: 10px;
+        }
+         
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+        }
+
+
+        /*responsive*/
+        @media (max-width: 360px){
+.lp .fb {
+            padding: 8px;
+            font-size: 9px;
+                 background-size: inherit;
+}
+}
+.lp .fb{
+       padding: 17px 40px;
+}
+        @media (max-width: 767px){
+        .header-icons li{
+            width: 100%;
+            margin-bottom: 11px;
+        }
+        .header-icons li > img{
+            text-align: center;
+        }
+        .header-icons li > p {
+            text-align: center;   
+        }
+         .header-icons li > img{
+            margin-bottom: 12px;
+        }
+        .slider-first .firstsec-cont{
+            padding: 36px 0 0;
+        }
+       .slider-first  .firstsec-cont a.fb{
+            margin-bottom: 20px;
+       }
+    }
+     @media (min-width: 768px) and (max-width: 1023px){
+        .dot{
+            margin-top: 8%;
+        }
+        .lp .subscribe-section .subs .subs-submit{
+               padding: 13px;
+        }
+        .dot{
+            width: 2% !important;
+        }
+     }
+     @media screen and (max-width: 979px){
+        .card .discription-holder .discription {
+            min-height: 30px;
+}
+}
+    @media (max-width: 1200px){
+        .first-filter ul{
+            overflow-y: hidden;
+            display: -webkit-box;
+            display: -moz-box;
+            padding-bottom: 17px;
+        }
+        .second-filter{
+             width: auto;
+        }
+        .first-filter ul li{
+            display: block;
+        }
+}
+ @media (max-width: 1023px){
+.second-filter{
+    width: auto;
+}
+}
+
+    /* don't touch this class css */
+        .lp img {
+            max-width: initial;
+        }
+    /* end */
+
+</style>
+
+    <div class="lp">
+    <header class="header-new-home">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 logo-hold ">
+                    <a href="" ng-click="refreshPage()" ><img src="app/styles/images/logo.png" alt="" /><span class="logo-text">Happystry</span></a>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 right-align" style="display: inline-block; margin: 5px 0;">
+                    <a class="google-play-btn black-btn andr-img-hold"  href="https://play.google.com/store/apps/details?id=com.happy.happystry">
+                        <span class="andr-img"></span>
+                        <p>
+                            Android
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="slider-first">
+        <div class="container pad-0">
+            <div class="firstsec-cont text-center">
+                <h1>Share All Things Happy and Responsible</h1>
+            </div>
+            <div class="header-icons">
+                <ul>
+                    <li>
+                        <img src="app/styles/images/1.png">
+                        <p> Share & Discover Responsible Actions, Products, Services</p>
+                    </li>
+                    <li class="dot hidden-xs"><img src="app/styles/images/dots.png"></li>
+                    <li>
+                        <img src="app/styles/images/2.png">
+                        <p> Get Appreciated</p>  
+                    </li>
+                    <li class="dot hidden-xs"><img src="app/styles/images/dots.png"></li>
+                    <li>
+                        <img src="app/styles/images/3.png">
+                        <p> Shares and Recognition Earn You Dlites </p>
+                    </li>
+                    <li class="dot hidden-xs"><img src="app/styles/images/dots.png"></li>
+                    <li>
+                        <img src="app/styles/images/4.png">
+                        <p>Exchange Dlites for All Things Happy</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="discover-more-fixed"></div>
+            <div class="firstsec-cont text-center">
+                <a class="fb play-icon" ng-disabled="loginStatus.status == 'connected'"  ng-click="playVideo()">
+                Happystry in 60 Sec</a>
+
+                <a class="fb" ng-click="login()" ng-disabled="loginStatus.status == 'connected'">Connect using facebook</a>
+            </div>        
+        </div>
+    </section>
+    <section class="feed-section">
+        <div class="first-filter" >
+        <div class="container">
+            <ul>
+                <li ng-class="{'SelectedCollection': SelectedCollection === 'All'}" ng-click="collectionFilter('All')">All</li>
+                <li ng-repeat="coll in getCollectionData track by $index" ng-if="coll.collection_api_name!='Happystreet' " ng-click="collectionFilter(coll.collection_api_name)" ng-class="{SelectedCollection: coll.collection_api_name === SelectedCollection}">
+                    {{coll.collection_api_name}}
+                </li>
+            </ul>
+         </div>
+        </div>
+        <div class="second-filter">
+            <ul>
+                <li ng-repeat="hash in getTrendingData track by $index" ng-click="hashFilter(hash.tag_name)" ng-class="{SelectedHash: hash.tag_name === SelectedHash}">
+                    #{{hash.tag_name}}
+                </li>
+            </ul>
+        </div>
+        <div class="feed-body holder container">
+            <div class="scroll-section posts-holder" id="searchCH">
+                <ul class="dynamic-grid grid postfeeds_flex in_timeline margin-b-30">
+                    <li ng-repeat="item in getPromotedData" class="posts wow" my-posts ng-click="urlModification(item.post_id, $event)"></li>
+                    <li ng-repeat="item in getPostData | limitTo: normalPostLimit" class="posts wow" my-posts ng-click="urlModification(item.post_id, $event)"></li>
+                </ul>
+                <div class="discover-more-relative"></div>
+               <div class="no-search-results" ng-show="getPostData.length == 0 && getPromotedData.length == 0 && showNoPost" ng-cloak>
+                    <span class="sprite no-search-icons"></span>
+                    <h4>No results found</h4>
+                </div>
+            </div>
+        </div>
+        <div class="fb-more">
+            Discover More
+            <a class="fb" ng-click="login()" ng-disabled="loginStatus.status == 'connected'">Connect using facebook</a>
+        </div>
+        
+    </section>
+    
+    <div class="footer-block">
+    <!-- <section class="subscribe-section " ng-class="{'show': footerShow}"> -->
+    <section class="subscribe-section ">
+        <h2>Subscribe and stay informed</h2>
+        <form  class="subs" novalidate>
+            <input type="email" id="subscribe" class="subs-email" placeholder="Enter your email address" />
+            <input type="submit" ng-click="submitSub()" class="subs-submit" value="Subscribe"/>
+            <span id="error_email" class="error"></span>  
+        </form>
+        <p class="download-text"> A community that exchanges Dlites</p>
+        <a class="google-play-btn black-btn andr-img-hold"  href="https://play.google.com/store/apps/details?id=com.happy.happystry">
+            <span class="andr-img"></span>
+            <p>Download Android App</p>
+        </a>
+    </section>
+    <!-- <footer ng-class="{'show': footerShow}"> -->
+    <footer>
+        <div class="container">
+            <ul class="quick-links">
+                <li class=""><a href="#"  style="visibility: visible; animation-delay: 500ms; animation-name: fadeInUp;"><img src="app/styles/images/happystry-logo.jpg" alt=""></a></li>
+                <li><a  class="active" href="javascript:;"  style="visibility: visible; animation-delay: 1000ms; animation-name: fadeInUp;">Home</a></li>
+                <li class=""><a href="<?php echo APP_SOURCE ?>home/about_us" target="_blank" style="visibility: visible; animation-delay: 1100ms; animation-name: fadeInUp;">About Us</a></li>
+                <li class=""><a href="https://happystry.wordpress.com/" target="_blank" style="visibility: visible; animation-delay: 1100ms; animation-name: fadeInUp;">Blog</a></li>
+                <li class=""><a href="<?php echo APP_SOURCE ?>home/contact_us" target="_blank"  style="visibility: visible; animation-delay: 1200ms; animation-name: fadeInUp;">Contact Us</a></li>
+                <li class=""><a href="<?php echo APP_SOURCE ?>home/terms_condition" target="_blank" style="visibility: visible; animation-delay: 1300ms; animation-name: fadeInUp;">Terms &amp; Condition</a></li>
+                <li class=""><a href="<?php echo APP_SOURCE ?>home/terms_condition" target="_blank" style="visibility: visible; animation-delay: 1400ms; animation-name: fadeInUp;">Privacy Policy</a></li>
+            </ul>
+            <ul class="social-links">
+                <li class=""><a href="https://www.facebook.com/Happystry-1124403420991917/?fref=nf" target="_blank"><img src="app/styles/images/fs.png" alt="" /></a></li>
+                <li class=""><a href="https://twitter.com/HappystryMedia" target="_blank"><img src="app/styles/images/ts.png" alt="" /></a></li>
+                <li class=""><a href="https://instagram.com/happystryonline/" target="_blank"><img src="app/styles/images/Instagram-icon .png" alt="" /></a></li>
+            </ul>
+        </div>
+    </footer>
+    </div>
+    <div class="copy-right">
+        <p>Copyright © Happystry</p>
+    </div>
+    <div id="contactInfo" class="popup" style="display: none" ng-init="updateApiMe()" >
+        <div class="pop-header">
+            <figure>
+                <img ng-src="{{userData[0].profile_image}}" alt=""/>
+            </figure>
+            <div>
+                <h3>{{userData[0].name}}</h3>
+                <p>Welcome to Happystry</p>
+            </div>
+        </div>
+        <div class="pop-body profile-section">
+            <form  novalidate>
+                <div class="fieldholder">
+                    <label >City</label>
+                    <div>
+                        <input type="text" id="uloc" class="form-control" ng-autocomplete="result" details="details" options="options" value="{{userData[0].location}}" placeholder="Please enter your city (Bangalore, Delhi)" required/>
+
+                        <span id="errorloc" class="error"></span>
+                    </div>
+                </div>
+                <div class="fieldholder noborder">
+                    <label for="">Phone number</label>
+                    <div class="code-mob">
+                        <select id="countrycode" ng-change="showSelCode(selCode)" ng-model="selCode" class="form-control ng-hide pop-inp-code">
+                            <option ng-repeat="item in countryData| orderBy:'iso3'" value="{{item.phonecode}}" ng-selected="item.phonecode == selCode">{{item.iso3}}({{item.phonecode}})</option>
+                        </select>
+                        <input type="text" id="umobile" class="form-control  pop-inp-num-wel" minlength="10" maxlength="15"  value="{{userData[0].mobile}}" />
+                        <span id="errorphone" class="error"></span>
+                    </div>
+                </div>
+                <div class="fieldholder">
+                    <label>Email</label>
+                    <div>
+                        <input type="email" id="uemail" class="form-control" value="{{userData[0].email}}" />
+                        <span id="erroremail" class="error"></span>
+                    </div>
+                </div>
+                <div class="fieldholder noborder" >
+                    <p>By signing in I agree to the <a href="<?php echo APP_SOURCE ?>home/terms_condition" target="_blank">Terms &amp; Conditions</a></p>
+                </div>
+                <div class="btnHolder">
+                    <button ng-click="goToMobileVerf($event)"  class="btn btn-success greebBtn" type="submit">Continue</button>
+                </div>
+            </form>
+        </div>
+    </div><!--contact info popup-->
+    <div id="otp" style="display: none" >
+        <div class="popup">
+            <h3 class="text-center nomargin">Verify mobile number</h3>
+            <p class="text-center margin-t-20">We've sent a OTP to your number</p>
+            <p class="nomargin text-center ">{{umobile}}</p>
+            <form class=" profile-section nopadding">
+                <div class="fieldholder">
+                    <label>OTP</label>
+                    <div>
+                        <input type="hidden" id="umob" value="{{umobile}}"/>
+                        <input type="hidden" id="umcode" value="{{umcode}}"/>
+                        <input type="hidden" id="umflag" value="{{umflag}}"/>
+                        <input type="text" id="otp-no" class="form-control" />
+                        <span id="errorphone1" class="error"></span>
+                    </div>
+                </div>
+                <div class="btnHolder">
+                    <button ng-click="otpMobileVerf($event)" class="btn btn-success greebBtn" type="submit">Continue</button>
+                </div>
+            </form>
+            <p class="resend text-center">Did not receive SMS? <a class="cursor-pointer" ng-click="resend(umobile)">Resend</a></p>
+        </div>
+        <p ng-click="wrongNo($event)" class="btm-sec text-center cursor-pointer">Entered wrong number</p>
+    </div><!--otp popup-->
+    <div id="change-mob-no" style="display: none">
+        <div class="popup">
+            <h3 class="text-center nomargin">Change mobile number</h3>
+            <form class=" profile-section nopadding">
+                <div class="fieldholder noborder">
+                    <label for="">Phone number</label>
+                    <div class="code-mob">
+                        <select id="countrycode1" ng-change="showSelCode(selCode)" ng-model="selCode" class="form-control ng-hide pop-inp-code">
+                            <option ng-repeat="item in countryData" value="{{item.phonecode}}" ng-selected="item.phonecode == selCode">{{item.iso3}}({{item.phonecode}})</option>
+                        </select>
+                        <input type="text" id="mobile1" class="form-control  pop-inp-num" minlength="10" maxlength="15"  value="" />
+                        <span id="errorphone2" class="error"></span>
+                    </div>
+                </div>
+                <div class="btnHolder">
+                    <button class="btn btn-success greebBtn" ng-click="changeno()"  type="submit">Continue</button>
+                </div>
+            </form>
+        </div>
+        <p ng-click="goBack()" class="btm-sec text-center cursor-pointer">Go back</p>
+    </div><!--wrong number popup-->  
+    <div id="user-blocked" class="report" style="display: none" >
+        <h3 class="text-center nomargin">Notification</h3>
+        <div class="popup">
+            <form class=" profile-section nopadding">
+                <p>Sorry, You have been Blocked by Admin. Please contact Happystry to Activate You!</p>                
+            </form>
+        </div>
+    </div><!--User Blocked popup-->
+
+    <div id="loginPop" class="report new-report" style="display: none" >
+        <h3><img src="<?php echo PAGE_IMAGES_PATH ?>/happystry-logo.png" alt="" /></h3>
+        <div class="popup">
+            <form class=" profile-section nopadding lp">
+                <p>Please login to continue</p>  
+                <a class="fb" ng-click="login()">Connect using facebook</a>
+            </form>
+        </div>
+    </div>
+
+    <div id="videoPop" class="report new-report" style="display: none" >
+        <div class="">
+        <!-- //www.youtube.com/embed/ihTZ1o6gNfI?autoplay=1 -->
+           <iframe src="//www.youtube.com/embed/ihTZ1o6gNfI"
+                width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+</div>
+
+</div>

@@ -1,0 +1,10 @@
+// Button sizes
+@mixin profile-holder($profile-width, $profile-display, $profile-vertical-align, $profile-line-height) {
+    width: $profile-width;
+    display: $profile-display;
+    vertical-align: $profile-vertical-align;
+    line-height: $profile-line-height;
+}
+
+
+

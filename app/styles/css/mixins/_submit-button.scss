@@ -1,0 +1,6 @@
+// Submit button sizes
+@mixin submit-button($submit-padding-vertical, $submit-padding-horizontal, $submit-line-height, $border-radius) {
+  padding: $submit-padding-vertical $submit-padding-horizontal;
+  line-height: $submit-line-height;
+  border-radius: $border-radius;
+}

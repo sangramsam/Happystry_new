@@ -1,0 +1,8 @@
+// Button sizes
+@mixin main-heading($no-margin, $font-bold, $heading-color-black, $medium-font-size, $no-letterspacing) {
+    margin: $no-margin;
+    font-family: $font-bold;
+    color: $heading-color-black;
+    font-size: $medium-font-size;
+    letter-spacing: $no-letterspacing;
+}

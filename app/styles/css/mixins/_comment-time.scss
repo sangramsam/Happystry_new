@@ -1,0 +1,8 @@
+// comment time styles
+@mixin comment-time($float-right, $color-light-grey, $font-medium, $small-font-size, $font-weight-light) {
+    float: $float-right;
+    color: $color-light-grey;
+    font-family: $font-medium;
+    font-size: $small-font-size - 2;
+    font-weight: $font-weight-light;
+}

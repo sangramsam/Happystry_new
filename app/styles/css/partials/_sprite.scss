@@ -1,0 +1,184 @@
+.sprite {
+    background: url('../images/sprite.png');
+    display: inline-block;
+    vertical-align: middle;
+    &.story1 {
+        height: 140px;
+        width: 134px;
+        background-position: 0px 0px;
+    }
+    &.story2 {
+        height: 140px;
+        width: 134px;
+        background-position: -142px 0px;
+    }
+    &.story3 {
+        height: 140px;
+        width: 134px;
+        background-position: -284px 0px;
+    }
+    &.premium-icon{
+        width: 22px;
+        height: 22px;
+        background-position: 0px -140px;
+    }
+    &.like-icon{
+        width: 21px;
+        height: 21px;
+        background-position: -24px -4px;
+        margin-right: 4px;
+    }
+    &.comment-icon{
+        width: 21px;
+        height: 21px;
+        background-position: -47px -6px;
+        margin-right: 4px;
+    }
+    &.home-icon{
+        width: 26px;
+        height: 21px;
+        background-position:-95px -139px;
+    }
+    &.gift-box-icon{
+        width: 26px;
+        height: 21px;
+        background-position:-68px -5px;
+        margin-right: 12px;
+    }
+    &.search-icon{
+        width: 26px;
+        height: 21px;
+        background-position:-122px -5px;
+    }
+    &.notification-icon{
+        width: 26px;
+        height: 21px;
+        background-position:-150px -5px;
+        margin-right: 12px;
+    }
+    &.message-icon{
+        width: 26px;
+        height: 21px;
+        background-position:-177px -5px;
+        margin-right: 12px;
+    }
+    &.user-icon{
+        width: 26px;
+        height: 21px;
+        background-position:-337px -5px;
+    }
+    &.no-search-icons{
+        width: 62px;
+        height: 68px;
+        background-position:0px -207px;
+    }
+    &.small-close-icon{
+        width: 16px;
+        height: 16px;
+        background-position:-63px -28px;
+    }
+    &.bookmark-icon{
+        width: 26px;
+        height: 21px;
+        background-position:-314px -6px;
+        margin-right: 12px;}
+    &.bookmark-icon-active{
+        width: 26px;
+        height: 21px;
+        background-position:-284px -6px;
+        margin-right: 12px;
+    }
+    &.user-small-icon{
+        width: 26px;
+        height: 21px;
+        background-position:-338px -6px;
+        margin-right: 12px;
+    }
+    &.leader-board-icon{
+        width: 26px;
+        height: 21px;
+        background-position:-365px -6px;
+        margin-right: 12px;
+    }
+    &.settings-icon{
+        width: 26px;
+        height: 21px;
+        background-position:-393px -6px;
+        margin-right: 12px;
+    }
+    &.logout-icon{
+        width: 26px;
+        height: 21px;
+        background-position:-421px -6px;
+        margin-right: 12px;
+    }
+    &.rupee-icon{
+        width: 20px;
+        height: 22px;
+        background-position: -63px -179px;
+    }
+    &.no-rupee-icon{
+        width: 20px;
+        height: 22px;
+        background-position: -63px -200px;
+    }
+    &.downarrow-icon{
+        width: 15px;
+        height: 9px;
+        background-position: -84px -236px;
+    }
+    &.share-icon{
+        width: 19px;
+        height: 20px;
+        background-position: -100px -181px;
+    }
+    &.edit-icon{
+        width: 16px;
+        height: 16px;
+        background-position: -81px -98px;
+    }
+    &.add-icon{
+        width: 13px;
+        height: 15px;
+        background-position: -84px -80px;
+    }
+    &.gift{
+        width: 25px;
+        height: 22px;
+        background-position: -120px -85px;
+        vertical-align: baseline;
+        margin-right: 10px;
+    }
+    &.percentile-icon{
+        width: 25px;
+        height: 22px;
+        background-position: -156px -86px;
+        vertical-align: baseline;
+        margin-right: 10px;
+    }
+    &.user-location{
+        width: 17px;
+        height: 19px;
+        background-position: -235px -141px;
+    }
+    &.grey-cart-icon{
+        width: 20px;
+        height: 20px;
+        background-position: -179px -113px;
+    }
+    &.grey-location-icon{
+        width: 20px;
+        height: 20px;
+        background-position: -149px -138px;
+    }
+    &.grey-link-icon{
+        width: 20px;
+        height: 20px;
+        background-position: -121px -113px;
+    }
+
+}
+
+
+
+
