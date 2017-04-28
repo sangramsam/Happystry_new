@@ -1,0 +1,79 @@
+<div class="card" id="postcard_{{item.post_id}}">
+    <div class="header-hold">
+        <div class="profile-holder">
+            <a href="#/profile/{{item.user_id}}">
+                <div class="progress-wrapper">
+                    <!--<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>-->
+                    <round-progress
+                        max="max"
+                        current="current"
+                        color="{{ getColor()}}"
+                        bgcolor="{{ bgColor}}"
+                        radius="{{ radius}}"
+                        semi="isSemi"
+                        rounded="rounded"
+                        stroke="{{ stroke}}"
+                        clockwise="clockwise"
+                        responsive="responsive"
+                        duration="{{ duration}}"
+                        animation="{{ currentAnimation}}"
+                        offset="{{ offset}}"
+                        animation-delay="{{ animationDelay}}"
+                        on-render="showPrecisseCurrent"
+                        ng-init="current = item.percentile">
+
+                    </round-progress>
+                </div>
+                <img ng-src="{{item.image}}" alt="" style="width: 38px; height: 38px;" />
+            </a>
+        </div>
+        <div class="profile-details">
+            <a href="#/profile/{{item.user_id}}"><h4>{{item.name}}</h4></a>
+            <h6 class="lmt-loc">
+                <span class="location">{{item.location}}</span>
+            </h6>
+        </div>
+    </div>
+    <div class="image-holder promoted-holder">
+        <a class="max-height-137" ng-href="#/postdetails/{{item.post_id}}"><img ng-src="{{item.post_image[0]}}" alt="" />
+            <span ng-show="item.promoted == 'Y'">
+                <img src="../../../../app/images/featured.png" alt="image" class="for-promoted-icon img-responsive"/>
+            </span>
+                <!--<span class="plus-more" ng-if="item.post_image.length != 1">+{{item.post_image.length -1}}</span>-->
+        </a>
+        <span ng-show="item.for_sale == 'Y'">
+            <img src="../../../../app/images/cart.png" alt="image" class="for-sale-icon img-responsive"/>
+        </span>
+    </div>
+
+    <div class="discription-holder">
+        <h6 class="time-interval"><span ><abbr>{{ item.cret_date | timeago}}</abbr></span></h6>
+<!--        <h6 class="time-interval"><span ><abbr><time-ago from-time='{{item.cret_date}}'></time-ago></abbr></span></h6>-->
+        <div class="discription">
+            <p class="text-clip" compile="item.description"></p>
+        </div>
+        <!--        <div ng-if="item.limitDes.length > limitDesc" class="discription limit-desc">
+                    {{item.limitDes.length}}
+                    {{item.description.length}}
+                    <p class="moreDataDesc" compile="item.description | limitTo:limitDesc"></p>
+                </div>-->
+
+        <div class="tags">
+            <span ng-repeat="coll in item.collections| limitTo:1 track by $index" ng-if="coll != ''" ><a class="cursor-pointer" ng-click="searchChash(coll)">{{coll}}</a></span>
+        </div>
+    </div> 
+    <div class="like-comment-holder clearfix">
+        <div ng-click="sendLike(item.post_id, $event)" class="sj_like share-like" style="cursor:pointer;">
+            <a class="like-unlike" ng-class="{{item.user_like == 0}} ? 'like' : 'liked'">
+                <span class="sprite like-icon"></span>
+                <span class="likes-comments">{{item.total_likes}}</span>
+            </a>
+        </div>
+        <div class="share-like">
+            <a href="#/postdetails/{{item.post_id}}"  >
+                <span class="sprite comment-icon"></span>
+                <span class="likes-comments">{{item.total_comments}}</span>
+            </a>
+        </div>
+    </div>
+</div>

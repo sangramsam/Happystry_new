@@ -7,8 +7,16 @@
  * @version 1.0
  */
 angular.module('Happystry', [
-  'Happystry.controllers',
-  'Happystry.services',
-  'Happystry.router',
-  'Happystry.directives'
+			'Happystry.controllers',
+			'Happystry.services',
+			'Happystry.router',
+			'Happystry.directives',
+			'Happystry.filters',
+			'angular-svg-round-progressbar'
 ]);
+
+
+angular.module('Happystry.controllers', ['ui.bootstrap']);
+angular.module('Happystry.directives', ['ui.bootstrap']);
+angular.module('Happystry.services', []);
+angular.module('Happystry.filters', []);

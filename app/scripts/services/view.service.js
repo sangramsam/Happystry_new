@@ -10,55 +10,89 @@
  */
 angular.module('Happystry.services')
 .factory('ViewService', function ($http, Settings, $state, Properties, $log,$q) {
-            var data;
-            function getApiData(){
+
+            function getFeeds(args){
                 var deferred = $q.defer();
                 $http({
-                    url:'http://localhost:3002/data.json',
-                    method: "GET",
-                }).success(function(response, status, headers, config){
-                    data = response;
+                    method: 'GET',
+                    url: Settings.BASE_URL+"/post?page="+args.page,
+                    headers: {'Content-Type': 'application/json',
+                             'HAPPI-API-KEY': "TRR36-PDTHB-9XBHC-PPYQK-GBPKQ"
+                    }
+                }).then(function (response, status, headers, config) {
                     deferred.resolve({
                         status: status,
-                        data: response
+                        data: response.data.allPosts
                     });
-                }).error(function(response, status, headers, config){
+                },function(response, status, headers, config){
                     deferred.reject({
                         status: status,
-                        data: response
+                        data: response.data.allPosts
                     });
-                });      
-            return deferred.promise;
+                });
+                return deferred.promise;
             };
 
-            function getData(){
+
+            function getCollections(){
                 var deferred = $q.defer();
-                deferred.resolve({
-                    status: "ok",
-                    data: data
+                $http({
+                    method: 'GET',
+                    url: Settings.BASE_URL+'/collections',
+                    headers: {'Content-Type': 'application/json',
+                             'HAPPI-API-KEY': "TRR36-PDTHB-9XBHC-PPYQK-GBPKQ"
+                    }
+                }).then(function (response, status, headers, config) {
+                    deferred.resolve({
+                        status: status,
+                        data: response.data
+                    });
+                },function(response, status, headers, config){
+                    deferred.reject({
+                        status: status,
+                        data: response.data
+                    });
                 });
                 return deferred.promise;
             }
 
-            function getEventList(){
-                if (data==undefined){
-                    return getApiData();
-                }else{
-                    return getData();
-                }
+            function getTrendingHashTag(){
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: Settings.BASE_URL+'/post/trendinghash',
+                    headers: {'Content-Type': 'application/json',
+                             'HAPPI-API-KEY': "TRR36-PDTHB-9XBHC-PPYQK-GBPKQ"
+                    }
+                }).then(function (response, status, headers, config) {
+                    deferred.resolve({
+                        status: status,
+                        data: response.data
+                    });
+                },function(response, status, headers, config){
+                    deferred.reject({
+                        status: status,
+                        data: response.data
+                    });
+                });
+                return deferred.promise;
             }
 
-            function updateEventList(options){
-                var index=data.event_list.indexOf(options.item)
-                data.event_list.splice(index,1);
-                return data;
+            function openFancyBox(props){
+                jQuery.fancybox({
+                    'href': props.id,
+                    'closeBtn': true,
+                    keys: {
+                        close: null
+                    }
+                });
             }
-
 
     return{
-        getEventList: getEventList,
-        updateEventList: updateEventList,
-        getApiData:getApiData
+        getTrendingHashTag: getTrendingHashTag,
+        getCollections: getCollections,
+        getFeeds:getFeeds,
+        openFancyBox: openFancyBox
     };
 
 });

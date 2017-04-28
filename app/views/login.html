@@ -333,7 +333,7 @@
             <div class="scroll-section posts-holder" id="searchCH">
                 <ul class="dynamic-grid grid postfeeds_flex in_timeline margin-b-30">
                     <li ng-repeat="item in getPromotedData" class="posts wow" my-posts ng-click="urlModification(item.post_id, $event)"></li>
-                    <li ng-repeat="item in getPostData | limitTo: normalPostLimit" class="posts wow" my-posts ng-click="urlModification(item.post_id, $event)"></li>
+                    <li ng-repeat="item in getPostData" class="posts wow" my-posts ng-click="urlModification(item.post_id, $event)"></li>
                 </ul>
                 <div class="discover-more-relative"></div>
                <div class="no-search-results" ng-show="getPostData.length == 0 && getPromotedData.length == 0 && showNoPost" ng-cloak>
