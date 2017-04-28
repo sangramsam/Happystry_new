@@ -6,9 +6,9 @@
  * Controller of the Happystry used in login state
  */
 angular.module('Happystry.controllers')
-  .controller('AuthCtrl', ['$scope','$http','AuthService','ViewService','roundProgressService','$state','$rootScope','Settings', function ($scope, $http, AuthService, ViewService,roundProgressService, $state,$rootScope, Settings) {
+  .controller('AuthCtrl', ['$scope','$http','AuthService','ViewService','$state','$rootScope','Settings', function ($scope, $http, AuthService, ViewService,roundProgressService, $state,$rootScope, Settings) {
   	'use strict';
-
+  	
   	ViewService.getFeeds({page:0}).then(function(response){
   		$scope.getPostData = response.data.Posts;
     	$scope.getPromotedData = response.data.Promoted;
@@ -26,29 +26,14 @@ angular.module('Happystry.controllers')
 		ViewService.openFancyBox({id:"#videoPop"});
 	};
 
+
+/*------------------ Round circle on feeds --------------------------------*/
+	$scope.roundProgress = ViewService.roundProgressInitialization();
 	$scope.getColor = function () {
-	    return $scope.gradient ? 'url(#gradient)' : $scope.currentColor;
+	    return $scope.gradient ? 'url(#gradient)' : $scope.roundProgress.currentColor;
 	};
+/*------------------ end of round circle feeds ---------------------------*/
 
-    $scope.max = 100;
-    $scope.offset = 0;
-    $scope.timerCurrent = 0;
-    $scope.uploadCurrent = 0;
-    $scope.stroke = 2;
-    $scope.radius = 20;
-    $scope.isSemi = false;
-    $scope.rounded = false;
-    $scope.responsive = false;
-    $scope.clockwise = true;
-    $scope.currentColor = '#f47354';
-    $scope.bgColor = '#ccc';
-    $scope.duration = 800;
-    $scope.currentAnimation = 'easeOutCubic';
-    $scope.animationDelay = 0;
-    $scope.animations = [];
-    angular.forEach(roundProgressService.animations, function (value, key) {
-        $scope.animations.push(key);
-    });
 
-  }]);
+}]);
     

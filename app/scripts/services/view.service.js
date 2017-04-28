@@ -9,7 +9,34 @@
  * @author Anand Tiwari <anand.tiwari@appinessworld.com>
  */
 angular.module('Happystry.services')
-.factory('ViewService', function ($http, Settings, $state, Properties, $log,$q) {
+.factory('ViewService', function ($http, Settings, $state, Properties,roundProgressService, $log,$q) {
+
+            var roundProgress = {
+                    max             : 100,
+                    offset          : 0,
+                    timerCurrent    : 0,
+                    uploadCurrent   : 0,
+                    stroke          : 2,
+                    radius          : 20,
+                    isSemi          : false,
+                    rounded         : false,
+                    responsive      : false,
+                    clockwise       : true,
+                    currentColor    : '#f47354',
+                    bgColor         : '#ccc',
+                    duration        : 800,
+                    currentAnimation: 'easeOutCubic',
+                    animationDelay  : 0,
+                    animations      : [],
+            };
+            angular.forEach(roundProgressService.animations, function (value, key) {
+                roundProgress.animations.push(key);
+            });
+            
+            function roundProgressInitialization(){
+                return roundProgress;
+            };
+
 
             function getFeeds(args){
                 var deferred = $q.defer();
@@ -88,11 +115,13 @@ angular.module('Happystry.services')
                 });
             }
 
+
     return{
         getTrendingHashTag: getTrendingHashTag,
         getCollections: getCollections,
         getFeeds:getFeeds,
-        openFancyBox: openFancyBox
+        openFancyBox: openFancyBox,
+        roundProgressInitialization: roundProgressInitialization
     };
 
 });

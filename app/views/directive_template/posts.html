@@ -5,23 +5,22 @@
                 <div class="progress-wrapper">
                     <!--<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>-->
                     <round-progress
-                        max="max"
+                        max="roundProgress.max"
                         current="current"
                         color="{{ getColor()}}"
-                        bgcolor="{{ bgColor}}"
-                        radius="{{ radius}}"
-                        semi="isSemi"
-                        rounded="rounded"
-                        stroke="{{ stroke}}"
-                        clockwise="clockwise"
-                        responsive="responsive"
-                        duration="{{ duration}}"
-                        animation="{{ currentAnimation}}"
-                        offset="{{ offset}}"
-                        animation-delay="{{ animationDelay}}"
-                        on-render="showPrecisseCurrent"
+                        bgcolor="{{ roundProgress.bgColor}}"
+                        radius="{{ roundProgress.radius}}"
+                        semi="roundProgress.isSemi"
+                        rounded="roundProgress.rounded"
+                        stroke="{{ roundProgress.stroke}}"
+                        clockwise="roundProgress.clockwise"
+                        responsive="roundProgress.responsive"
+                        duration="{{ roundProgress.duration}}"
+                        animation="{{ roundProgress.currentAnimation}}"
+                        offset="{{ roundProgress.offset}}"
+                        animation-delay="{{ roundProgress.animationDelay}}"
+                        on-render="roundProgress.showPrecisseCurrent"
                         ng-init="current = item.percentile">
-
                     </round-progress>
                 </div>
                 <img ng-src="{{item.image}}" alt="" style="width: 38px; height: 38px;" />
@@ -35,7 +34,7 @@
         </div>
     </div>
     <div class="image-holder promoted-holder">
-        <a class="max-height-137" ng-href="#/postdetails/{{item.post_id}}"><img ng-src="{{item.post_image[0]}}" alt="" />
+        <a class="max-height-137" ui-sref="postdetails({ post_id: item.post_id})"><img ng-src="{{item.post_image[0]}}" alt="" />
             <span ng-show="item.promoted == 'Y'">
                 <img src="../../../../app/images/featured.png" alt="image" class="for-promoted-icon img-responsive"/>
             </span>

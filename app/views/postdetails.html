@@ -1,0 +1,300 @@
+<div class="margin-t-40 social-fix">
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+    <div class="container-medium clearfix post-details" ng-clock>
+        <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12 nopadding">
+            <div class="postdetails-holder">
+                <ul>
+                    <li class=" posts">
+                        <div class="card mar-rt-7">
+                            <div class="header-hold drop-position">
+                                <div class="profile-holder">
+                                    <a href="#/profile/{{postdetails.posts[0].user_id}}">
+                                        <div class="progress-wrapper">
+                                            <round-progress
+                                                max="roundProgress.max"
+                                                current="postdetails.posts[0].percentile"
+                                                color="{{ getColor()}}"
+                                                bgcolor="{{ roundProgress.bgColor}}"
+                                                radius="{{ roundProgress.radius}}"
+                                                semi="roundProgress.isSemi"
+                                                rounded="roundProgress.rounded"
+                                                stroke="{{ roundProgress.stroke}}"
+                                                clockwise="roundProgress.clockwise"
+                                                responsive="roundProgress.responsive"
+                                                duration="{{ roundProgress.duration}}"
+                                                animation="{{ roundProgress.currentAnimation}}"
+                                                offset="{{ roundProgress.offset}}"
+                                                animation-delay="{{ roundProgress.animationDelay}}"
+                                                on-render="roundProgress.showPrecisseCurrent">
+                                            </round-progress>
+                                        </div>
+                                        <img ng-src="{{postdetails.posts[0].image}}" alt="" style="width: 38px; height: 38px;" />
+                                    </a>
+                                </div>
+                                <div class="profile-details">
+                                    <a href="#/profile/{{postdetails.posts[0].user_id}}"><h4>{{postdetails.posts[0].name}}</h4></a>
+                                    <h6>
+                                        <span ng-if="postdetails.posts[0].cret_date != nan">
+                                            {{ postdetails.posts[0].cret_date | timeago}}
+                                        </span>
+                                        <span class="location loc-dot post-det-loc">{{postdetailsLocation}}</span>
+                                    </h6>
+                                </div>
+                                <!--<span ng-click="writeMsg()" class="sprite message-icon cursor-pointer msg-icon"></span>-->
+                                <div ng-hide="logged_res" class="post-options">
+                                    <span ng-if="postdetails.posts[0].own_post == 0" ng-click="writeMsg(postdetails.posts[0].user_id)" class="sprite message-icon cursor-pointer msg-icon"></span>
+                                    <div uib-dropdown keyboard-nav>
+                                        <div id="simple-btn-keyboard-nav" type="button" uib-dropdown-toggle>
+                                            <span class="sprite downarrow-icon"></span>
+                                        </div>
+                                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+                                            <li role="menuitem"><a class="cursor-pointer" ng-if="postdetails.posts[0].own_post == 0" ng-click="continueReport()">Report post</a></li>
+                                            <li role="menuitem"><a  class="cursor-pointer" ng-if="postdetails.posts[0].own_post == 1" ng-click="editPost(postdetails.posts[0].post_id)">Edit post</a></li>
+                                            <li role="menuitem"><a class="cursor-pointer" ng-if="postdetails.posts[0].own_post == 1" ng-click="deletePostClk()">Delete post</a></li>
+                                        </ul>
+                                    </div>                                                                                                                         
+                                </div>
+                            </div>
+                            <div class="image-holder" ng-cloak>
+                                <a ng-repeat="thumb in postdetails.posts[0].post_image track by $index" rel="detailsGallery1" class="fancybox" ng-href="{{thumb}}" ng-show="$first">
+                                    <img ng-src="{{postdetails.posts[0].post_image[0]}}" alt="" />
+                                    <span class="top-img" ng-show="postdetails.posts[0].promoted == 'Y'">
+                                        <img src="../../../../assets/pages/images/featured.png" alt="image" class="for-promoted-icon img-responsive"/>
+                                    </span>
+                                </a>
+                                <div class="thumbnial-img" ng-if="postdetails.posts[0].post_image.length > 1">
+                                    <a ng-repeat="thumb in postdetails.posts[0].post_image track by $index" rel="detailsGallery" class="fancybox thumbclk" ng-href="{{thumb}}" ng-hide="$first">
+                                        <img ng-hide="$first" ng-src="{{thumb}}" alt=""/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="discription-holder" ng-cloak>
+                                <div class="like-comment-holder like-icon clearfix">
+                                    <div class="pull-left sj_like1 share-like">
+                                        <span ng-click="sendLike(postdetails.posts[0].post_id, $event)">
+                                            <a class="like-unlike cursor-pointer">
+                                                <span class="sprite like-icon " ></span>
+                                            </a>
+                                        </span>
+                                        <a class="cursor-pointer" ng-click="likepost(postdetails.posts[0].post_id)">
+                                            <span class="likes-comments">{{postdetails.posts[0].total_likes}}</span> <span>Likes</span>
+                                        </a>
+                                    </div>
+                                    <div class="pull-right share-like share-post">
+                                        <div class="bookmark-sec">
+                                            <span class="bookmark-icon-holder">
+                                                <span id="bookmark" ng-class="bookmarked ? 'bookmark-icon-active' : 'bookmark-icon'" ng-click="bookmarked = (logged_res) ? bookmarked : !bookmarked; (logged_res) ? loggin_pop($event) : bookmark($event)" class="sprite bookmark-icon cursor-pointer"></span> 
+                                            </span>
+                                        </div>
+                                        <div class="share-align">
+                                            <b>Share via</b> 
+                                            <a
+                                                socialshare
+                                                socialshare-provider="facebook"
+                                                socialshare-caption="{{postdetails.posts[0].name}}"
+                                                socialshare-description="{{postdetailsDesc}}"
+                                                socialshare-media="{{postdetails.posts[0].post_image[0]}}"
+                                                socialshare-url="{{share_link}}"
+                                                socialshare-type="feed"
+                                                socialshare-via="<?php echo FBAPP_ID ?>"
+                                                class="cursor-pointer"
+                                                >
+                                                <!--socialshare-via="<? //php echo FBAPP_ID            ?>"-->
+
+                                                <span class="fa fa-facebook-square fa-fb"></span>
+                                            </a>
+                                            <a 
+                                                socialshare
+                                                socialshare-provider="twitter"
+                                                socialshare-via="{{postdetails.posts[0].name}}"
+                                                socialshare-text="{{twrpostdetailsDesc}}"
+                                                socialshare-url="{{share_link}}"
+                                                class="cursor-pointer"
+                                                >
+                                                <span class="fa fa-twitter-square fa-tw"></span>
+                                            </a>
+                                            <a 
+                                                socialshare
+                                                socialshare-provider="pinterest"
+                                                socialshare-text="{{postdetails.posts[0].name}}"
+                                                socialshare-media="{{postdetails.posts[0].post_image[0]}}"
+                                                socialshare-url="{{share_link}}"
+                                                class="cursor-pointer"
+                                                >
+                                                <span class="fa fa-pinterest-square fa-pt"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="discription">
+                                    <p compile="postdetails.posts[0].description"></p>
+                                </div>
+                                <div class="tags">
+                                    <span ng-repeat="coll in postdetails.posts[0].collections" ng-if="coll != ''"><a class="cursor-pointer" ng-click="searchChash(coll)">{{coll}}</a></span>
+                                </div>
+                                <div ng-show="postdetails.posts[0].for_sale == 'Y'" class="premium-details-holder">
+                                    <ul>
+                                        <li>
+                                            <h5>Price</h5>
+                                            <span class="amount"><i>{{postdetails.posts[0].currency}}</i> {{postdetails.posts[0].cost}}</span>
+                                        </li>
+                                        <li>
+                                            <h5>Quantity</h5>
+                                            <span class="quantity">{{postdetails.posts[0].quantity}}</span>
+                                        </li>
+                                    </ul> 
+                                </div>
+                                <div ng-if="postdetails.posts[0].link" class="link">
+                                    <a class="text-underline" href="{{postdetails.posts[0].link}}" target="_blank" ng-click="(logged_res) ? loggin_pop($event) : ''" >View more / Buy now</a>
+                                </div>
+                            </div>
+                            <div class="post-comment-holder">
+                                <div class="header-hold commentSection new-comment-hold" ng-repeat="cmnt in postdetailsCmts | orderBy: 'comment_id' ">
+                                    <div class="profile-holder">
+                                        <a href="#/profile/{{cmnt.user_id}}">
+                                            <img ng-src="{{cmnt.profile_image}}" alt="" style="width: 38px; height: 38px;" /></a>
+                                    </div>
+                                    <div class="profile-details">
+                                        <a href="#/profile/{{cmnt.user_id}}"><h4>{{cmnt.name}}</h4></a>
+                                        <h6>
+                                            <abbr><time-ago from-time='{{cmnt.commented_time}}'></time-ago></abbr>
+                                            <div class="post-options" ng-if="cmnt.edit == 1">
+                                                <div uib-dropdown keyboard-nav>
+                                                    <div id="simple-btn-keyboard-nav" type="button" uib-dropdown-toggle>
+                                                        <span class="sprite downarrow-icon"></span>
+                                                    </div>
+                                                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+                                                        <li role="menuitem"><a class="cursor-pointer" ng-click="editComment($event, cmnt.comment_id)">Edit</a></li>
+                                                        <li role="menuitem"><a class="cursor-pointer" ng-click="deleteComment(cmnt.comment_id, $event, postdetails.posts[0].post_id)">Delete</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </h6>
+                                    </div>
+                                    <div class="comments">
+                                        <p>{{cmnt.comment}}</p>
+                                    </div>
+                                </div>
+                                <div class="header-hold " id="foo"  ng-click="(logged_res) ? loggin_pop($event) : ''">
+                                    <div class="type-comment">
+                                        <a ng-if="postdetails.posts[0].total_comments > 5" ng-click="seeMoreComments(postdetails.posts[0].post_id, $event)" class="allmorecmts cursor-pointer">
+                                            <span class="sprite comment-icon"></span>
+                                            <span class="likes-comments ng-binding"> See all comments</span>
+                                        </a>
+                                        <textarea id="pos_detCmt" ng-keyup="$event.keyCode == 13 && !$event.shiftKey && sendComment(postdetails.posts[0].post_id, $event)" placeholder="Add Comment"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="similar_feeds.length > 1 && item.post_repet != 0" class="similar-posts margin-t-35" ng-controller="AuthCtrl" >
+                            <div class="title">
+                                <h4 class="sf-size">Similar Feeds</h4>
+                                <!--<ul class="dynamic-grid grid" angular-grid="similar_feeds" ag-grid-width="270" ag-gutter-size="5" ag-id="similar_feeds" ng-init="loadMoreShots()">-->
+                                <div class="post-card-holder">
+                                    <ul class="dynamic-grid grid postfeeds_flex in_postdetails"  ag-id="similar_feeds" ng-init="loadMoreRelShots()">
+                                        <li ng-repeat="item in similar_feeds|  filter:{ post_repet: '0'}" class=" posts" my-posts></li>
+                                    </ul>
+                                    <!--<div  class="loader margin-t-15" ng-show="loader"><img src="loader.gif" alt="" /></div>-->
+                                    <div class="loadmore-relative"></div>
+                                    <div class="loader ng-hide" ng-show="loadmore">
+                                        <div id="loader">
+                                            <span></span>
+                                        </div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12 nopadding" ng-controller="AuthCtrl" ng-if="getPromotedData != 0">
+            <ul  ag-gutter-size="5" class="collection-reward collection-reward-inner grid ">
+                <li class="posts">
+                    <h3 class="featured">Featured</h3>
+                <uib-carousel interval="5000" active="active">
+                    <uib-slide ng-repeat="item in getPromotedData track by $index" index="$index">
+                        <div my-posts></div>
+                    </uib-slide>
+                </uib-carousel>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--<div id="delete-post" class="popup" style="display: none">
+    <h3>Delete Post</h3>
+    <h3>Do you really want to delete the post</h3>
+    <div class="button-holder clearfix" >
+        <ul>
+            <li><button class="btn btn-success" type="button"><a href="#/timeline"  ng-click="deletePost(postdetails.posts[0].post_id)">Delete</a></button></li>
+            <li><button class="btn btn-default" type="button" close-popup>Cancel</button></li>
+        </ul>
+    </div> 
+</div>-->
+<div id="delete-post" class="report" style="display: none" >
+    <h3 class="text-center nomargin">Delete Post</h3>
+    <div class="popup">
+        <form class=" profile-section nopadding">
+            <p class="pad-l-r-10">Do you really want to delete the post</p>
+            <!--                        <div class="btnHolder">
+                                        <button class="btn btn-success greebBtn" ng-click="reportPost(postdetails.posts[0].post_id)" >Continue</button>
+                                        <button class="btn btn-default" close-popup>Cancel</button>
+                                    </div>-->
+            <div class="button-holder clearfix" >
+                <ul>
+                    <li><button class="btn btn-success greebBtn" type="button" ng-click="deletePost(postdetails.posts[0].post_id)">Delete</button></li>
+                    <li><button class="btn btn-default" type="button" close-popup>Cancel</button></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+<!--delete post popup-->
+<div id="likes" style="display: none">
+    <div class="card">
+        <div class="header-hold" ng-repeat="l in getLikePopupData">
+            <div class="profile-holder">
+                <img ng-src="{{l.profile_image}}" alt="" style="width: 38px;" class="img-loaded">
+            </div>
+            <div class="profile-details">
+                <h4 class="ng-binding">{{l.name}}</h4>
+            </div>
+        </div>
+        <div ng-if="getLikePopupData == 0" class="header-hold" >
+            <h5 class="text-center">No Likes</h5>
+        </div>
+        <!--<div class="loader text-center" ng-show="loader"><img src="loader.gif" alt="" /></div>-->
+        <div class="loader ng-hide" ng-show="loader">
+            <div id="loader">
+                <span></span>
+            </div></div>
+    </div>
+</div><!--like popup-->
+<div id="report-post" class="report" style="display: none" >
+    <h3 class="text-center nomargin">Report Post</h3>
+    <div class="popup">
+        <form class=" profile-section nopadding">
+            <p class="pad-l-r-10">Do you really want to continue to report inappropriate content?</p>
+            <div class="btnHolder">
+                <button class="btn btn-success greebBtn" ng-click="reportPost(postdetails.posts[0].post_id)" >Continue</button>
+            </div>
+        </form>
+    </div>
+</div><!--report-post popup-->
+<div id="report-post-cont" class="report" style="display: none">
+    <h3 class="text-center nomargin">Inappropriate content reported</h3>
+    <div class="popup">
+        <form class=" profile-section nopadding">
+            <p>We have received your request.</p>
+            <p>We will remove the post if it violates our guidelines.</p>
+            <div class="btnHolder">
+                <button class="btn btn-success greebBtn" close-popup type="submit">Ok</button>
+            </div>
+        </form>
+    </div>
+</div><!--report-post-cont popup-->
+

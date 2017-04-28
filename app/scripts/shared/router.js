@@ -20,6 +20,12 @@ angular.module('Happystry.router', ['ui.router'])
       templateUrl: "/app/views/timeline.html",
       title:'Timeline',
       controller:"ViewCtrl"
+    })
+    .state('postdetails', {
+      url: "/postdetails/:post_id",
+      templateUrl: "/app/views/postdetails.html",
+      title:'postdetails',
+      controller:"PostDetailsCtrl"
     });
 
   $urlRouterProvider.otherwise("/");
