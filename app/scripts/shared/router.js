@@ -14,6 +14,12 @@ angular.module('Happystry.router', ['ui.router'])
       templateUrl: "/app/views/login.html",
       title:'Login',
       controller:"AuthCtrl"
+    })
+    .state('timeline', {
+      url: "/timeline",
+      templateUrl: "/app/views/timeline.html",
+      title:'Timeline',
+      controller:"ViewCtrl"
     });
 
   $urlRouterProvider.otherwise("/");

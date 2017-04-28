@@ -14,7 +14,8 @@ angular.module('Happystry.controllers')
 		method: 'GET',
 		url: "https://www.happystry.com/post?page=0",
 		headers: {'Content-Type': 'application/json',
-				 'HAPPI-API-KEY': "TRR36-PDTHB-9XBHC-PPYQK-GBPKQ"}
+				 'HAPPI-API-KEY': "TRR36-PDTHB-9XBHC-PPYQK-GBPKQ"},
+		
     }).then(function (response) {
     	console.log("success", response);
     },function(response){
