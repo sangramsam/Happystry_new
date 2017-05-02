@@ -9,7 +9,7 @@
  * @author Anand Tiwari <anand.tiwari@appinessworld.com>
  */
 angular.module('Happystry.services')
-.factory('AuthService', function ($http, Settings, $state, $log,$rootScope) {
+.factory('AuthService', function ($http, Settings, $state, $log,$rootScope, ezfb,$q) {
     function signIn(uname,pass) {
         $.ajax({
             crossDomain: true,
@@ -34,8 +34,25 @@ angular.module('Happystry.services')
         });
     };
 
+    function getLogin(){
+        var deferred = $q.defer();
+        ezfb.login(function (res,status) {
+                deferred.resolve({
+                    status: status,
+                    data: res.data
+                })
+            },function(response, status, headers, config){
+                deferred.reject({
+                    status: status,
+                    data: response.data
+                });
+            });
+        return deferred.promise;
+    };
+
   return {
-      signIn: signIn
+      signIn: signIn,
+      getLogin:getLogin
   };
 
 });

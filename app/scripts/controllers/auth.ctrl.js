@@ -6,7 +6,7 @@
  * Controller of the Happystry used in login state
  */
 angular.module('Happystry.controllers')
-  .controller('AuthCtrl', ['$scope','$http','AuthService','ViewService','$state','$rootScope','Settings', function ($scope, $http, AuthService, ViewService,roundProgressService, $state,$rootScope, Settings) {
+  .controller('AuthCtrl', ['$scope','$http','FacebookService','LoginService','ViewService','$state','$rootScope','Settings', function ($scope, $http,FacebookService, LoginService, ViewService,roundProgressService, $state,$rootScope, Settings) {
   	'use strict';
   	
   	ViewService.getFeeds({page:0}).then(function(response){
@@ -34,6 +34,22 @@ angular.module('Happystry.controllers')
 	};
 /*------------------ end of round circle feeds ---------------------------*/
 
+
+//facebook loin
+$scope.login=function () {
+    var flag=LoginService.getLogin();
+    console.log(flag);
+
+    /*if (response===true) {
+    	console.log("inside if block");
+        FacebookService.getUserDetail().then(function (response) {
+            $scope.userDetail = response.data;
+            console.log($scope.userDetail);
+        }, function (response) {
+        });
+        console.log("inside controller", response)
+    }*/
+}
 
 }]);
     

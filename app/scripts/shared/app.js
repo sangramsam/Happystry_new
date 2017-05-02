@@ -12,8 +12,14 @@ angular.module('Happystry', [
 			'Happystry.router',
 			'Happystry.directives',
 			'Happystry.filters',
-			'angular-svg-round-progressbar'
-]);
+			'angular-svg-round-progressbar',
+			'ezfb'
+]).config(function (ezfbProvider) {
+    ezfbProvider.setInitParams({
+        appId: '312638455759153'
+    });
+})
+;
 
 
 angular.module('Happystry.controllers', ['ui.bootstrap']);

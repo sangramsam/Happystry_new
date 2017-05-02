@@ -9,5 +9,5 @@
  */
 angular.module('Happystry.services')
   .constant('Settings', {
-    'BASE_URL': 'https://beta.happystry.com'
+    'BASE_URL': 'https://beta.happystry.com/'
   });

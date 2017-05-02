@@ -116,6 +116,8 @@ angular.module('Happystry.services')
             }
 
 
+
+
     return{
         getTrendingHashTag: getTrendingHashTag,
         getCollections: getCollections,
