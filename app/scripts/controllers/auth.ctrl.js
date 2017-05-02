@@ -33,7 +33,12 @@ angular.module('Happystry.controllers')
 	    return $scope.gradient ? 'url(#gradient)' : $scope.roundProgress.currentColor;
 	};
 /*------------------ end of round circle feeds ---------------------------*/
-
+	
+	$scope.login = function(){
+	
+		$state.go('timeline');
+	};
+	console.log($state.current);
 
 }]);
     
