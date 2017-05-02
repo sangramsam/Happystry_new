@@ -7,6 +7,8 @@
  * @version 1.0
  */
 angular.module('Happystry', [
+			'ui.router',
+			'angular-svg-round-progressbar',
 			'Happystry.controllers',
 			'Happystry.services',
 			'Happystry.router',
@@ -18,11 +20,11 @@ angular.module('Happystry', [
     ezfbProvider.setInitParams({
         appId: '312638455759153'
     });
-})
-;
-
+});
 
 angular.module('Happystry.controllers', ['ui.bootstrap']);
 angular.module('Happystry.directives', ['ui.bootstrap']);
 angular.module('Happystry.services', []);
 angular.module('Happystry.filters', []);
+angular.module('Happystry.router', []);
+

@@ -6,7 +6,7 @@
  * Main router of the application.
  */
 
-angular.module('Happystry.router', ['ui.router'])
+angular.module('Happystry.router',[])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider
     .state('login', {

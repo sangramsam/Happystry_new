@@ -34,8 +34,7 @@ angular.module('Happystry.controllers')
 	};
 /*------------------ end of round circle feeds ---------------------------*/
 
-
-//facebook loin
+//facebook login
 $scope.login=function () {
     var flag=LoginService.getLogin();
     console.log(flag);
