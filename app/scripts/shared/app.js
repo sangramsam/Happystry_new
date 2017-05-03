@@ -7,15 +7,16 @@
  * @version 1.0
  */
 angular.module('Happystry', [
-			'ui.router',
-			'angular-svg-round-progressbar',
-			'Happystry.controllers',
-			'Happystry.services',
-			'Happystry.router',
-			'Happystry.directives',
-			'Happystry.filters',
-			'angular-svg-round-progressbar',
-			'ezfb'
+    'ui.router',
+    'angular-svg-round-progressbar',
+    'Happystry.controllers',
+    'Happystry.services',
+    'Happystry.router',
+    'Happystry.directives',
+    'Happystry.filters',
+    'angular-svg-round-progressbar',
+    'ezfb',
+    'ngAutocomplete'
 ]).config(function (ezfbProvider) {
     ezfbProvider.setInitParams({
         appId: '312638455759153'

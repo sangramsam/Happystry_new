@@ -387,7 +387,7 @@
     <div class="copy-right">
         <p>Copyright © Happystry</p>
     </div>
-    <div id="contactInfo" class="popup" style="display: none" ng-init="updateApiMe()" >
+    <div id="contactInfo" class="popup" style="display: none" >
         <div class="pop-header">
             <figure>
                 <img ng-src="{{userData[0].profile_image}}" alt=""/>
@@ -402,7 +402,7 @@
                 <div class="fieldholder">
                     <label >City</label>
                     <div>
-                        <input type="text" id="uloc" class="form-control" ng-autocomplete="result" details="details" options="options" value="{{userData[0].location}}" placeholder="Please enter your city (Bangalore, Delhi)" required/>
+                        <input type="text" id="uloc" class="form-control"  ng-autocomplete="result" details="details" options="options"  placeholder="Please enter your city (Bangalore, Delhi)" required/>
 
                         <span id="errorloc" class="error"></span>
                     </div>
@@ -410,17 +410,17 @@
                 <div class="fieldholder noborder">
                     <label for="">Phone number</label>
                     <div class="code-mob">
-                        <select id="countrycode" ng-change="showSelCode(selCode)" ng-model="selCode" class="form-control ng-hide pop-inp-code">
-                            <option ng-repeat="item in countryData| orderBy:'iso3'" value="{{item.phonecode}}" ng-selected="item.phonecode == selCode">{{item.iso3}}({{item.phonecode}})</option>
+                        <select id="countrycode"  ng-model="user.selCode" class="form-control ng-hide pop-inp-code">
+                            <option ng-repeat="item in countryData | orderBy:'iso3'" value="{{item.phonecode}}" ng-selected="item.phonecode == selCode">{{item.iso3}}({{item.phonecode}})</option>
                         </select>
-                        <input type="text" id="umobile" class="form-control  pop-inp-num-wel" minlength="10" maxlength="15"  value="{{userData[0].mobile}}" />
+                        <input type="text" id="umobile" class="form-control  pop-inp-num-wel" minlength="10" maxlength="15"  ng-model="user.mobileNo" />
                         <span id="errorphone" class="error"></span>
                     </div>
                 </div>
                 <div class="fieldholder">
                     <label>Email</label>
                     <div>
-                        <input type="email" id="uemail" class="form-control" value="{{userData[0].email}}" />
+                        <input type="email" id="uemail" class="form-control" ng-model="user.email" />
                         <span id="erroremail" class="error"></span>
                     </div>
                 </div>
@@ -428,7 +428,7 @@
                     <p>By signing in I agree to the <a href="<?php echo APP_SOURCE ?>home/terms_condition" target="_blank">Terms &amp; Conditions</a></p>
                 </div>
                 <div class="btnHolder">
-                    <button ng-click="goToMobileVerf($event)"  class="btn btn-success greebBtn" type="submit">Continue</button>
+                    <button ng-click="goToMobileVerf(user)"  class="btn btn-success greebBtn" type="submit">Continue</button>
                 </div>
             </form>
         </div>

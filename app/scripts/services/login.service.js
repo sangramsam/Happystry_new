@@ -73,9 +73,11 @@ angular.module('Happystry.services')
                                         'User-Id':user_id,
                                         'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'}
                                 }).success(function (data) {
-                                    var userData = data.user_welcome;
-                                    $state.go('timeline');
-                                    if (userData) {
+                                    //localStorage.setItem("userData",userData);
+                                    $rootScope.userData = data.user_welcome;
+                                    console.log($rootScope.userData);
+                                   // $state.go('timeline');
+                                    if ($rootScope.userData) {
                                         jQuery.fancybox({
                                             'href': '#contactInfo',
                                             'closeBtn': false,
