@@ -42,9 +42,10 @@ angular.module('Happystry.services')
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: Settings.BASE_URL+"/post?page="+args.page,
+                    url: Settings.BASE_URL+"post?page="+args.page,
                     headers: {'Content-Type': 'application/json',
-                             'HAPPI-API-KEY': "TRR36-PDTHB-9XBHC-PPYQK-GBPKQ"
+                        'HAPPI-API-KEY':'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'
+                             // 'HAPPI-API-KEY': "TRR36-PDTHB-9XBHC-PPYQK-GBPKQ"
                     }
                 }).then(function (response, status, headers, config) {
                     deferred.resolve({
@@ -65,7 +66,7 @@ angular.module('Happystry.services')
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: Settings.BASE_URL+'/collections',
+                    url: Settings.BASE_URL+'collections',
                     headers: {'Content-Type': 'application/json',
                              'HAPPI-API-KEY': "TRR36-PDTHB-9XBHC-PPYQK-GBPKQ"
                     }
@@ -87,7 +88,7 @@ angular.module('Happystry.services')
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: Settings.BASE_URL+'/post/trendinghash',
+                    url: Settings.BASE_URL+'post/trendinghash',
                     headers: {'Content-Type': 'application/json',
                              'HAPPI-API-KEY': "TRR36-PDTHB-9XBHC-PPYQK-GBPKQ"
                     }

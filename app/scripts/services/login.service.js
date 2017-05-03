@@ -53,24 +53,28 @@ angular.module('Happystry.services')
                     headers: {'Content-Type': 'application/json', 'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'}
                 }).success(function (data) {
                     if (data.message == 'success') {
+                        var id = data.user_id;
                         ezfb.api(
                             "/me/friends",
                             function (response) {
                                var friends = response.data;
-                                var user_id = data.user_id;
+                                var user_id = id;
                                 console.log("Login Success  !!!");
-                               $state.go('timeline');
-                                return 1;
-                               /* $http({
+                               //$state.go('timeline');
+                                var data = {
+                                    friends: friends,
+                                    user_id: user_id
+                                };
+                                $http({
                                     method: "post",
                                     url: Settings.BASE_URL + 'user/friends_list',
-                                    data: {
-                                        friends: friends,
-                                        user_id: user_id,
-                                    },
-                                    headers: {'Content-Type': 'application/json', 'HAPPI-API-KEY': api_key}
+                                    data: data,
+                                    headers: {'Content-Type': 'application/json',
+                                        'User-Id':user_id,
+                                        'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'}
                                 }).success(function (data) {
                                     var userData = data.user_welcome;
+                                    $state.go('timeline');
                                     if (userData) {
                                         jQuery.fancybox({
                                             'href': '#contactInfo',
@@ -83,7 +87,7 @@ angular.module('Happystry.services')
                                         return false;
                                     } else {
                                         console.log("Login Success  !!!");
-                                        /!*var id = $localStorage.happystryUrl.substr($localStorage.happystryUrl.lastIndexOf('/') + 1);
+                                        /*var id = $localStorage.happystryUrl.substr($localStorage.happystryUrl.lastIndexOf('/') + 1);
                                          if ($localStorage.happystryUrl.indexOf('postdetails') > -1) {
                                          $window.location.href = api_url + "#/postdetails/" + id;
                                          $window.location.reload();
@@ -92,9 +96,9 @@ angular.module('Happystry.services')
                                          $window.location.reload();
                                          } else {
                                          $window.location.href = api_url + "#/timeline";
-                                         }*!/
+                                         }*/
                                     }
-                                });*/
+                                });
                             });
                     } else {
                         if (data.type == 'user blocked') {
