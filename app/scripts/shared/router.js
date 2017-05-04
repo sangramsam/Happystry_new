@@ -17,9 +17,8 @@ angular.module('Happystry.router',[])
     })
     .state('timeline', {
       url: "/timeline",
-      templateUrl: "/app/views/timeline.html",
-      title:'Timeline',
-      controller:"ViewCtrl"
+      templateUrl: "/app/views/templates/dashboard.html",
+      title:'Timeline'
     })
     .state('postdetails', {
       url: "/postdetails/:post_id",

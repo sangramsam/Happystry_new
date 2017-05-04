@@ -1,0 +1,575 @@
+<div ng-cloak="" ng-controller="headerController">
+<div ng-hide="dataLoaded" class="preloader"></div>
+<div class="hidden-xs"><input  type="checkbox" /></div>
+<header class="dashboard">
+    <div class="menu left">
+        <div class="menu-left">
+            <ul class="clearfix">
+                <li><a ng-click="refreshtimePage()" href="<?php echo APP_SOURCE ?>#/timeline" ng-hide="logged_res">
+                            <span class="logo-holder">
+                                <img class="hidden-xs" src="<?php echo PAGE_IMAGES_PATH ?>/happystry-logo.png" alt="" />
+                                <img class="hidden-sm hidden-md hidden-lg" src="<?php echo PAGE_IMAGES_PATH ?>/mobile-logo.png" alt="" />
+                            </span>
+                </a>
+                    <a ng-click="refreshtimePage()" href="<?php echo APP_SOURCE ?>home" ng-show="logged_res">
+                            <span class="logo-holder">
+                                <img class="hidden-xs" src="<?php echo PAGE_IMAGES_PATH ?>/happystry-logo.png" alt="" />
+                                <img class="hidden-sm hidden-md hidden-lg" src="<?php echo PAGE_IMAGES_PATH ?>/mobile-logo.png" alt="" />
+                            </span>
+                    </a>
+                </li>
+                <li class="main-menu add-img" onclick="">
+                    <a ng-click="(logged_res) ? loggin_pop($event) : ''" href="" class="addpostbtn" ><img src="<?php echo PAGE_IMAGES_PATH ?>/add-new.png" alt="" /><i>Add post</i></a>
+                    <div class="sub-menu medium show-add-img" onclick="">
+                        <ul ng-hide="logged_res" class="addNewPast">
+                            <li><div class="menu-arrow-top"></div></li>
+                            <li>
+                                <a ng-href="javascript:void();" class="cursor-pointer" >
+                                    <input type="file" id="hfupload" multiple img-cropper-fileread image="cropper.sourceImage"  accept=".png, .jpg, .jpeg, .JPG, .JPEG, .PNG" />
+                                    <label for="hfupload">
+                                        <img src="<?php echo PAGE_IMAGES_PATH ?>/upload-image.png" alt="" />
+                                        <h6>Upload images</h6>
+                                    </label>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="menu right">
+        <ul class="clearfix mobMenu">
+            <li class="main-menu on-clk autosearch ng-cloak">
+                <div class="input-group">
+                    <typeahead  subtitle="BillingCity" displaykey="key" retkey="AccId"  modelret="valRet" modeldisplay="valDis" ng-keypress="checkIfEnterKeyWasPressed($event)"/>
+
+                </div> </li>
+            <li ng-hide="logged_res" class="main-menu on-clk diffInMob">
+                <a ng-href="#/rewards" class="sprite gift-box-icon">
+                    <span class="customSpanMobile hidden-sm hidden-md hidden-lg">Rewards</span>
+                </a>
+            </li>
+            <li ng-hide="logged_res" class="main-menu on-clk diffInMob moretop" ng-controller="notificationsController">
+                <a href="" class="sprite notification-icon">
+                    <span id="mybadge" ng-class="(getNotificationData1.length > 0) ? 'badge' : ''"></span>
+                    <span class="customSpanMobile hidden-sm hidden-md hidden-lg">Notifications</span>
+                </a>
+                <div class="sub-menu big">
+                    <div class="menu-title">
+                        <h3>Notifications</h3>
+                    </div>
+                    <ul>
+                        <li><div class="menu-arrow-top"></div></li>
+                        <li ng-if="getNotificationData1.length != 0" ng-repeat="n in getNotificationData1" ng-click="notified(n)">
+                            <a  ng-class="(n.status === 'S') ? 'read' : 'unread'">
+                                <div class="profile-holder">
+                                    <img ng-if="n.profile_image != 'Image'" ng-src="{{n.profile_image}}" alt="" style="width: 38px;" class="img-loaded img-circle">
+                                    <img ng-if="n.profile_image == 'Image'" ng-src="<?php echo PAGE_IMAGES_PATH ?>unknown.png" alt="" style="width: 38px;" class="img-loaded img-circle">
+                                </div>
+                                <div class="profile-details">
+                                    <h6>
+                                            <span class="location ng-binding clearfix"><strong>{{n.name}}
+                                                    <span class="comment-time"><abbr><time-ago from-time='{{n.mod_date}}'></time-ago></abbr></span>
+                                                </strong> {{n.content}}
+                                            </span>
+                                    </h6>
+                                </div>
+                            </a>
+                        </li>
+                        <li ng-if="getNotificationData1.length == 0 && getNotificationDataAll.length == 0">
+                            <div class="empty-state">
+                                <img src="<?php echo PAGE_IMAGES_PATH ?>/no-notification.png" alt="" />
+                                <div>
+                                    <h6 class="bold">Sorry!!</h6>
+                                    <h6>No notifications</h6>
+                                </div>
+                            </div>
+                        </li>
+                        <li ng-if="getNotificationDataAll.length > 0 && getNotificationData1.length == 0">
+                            <div class="empty-state">
+                                <img src="<?php echo PAGE_IMAGES_PATH ?>/no-notification.png" alt="" />
+                                <div>
+                                    <!--<h6 class="bold">Sorry!!</h6>-->
+                                    <h6>No new notifications</h6>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div ng-if="getNotificationData1.length > 0;
+                        getNotificationDataAll.length > 0" class="menu-footer">
+                        <a class="cursor-pointer" ng-href="#/notifications">View all</a>
+                    </div>
+                    <!--                        <div ng-if="getNotificationDataAll.length != 0" class="menu-footer">
+                                                <a class="cursor-pointer" ng-href="#/notifications">View all</a>
+                                            </div>-->
+                </div>
+            </li>
+            <li ng-hide="logged_res" class="main-menu on-clk diffInMob moretop20" ng-controller="messagesController" >
+                <a class="sprite message-icon cursor-pointer">
+                    <span id="mybadge" ng-class="(msgnotify1 > 0) ? 'badge' : ''"></span>
+                    <span class="customSpanMobile hidden-sm hidden-md hidden-lg">Messages</span>
+                </a>
+                <div class="sub-menu big">
+                    <div class="menu-title">
+                        <h3>Messages</h3>
+                    </div>
+                    <ul>
+                        <li><div class="menu-arrow-top"></div></li>
+                        <li ng-if="getNotificationDataAll1.length == 0">
+                            <div class="empty-state">
+                                <img src="<?php echo PAGE_IMAGES_PATH ?>/no-message.png" alt="" />
+                                <div>
+                                    <h6 class="bold">Sorry!!</h6>
+                                    <h6>No messages</h6>
+                                </div>
+                            </div>
+                        </li>
+                        <li ng-if="getNotificationDataAll1.length > 0" ng-repeat="data in getNotificationDataAll1" >
+                            <a ng-click="pickMessage(data.user_id)" ng-class="(data.msgcount == 0) ? 'read' : 'unread'" class="cursor-pointer">
+                                <div class="profile-holder">
+                                    <img ng-src="{{data.profile_image}}" alt="" style="width: 38px;" class="img-loaded img-circle">
+                                </div>
+                                <div class="profile-details">
+                                    <h6>
+                                        <span class="location ng-binding"><strong>{{data.name}}<span class="comment-time" ng-if="data.messages"><abbr><time-ago from-time='{{data.cret_date}}'></time-ago></abbr></span></strong><i>{{data.messages}}</i></span>
+                                        <span class="notification" ng-if="data.msgcount > 0">{{data.msgcount}}</span>
+                                    </h6>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div ng-if="getNotificationDataAll1.length > 0" class="menu-footer">
+                        <a class="cursor-pointer" ng-click="viewMsgAll()">View all</a>
+                    </div>
+                </div>
+            </li><!--message notification-->
+            <li class="main-menu on-clk">
+                <a ng-click="(logged_res) ? loggin_pop($event) : ''" href="" class="sprite user-icon"></a>
+                <div ng-hide="logged_res" class="sub-menu">
+                    <ul>
+                        <li><div class="menu-arrow-top"></div></li>
+                        <li><a ng-href="#/rewards" class="cursor-pointer hidden-sm hidden-md hidden-lg"><span class="sprite gift-box-icon"></span>Delights</a></li>
+                        <li ng-controller="notificationsController"><a ng-href="#/notifications"  class="cursor-pointer hidden-sm hidden-md hidden-lg">
+                            <span class="sprite notification-icon"><span id="mybadge" class="badge" ng-if="getNotificationData1.length != 0"></span></span>Notifications</a></li>
+                        <li ng-controller="messagesController"><a class="cursor-pointer hidden-sm hidden-md hidden-lg" ng-click="viewMsgAll()">
+                            <span class="sprite message-icon"><span id="mybadge" class="badge" ng-if="msgnotify1 != 0"></span></span>Messages</a></li>
+                        <li><a style="text-overflow: ellipsis;max-width: 170px; overflow: hidden; white-space: nowrap;" ng-href="#/profile/{{getEditProfileData.user_id}}"><span class="sprite user-small-icon"></span>{{getEditProfileData.name}} </a></li>
+                        <li><a leadership-popup class="cursor-pointer" ><span class="sprite leader-board-icon"></span>Leaderboard</a></li>
+                        <li><a href="#/bookmark"><span class="sprite bookmark-icon"></span>Bookmarks</a></li>
+                        <li><a href="#/editprofile"><span class="sprite settings-icon"></span>Settings</a></li>
+                        <li><a ng-click="appLogout()" class="cursor-pointer"><span class="sprite logout-icon"></span>Logout</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>
+</div>
+<div>
+<div class="holder container-sad" ng-controller="timelineController">
+    <div class="row">
+        <div ui-view></div>
+    </div>
+</div>
+<div id="congrats-reward" style="display: none">
+    <div class="card">
+        <div class="header">
+            <h3>Congratulations</h3>
+            <p class="green-text redeemd">Your reward has been redeemed successfully</p>
+            <p class="bold">Reward</p>
+            <div class="rewardhold">
+                <div class="cell one">
+                    <img src="<?php echo PAGE_IMAGES_PATH ?>/reward.jpg" alt="" />
+                </div>
+                <div class="cell two">
+                    <p class="black-text">Alive India in Concert with Sunidhi Chauhan</p>
+                    <p class="requires">Requires: <img src="<?php echo PAGE_IMAGES_PATH ?>/gift.png" alt="" /> <span class="bold">500</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="body">
+            <a href="" class="close-fancybox">OK</a>
+        </div>
+    </div>
+</div>
+<div id="leader-board" class="popup" style="display: none">
+    <div class="clearfix border-btm"><h3 class="pull-left">Leaderboard</h3>
+        <!--            <select class="pull-right" name="" id="" ng-model="d"  ng-change="setLocation(d)">
+                    <option value=""  >
+                        <option>All</option>
+                        <option ng-repeat="d in allLocation"  ng-selected="d.me == 1">{{d.current_location}}</option>
+                </select>-->
+        <select class="pull-right" ng-options="item as item.current_location for item in allLocation| orderBy:'current_location'" ng-model="myselect" ng-change="setLocation(myselect)">
+        </select>
+
+    </div>
+    <div class="card" >
+        <div class="row-hold" ng-repeat="lead in getleaderDataResult">
+            <div ng-if="lead.me == 0">
+                <div class="index">
+                    <p>{{lead.rank}}</p>
+                </div>
+                <div class="header-hold">
+                    <div ng-click="profileCLk(lead.user_id)" class="profile-holder cursor-pointer">
+                        <img ng-src="{{lead.profile_image}}" alt="" style="width: 38px;" class="img-loaded">
+                    </div>
+                    <div ng-click="profileCLk(lead.user_id)" class="profile-details cursor-pointer">
+                        <h4>{{lead.name}}</h4>
+                    </div>
+                    <div class="profile-holder second percentile-hold">
+                        <h4 class="bold"><span class="sprite percentile-icon">
+                                </span>
+                            <span class="percentile">
+                                    <div class="progress-wrapper">
+                                        <!--<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>-->
+                                        <round-progress
+                                                max="max"
+                                                current="current"
+                                                color="{{ getColor()}}"
+                                                bgcolor="{{ bgColor}}"
+                                                radius="{{ radius}}"
+                                                semi="isSemi"
+                                                rounded="rounded"
+                                                stroke="{{ stroke}}"
+                                                clockwise="clockwise"
+                                                responsive="responsive"
+                                                duration="{{ duration}}"
+                                                animation="{{ currentAnimation}}"
+                                                offset="{{ offset}}"
+                                                animation-delay="{{ animationDelay}}"
+                                                on-render="showPrecisseCurrent"
+                                                ng-init="current = lead.percentile">
+                                            </round-pssrogress>
+                                    </div>
+                                    <i>{{lead.percentile| number:0}}</i></span></h4>
+                    </div>
+                    <div class="profile-holder second">
+                        <h5 class="bold"><span class="sprite gift"></span><span class="reward-pts">{{lead.current_points}}</span></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="orange"  ng-if="lead.me == 1">
+                <div class="index">
+                    <p>{{lead.rank}}</p>
+                </div>
+                <div class="header-hold">
+                    <div ng-click="profileCLk(lead.user_id)" class="profile-holder cursor-pointer">
+                        <img ng-src="{{lead.profile_image}}" alt="" style="width: 38px;" class="img-loaded">
+                    </div>
+                    <div ng-click="profileCLk(lead.user_id)" class="profile-details cursor-pointer">
+                        <h4>{{lead.name}}</h4>
+                    </div>
+                    <div class="profile-holder second percentile-hold">
+                        <h4 class="bold"><span class="sprite percentile-icon"></span>
+                            <span class="percentile">
+                                    <div class="progress-wrapper">
+                                        <!--<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>-->
+                                        <round-progress
+                                                max="max"
+                                                current="current"
+                                                color="{{ getColor()}}"
+                                                bgcolor="{{ bgColor}}"
+                                                radius="{{ radius}}"
+                                                semi="isSemi"
+                                                rounded="rounded"
+                                                stroke="{{ stroke}}"
+                                                clockwise="clockwise"
+                                                responsive="responsive"
+                                                duration="{{ duration}}"
+                                                animation="{{ currentAnimation}}"
+                                                offset="{{ offset}}"
+                                                animation-delay="{{ animationDelay}}"
+                                                on-render="showPrecisseCurrent"
+                                                ng-init="current = lead.percentile">
+                                            </round-pssrogress>
+                                    </div>
+                                    <i>{{lead.percentile| number:0}}</i></span></h4>
+                    </div>
+                    <div class="profile-holder second">
+                        <h5 class="bold"><span class="sprite gift"></span><span class="reward-pts">{{lead.current_points}}</span></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="getleaderDataResult == 0">
+            <div class="empty-state">
+                <!--<img src="<?php echo PAGE_IMAGES_PATH ?>/no-rewards.png" alt="" />-->
+                <h6 class="bold margin-t-20"> No Data</h6>
+                <!--<h6>You have not received any rewards</h6>-->
+            </div>
+        </div>
+    </div>
+    <div ng-if="rankingCount > 5;
+            rankingCount != getleaderDataResult.length;" class="header-hold loadMore cursor-pointer" ng-click="loadMore($event, myselect)"><a>Loadmore <img src="<?php echo PAGE_IMAGES_PATH ?>/load.png" alt="" /></a></div>
+    <!--        <div ng-if="items.length != 0; "  class="header-hold loadMore cursor-pointer" ng-click="loadMore($event)"><a>Load More...</a></div>
+            <div ng-if="getleaderData.length != 0" class="header-hold loadMore cursor-pointer" ng-click="loadMore($event)"><a>Load More...</a></div>-->
+</div><!--leaderboard-->
+<div id="contactInfo" class="popup" style="display: none;" ng-init="updateApiMe()" >
+    <div class="pop-header">
+        <figure>
+            <img ng-src="{{userData[0].profile_image}}" alt=""/>
+        </figure>
+        <div>
+            <h3>{{userData[0].name}}</h3>
+            <p>Welcome to Happystry</p>
+        </div>
+    </div>
+    <div class="pop-body profile-section">
+        <form  novalidate>
+            <div class="fieldholder">
+                <label >City</label>
+                <div>
+                    <!--                        <input type="text" id="uloc" class="form-control"  value="{{userData[0].location}}" />-->
+                    <input type="text" id="uloc" class="form-control" ng-autocomplete="result" details="details" options="options" value="{{userData[0].location}}" placeholder="Please enter your city (Bangalore, Delhi)" required/>
+
+                    <span id="errorloc" class="error"></span>
+                </div>
+            </div>
+            <div class="fieldholder noborder">
+                <label for="">Phone number</label>
+                <div class="code-mob">
+                    <select id="countrycode" ng-change="showSelCode(selCode)" ng-model="selCode" class="form-control ng-hide pop-inp-code">
+                        <option ng-repeat="item in countryData| orderBy:'iso3'" value="{{item.phonecode}}" ng-selected="item.phonecode == selCode">{{item.iso3}}({{item.phonecode}})</option>
+                    </select>
+                    <input type="text" id="umobile" class="form-control  pop-inp-num-wel" minlength="10" maxlength="15"  value="{{userData[0].mobile}}" />
+                    <span id="errorphone" class="error"></span>
+                </div>
+            </div>
+            <div class="fieldholder">
+                <label >Email</label>
+                <div>
+                    <input type="email" id="uemail" class="form-control" value="{{userData[0].email}}" />
+                    <span id="erroremail" class="error"></span>
+                </div>
+            </div>
+            <div class="fieldholder noborder" >
+                <p>By signing in I agree to the <a href="<?php echo APP_SOURCE ?>home/terms_condition" target="_blank">Terms &amp; Conditions</a></p>
+            </div>
+            <div class="btnHolder">
+                <button ng-click="goToMobileVerf($event)"  class="btn btn-success greebBtn" type="submit">Continue</button>
+            </div>
+        </form>
+    </div>
+</div><!--contact info popup-->
+<div id="otp" style="display: none" >
+    <div class="popup">
+        <h3 class="text-center nomargin">Verify mobile number</h3>
+        <p class="text-center margin-t-20">We've sent a OTP to your number</p>
+        <p class="nomargin text-center ">{{umobile}}</p>
+        <form class=" profile-section nopadding">
+            <div class="fieldholder">
+                <label>OTP</label>
+                <div>
+                    <input type="hidden" id="umob" value="{{umobile}}"/>
+                    <input type="hidden" id="umcode" value="{{umcode}}"/>
+                    <input type="hidden" id="umflag" value="{{umflag}}"/>
+                    <input type="text" id="otp-no" class="form-control" />
+                    <span id="errorphone1" class="error"></span>
+                </div>
+            </div>
+            <div class="btnHolder">
+                <button ng-click="otpMobileVerf($event)" class="btn btn-success greebBtn" type="submit">Continue</button>
+            </div>
+        </form>
+        <p class="resend text-center">Did not receive SMS? <a class="cursor-pointer" ng-click="resend(umobile)">Resend</a></p>
+    </div>
+    <p ng-click="wrongNo($event)" class="btm-sec text-center cursor-pointer">Entered wrong number</p>
+</div><!--otp popup-->
+<div id="change-mob-no" style="display: none">
+    <div class="popup">
+        <h3 class="text-center nomargin">Change mobile number</h3>
+        <form class=" profile-section nopadding">
+            <div class="fieldholder noborder">
+                <label for="">Phone number</label>
+                <div class="code-mob">
+                    <select id="countrycode1" ng-change="showSelCode(selCode)" ng-model="selCode" class="form-control ng-hide pop-inp-code">
+                        <option ng-repeat="item in countryData" value="{{item.phonecode}}" ng-selected="item.phonecode == selCode">{{item.iso3}}({{item.phonecode}})</option>
+                    </select>
+                    <input type="text" id="mobile1" class="form-control  pop-inp-num" minlength="10" maxlength="15"  value="" />
+                    <span id="errorphone2" class="error"></span>
+                </div>
+            </div>
+            <div class="btnHolder">
+                <button class="btn btn-success greebBtn" ng-click="changeno()"  type="submit">Continue</button>
+            </div>
+        </form>
+    </div>
+    <p ng-click="goBack()" class="btm-sec text-center cursor-pointer">Go back</p>
+</div>
+<div id="user-blocked" class="report" style="display: none" >
+    <h3 class="text-center nomargin">Notification</h3>
+    <div class="popup">
+        <form class=" profile-section nopadding">
+            <p>Sorry, You have been Blocked by Admin. Please contact Happystry to Activate You!</p>
+            <div class="btnHolder">
+                <button class="btn btn-success greebBtn" ng-click="timeline()"  type="submit">Ok</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="post-deleted" class="report" style="display: none" >
+    <h3 class="text-center nomargin">Notification</h3>
+    <div class="popup">
+        <form class=" profile-section nopadding">
+            <p>Sorry, This post has been removed!</p>
+        </form>
+    </div>
+</div>
+<div id="loginPop" class="report new-report" style="display: none" >
+    <h3><img src="<?php echo PAGE_IMAGES_PATH ?>/happystry-logo.png" alt="" /></h3>
+    <div class="popup">
+        <form class=" profile-section nopadding lp">
+            <p>Please login to continue</p>
+            <a class="fb" ng-click="login()">Connect using facebook</a>
+        </form>
+    </div>
+</div>
+<div id="myimage_uploader" style="display: none;width:950px;float: left;position: relative;" >
+    <div class="canvas_loadings" style="display: none;width:100%;position: absolute;height: 100%;z-index: 2;background: url(/assets/pages/images/happystry.gif) no-repeat scroll 50% 50% #fff;"></div>
+    <div class="canvas_display" style="display: block;width:100%;">
+        <div class="thumb-holder" style="float: left;width:150px;">
+            <div style="width:100%;display: none;"><img style="width:100%" ng-src="{{cropper.croppedImage}}" /></div>
+            <ul>
+                <li ng-class="{'active_postimage': canvasCurrent == 1}" style="cursor: pointer;position: relative;width: 130px; padding: 6px; border: 1px solid #ccc; margin: 5px;" ng-show="posting_img1 != ''"><div ><img button2 image="cropper.sourceImage" style="width:100%" ng-src="{{posting_img1}}" actimg="{{act_img1}}" itemnum="1" /><span ng-hide="canvasCurrent == 1"class="del-icon"><img ng-click="deletePostingImage(1)" src="<?php echo PAGE_IMAGES_PATH ?>/delete.png" alt="" /></span></div></li>
+                <li ng-class="{'active_postimage': canvasCurrent == 2}" style="cursor: pointer;position: relative;width: 130px; padding: 6px; border: 1px solid #ccc; margin: 5px;" ng-show="posting_img2 != ''"><div ><img button2 image="cropper.sourceImage" style="width:100%" ng-src="{{posting_img2}}" actimg="{{act_img2}}" itemnum="2" /><span ng-hide="canvasCurrent == 2"class="del-icon"><img ng-click="deletePostingImage(2)" src="<?php echo PAGE_IMAGES_PATH ?>/delete.png" alt="" /></span></div></li>
+                <li ng-class="{'active_postimage': canvasCurrent == 3}" style="cursor: pointer;position: relative;width: 130px; padding: 6px; border: 1px solid #ccc; margin: 5px;" ng-show="posting_img3 != ''"><div ><img button2 image="cropper.sourceImage" style="width:100%" ng-src="{{posting_img3}}" actimg="{{act_img3}}" itemnum="3" /><span ng-hide="canvasCurrent == 3"class="del-icon"><img ng-click="deletePostingImage(3)" src="<?php echo PAGE_IMAGES_PATH ?>/delete.png" alt="" /></span></div></li>
+                <li ng-class="{'active_postimage': canvasCurrent == 4}" style="cursor: pointer;position: relative;width: 130px; padding: 6px; border: 1px solid #ccc; margin: 5px;" ng-show="posting_img4 != ''"><div ><img button2 image="cropper.sourceImage" style="width:100%" ng-src="{{posting_img4}}" actimg="{{act_img4}}" itemnum="4" /><span ng-hide="canvasCurrent == 4" class="del-icon"><img ng-click="deletePostingImage(4)" src="<?php echo PAGE_IMAGES_PATH ?>/delete.png" alt="" /></span></div></li>
+                <li ng-if="totalFilesAdded < 4" class="add-more-button ng-scope">
+                    <input style="display: none;" type="file" id="fileval1" multiple img-cropper-fileread image="cropper.sourceImage" accept=".png, .jpg, .jpeg, .JPG, .JPEG, .PNG"  />
+                    <label for="fileval1" style="cursor: pointer;text-align: center; width: 100%; padding: 15px 0 0 0;">
+                        <img ng-src="<?php echo PAGE_IMAGES_PATH ?>/upload-image.png" alt="" src="<?php echo PAGE_IMAGES_PATH ?>/upload-image.png">
+                        <h6>Add image</h6>
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div style="width:800px;float: left;" id="cropcanvas_wrap">
+            <div class="new_cropperarea">
+                <canvas width="800" height="500" id="canvas" image-cropper image="cropper.sourceImage" cropped-image="cropper.croppedImage" crop-width="500" crop-height="300" min-width="300" min-height="200" touch-radius="30" keep-aspect="true" crop-area-bounds="bounds"></canvas>
+            </div>
+            <div class="crop_continue crop" style="margin-right:10px;float: right; padding: 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; margin-bottom: 8px;color: #fff; background-color: #2a8caf;" ng-click="proceedToPost()">Crop & Continue</div>
+            <div class="crop_continue save" style="margin-right:10px;float: right; padding: 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; margin-bottom: 8px;color: #fff; background-color: #2a8caf;" ng-click="proceedToPost()">Save & Continue</div>
+            <div class="crop_cancel" style="margin-right:10px;float: right; padding: 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; margin-bottom: 8px;color: #fff; background-color: #2a8caf;" ng-click="proceedTocancel()">Cancel</div>
+            <div id="fountainG"class="fountain_proceed">
+                <div id="fountainG_1" class="fountainG"></div>
+                <div id="fountainG_2" class="fountainG"></div>
+                <div id="fountainG_3" class="fountainG"></div>
+                <div id="fountainG_4" class="fountainG"></div>
+                <div id="fountainG_5" class="fountainG"></div>
+                <div id="fountainG_6" class="fountainG"></div>
+                <div id="fountainG_7" class="fountainG"></div>
+                <div id="fountainG_8" class="fountainG"></div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+            $('.close-fancybox').click(function () {
+                $.fancybox.close();
+            });
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-orange',
+                radioClass: 'iradio_square-orange'
+            });
+
+            $('html').click(function () {
+                $('#autosugg').hide();
+            });
+            $('html').click(function () {
+                $('.sub-menu').removeClass('ngshow');
+            });
+            $('.main-menu.on-clk a').click(function (event) {
+                $('.sub-menu').removeClass('ngshow');
+                $(this).find('.badge').hide();
+                $(this).next('.sub-menu').toggleClass('ngshow');
+                event.stopPropagation();
+            });
+            $('.main-menu.on-clk a').click(function () {
+                event.stopPropagation();
+            });
+            $('body').on('click', '.pac-container .pac-item', function (){
+                event.stopPropagation();
+            });
+
+        });
+    </script>
+    <script>
+        if ($(window).width() < 767) {
+            function customser() {
+
+                $('.searchboxnew').find('.ty-search').slideToggle().toggleClass('top');
+                if ($('.searchboxnew').find('.ty-search').hasClass('top')) {
+                    $('body').css('margin-top', '39px');
+                } else
+                {
+                    $('body').css('margin-top', '0px');
+                }
+                $('.custom-height').toggleClass('custom-more');
+                $('.posts').addClass('martop');
+            }
+        }
+
+    </script>
+    <script>
+        $(document).ajaxStart(function () {
+            $('#preloader').fadeIn('slow', function () {
+                $(this).show();
+            });
+
+        });
+        function close_fancy() {
+
+        }
+
+    </script>
+    <script type="text/javascript">
+        (function (b, r, a, n, c, h, _, s, d, k) {
+            if (!b[n] || !b[n]._q) {
+                for (; s < _.length; )
+                    c(h, _[s++]);
+                d = r.createElement(a);
+                d.async = 1;
+                d.src = "https://cdn.branch.io/branch-latest.min.js";
+                k = r.getElementsByTagName(a)[0];
+                k.parentNode.insertBefore(d, k);
+                b[n] = h
+            }
+        })(window, document, "script", "branch", function (b, r) {
+            b[r] = function () {
+                b._q.push([r, arguments])
+            }
+        }, {_q: [], _v: 1}, "addListener applyCode autoAppIndex banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);
+
+        // Note that this example is using the key in two places, here and below
+        branch.init('key_live_bmDoLMBw1B95jVoVpjD71geesvefYrtr', function (err, data) {
+            document.getElementsByClassName('info')[0].innerHTML = JSON.stringify(data);
+
+        });
+    </script>
+    <script type="text/javascript">
+        var info = $('.info');
+        var request = $('.request');
+        var response = $('.response');
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-91639238-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</div>

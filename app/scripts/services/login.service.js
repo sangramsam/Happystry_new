@@ -92,16 +92,6 @@ angular.module('Happystry.services')
                                     } else {
                                         console.log("Login Success  !!!");
                                         $state.go('timeline');
-                                        /*var id = $localStorage.happystryUrl.substr($localStorage.happystryUrl.lastIndexOf('/') + 1);
-                                         if ($localStorage.happystryUrl.indexOf('postdetails') > -1) {
-                                         $window.location.href = api_url + "#/postdetails/" + id;
-                                         $window.location.reload();
-                                         } else if ($localStorage.happystryUrl.indexOf('profile') > -1) {
-                                         $window.location.href = api_url + "#/profile/" + id;
-                                         $window.location.reload();
-                                         } else {
-                                         $window.location.href = api_url + "#/timeline";
-                                         }*/
                                     }
                                 });
                             });
