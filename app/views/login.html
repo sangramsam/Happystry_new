@@ -443,17 +443,15 @@
                     <label>OTP</label>
                     <div>
                         <input type="hidden" id="umob" value="{{umobile}}"/>
-                        <input type="hidden" id="umcode" value="{{umcode}}"/>
-                        <input type="hidden" id="umflag" value="{{umflag}}"/>
-                        <input type="text" id="otp-no" class="form-control" />
+                        <input type="text" id="otp-no" class="form-control" ng-model="otpNo" />
                         <span id="errorphone1" class="error"></span>
                     </div>
                 </div>
                 <div class="btnHolder">
-                    <button ng-click="otpMobileVerf($event)" class="btn btn-success greebBtn" type="submit">Continue</button>
+                    <button ng-click="OTPVerify(otpNo)" class="btn btn-success greebBtn" type="submit">Continue</button>
                 </div>
             </form>
-            <p class="resend text-center">Did not receive SMS? <a class="cursor-pointer" ng-click="resend(umobile)">Resend</a></p>
+            <p class="resend text-center">Did not receive SMS? <a class="cursor-pointer" ng-click="resendOTP(umobile)">Resend</a></p>
         </div>
         <p ng-click="wrongNo($event)" class="btm-sec text-center cursor-pointer">Entered wrong number</p>
     </div><!--otp popup-->
@@ -462,17 +460,17 @@
             <h3 class="text-center nomargin">Change mobile number</h3>
             <form class=" profile-section nopadding">
                 <div class="fieldholder noborder">
-                    <label for="">Phone number</label>
+                    <label for="countrycode1">Phone number</label>
                     <div class="code-mob">
-                        <select id="countrycode1" ng-change="showSelCode(selCode)" ng-model="selCode" class="form-control ng-hide pop-inp-code">
+                        <select id="countrycode1"  ng-model="user.selCode" class="form-control ng-hide pop-inp-code">
                             <option ng-repeat="item in countryData" value="{{item.phonecode}}" ng-selected="item.phonecode == selCode">{{item.iso3}}({{item.phonecode}})</option>
                         </select>
-                        <input type="text" id="mobile1" class="form-control  pop-inp-num" minlength="10" maxlength="15"  value="" />
+                        <input type="text" id="mobile1" class="form-control  pop-inp-num" minlength="10" maxlength="15"  value=""  ng-model="user.mobile"/>
                         <span id="errorphone2" class="error"></span>
                     </div>
                 </div>
                 <div class="btnHolder">
-                    <button class="btn btn-success greebBtn" ng-click="changeno()"  type="submit">Continue</button>
+                    <button class="btn btn-success greebBtn" ng-click="changeno(user)"  type="submit">Continue</button>
                 </div>
             </form>
         </div>

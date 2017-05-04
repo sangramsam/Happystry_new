@@ -3,15 +3,15 @@
  */
 'use strict';
 angular.module('Happystry.services')
-    .factory('OTP', function ($http, Settings, $state, $log, $q) {
-        function getOTP(user) {
+    .factory('OTPVerify', function ($http, Settings, $state, $log, $q) {
+        function verifyOTP(OTPData) {
             var user_id=localStorage.getItem("user_id");
-            //console.log("inside factory",user);
+            //console.log("inside factory",OTPData);
             var deferred = $q.defer();
             $http({
                 method: 'put',
-                url: Settings.BASE_URL+ 'user',
-                data:user,
+                url: Settings.BASE_URL+ 'user/verifyotp',
+                data:OTPData,
                 headers: {
                     'Content-Type': 'application/json',
                     'User-Id':user_id,
@@ -33,7 +33,7 @@ angular.module('Happystry.services')
 
 
         return {
-            getOTP: getOTP
+            verifyOTP: verifyOTP
         }
 
     });

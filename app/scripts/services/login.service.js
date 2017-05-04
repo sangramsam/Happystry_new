@@ -54,6 +54,8 @@ angular.module('Happystry.services')
                 }).success(function (data) {
                     if (data.message == 'success') {
                         var id = data.user_id;
+                        localStorage.setItem("user_id",id);
+
                         ezfb.api(
                             "/me/friends",
                             function (response) {
@@ -89,6 +91,7 @@ angular.module('Happystry.services')
                                         return false;
                                     } else {
                                         console.log("Login Success  !!!");
+                                        $state.go('timeline');
                                         /*var id = $localStorage.happystryUrl.substr($localStorage.happystryUrl.lastIndexOf('/') + 1);
                                          if ($localStorage.happystryUrl.indexOf('postdetails') > -1) {
                                          $window.location.href = api_url + "#/postdetails/" + id;
