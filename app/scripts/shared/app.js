@@ -18,7 +18,8 @@ angular.module('Happystry', [
     'ezfb',
     'ngAutocomplete',
     'angularGrid',
-    'ngStorage'
+    'ngStorage',
+    'angular.filter'
 ]).config(function (ezfbProvider) {
     ezfbProvider.setInitParams({
         appId: '312638455759153'

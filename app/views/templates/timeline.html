@@ -7,10 +7,6 @@
         <ul class="dynamic-grid grid postfeeds_flex in_timeline">
             <li ng-repeat="item in getBookmarkData| unique: 'post_id' |  filter:{ user_report: 0}  track by $id($index)" class="posts wow " my-posts ></li>
         </ul>
-        <!--        <div class="loader ng-hide" ng-show="bookLoaded">
-                    <div id="loader">
-                        <span></span>
-                    </div></div>-->
         <div class="no-search-results" ng-show="getBookmarkData.length === 0">
             <span class="sprite no-search-icons"></span>
             <h4>No results found</h4>

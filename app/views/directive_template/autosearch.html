@@ -1,0 +1,67 @@
+<div class="searchboxnew clearfix">
+    <input class="ty-search" type="text"  ng-model="modeldisplay" ng-KeyUp="da(modeldisplay, $event)"  ng-keydown="selected = false" style="width:100%;" ng-class="ajaxClass" placeholder="Search for people, posts and products">
+    <span class="reset_close" ng-click="resetClose();" style="position: absolute; right: 42px; z-index: 3; cursor: pointer; height: 20px; top: 5px; width: 18px; display: none; background: url(/assets/pages/images/sprite.png) -62px -26px no-repeat;"></span>
+    <span class="search-sec" ng-click="da();" onclick="customser()"></span>
+</div>
+<div ng-controller="searchController" class="list-group table-condensed overlap" id="autosugg" ng-hide="!modeldisplay.length || selected" style="width:100%">
+    <div class="user-div" ng-if="TypeAheadData.users != undefined">
+        <div class="user-sec"><a style="float:left;color:#8e8e8e;"> Users</a> <a ng-click="allUsers(searchval)" style="cursor:pointer;">All Users</a></div>
+        <div class="list-group-item noTopBottomPad" ng-repeat="item in TypeAheadData.users|filter:model  track by $index" style="cursor:pointer">
+            <span class="search-sec1" ng-click="allPosts(searchval)"></span>
+            <input type="hidden" id="search_val" value="{{searchval}}">
+            <div class="card" ng-click="goToProfile(item.user_id)">
+                <div class="header-hold">
+                    <div class="profile-holder">
+                        <a href="#/profile/{{item.user_id}}">
+                            <div class="progress-wrapper">
+                                <round-progress
+                                        max="max"
+                                        current="current"
+                                        color="{{ getColor()}}"
+                                        bgcolor="{{ bgColor}}"
+                                        radius="{{ radius}}"
+                                        semi="isSemi"
+                                        rounded="rounded"
+                                        stroke="{{ stroke}}"
+                                        clockwise="clockwise"
+                                        responsive="responsive"
+                                        duration="{{ duration}}"
+                                        animation="{{ currentAnimation}}"
+                                        offset="{{ offset}}"
+                                        animation-delay="{{ animationDelay}}"
+                                        on-render="showPrecisseCurrent"
+                                        ng-init="current = item.percentile">
+
+                                </round-progress>
+                            </div>
+                            <img ng-src="{{item.profile_image}}" alt="" style="width: 38px; height: 38px;" />
+                        </a>
+                    </div>
+                    <div class="profile-details text-left">
+                        <a href="#/profile/{{item.user_id}}"><h4 class="text-left">{{item.name}}</h4></a>
+                    </div>
+                </div>
+            </div>
+            <!--new-->
+        </div>
+    </div>
+    <div class="post-div" ng-if="TypeAheadData.posts != undefined">
+        <div><a style="float:left;color:#8e8e8e;cursor:default;">Posts</a> <a ng-click="allPosts(searchval)">All Posts</a></div>
+        <div class="list-group-item noTopBottomPad" ng-repeat="item in TypeAheadData.posts|filter:model  track by $index" style="cursor:pointer" ng-click="postclick(item.post_id)">
+            <div class="post-sec">
+                <div class="post-left"><img ng-src="{{item.post_image[0]}}"></div>
+                <div class="post-right">
+                    <p class="desc">{{item.description}}</p>
+                    <p class="collection">{{item.collections}}</p>
+                    <p class="name">{{item.name}}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-group" ng-if="TypeAheadData.length == 0" style=" margin-top: 5px;">
+        <div class="post-div">
+            <a style="float:left;color:#8e8e8e;cursor:default;"> No matching result found!</a>
+        </div>
+    </div>
+</div>

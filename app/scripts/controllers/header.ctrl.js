@@ -693,11 +693,11 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
         }
 
         //search page
-        document.getElementById('uloc').addEventListener('keypress', function (event) {
-            if (event.keyCode == 13) {
-                event.preventDefault();
-            }
-        });
+        // document.getElementById('uloc').addEventListener('keypress', function (event) {
+        //     if (event.keyCode == 13) {
+        //         event.preventDefault();
+        //     }
+        // });
 
         $scope.login = function () {
             /**
