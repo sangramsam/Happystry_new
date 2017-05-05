@@ -167,11 +167,11 @@
     </div>
 </header>
 </div>
-<div ui-view="container" style="margin-top: 120px;"></div>
+
 <div>
-<!--<div class="holder container-sad" ng-controller="timelineController">
+<div class="holder container-sad">
     <div class="row">
-        <div ui-view></div>
+        <div ui-view="container"></div>
     </div>
 </div>
 <div id="congrats-reward" style="display: none">
@@ -197,11 +197,11 @@
 </div>
 <div id="leader-board" class="popup" style="display: none">
     <div class="clearfix border-btm"><h3 class="pull-left">Leaderboard</h3>
-        &lt;!&ndash;            <select class="pull-right" name="" id="" ng-model="d"  ng-change="setLocation(d)">
+        <!--            <select class="pull-right" name="" id="" ng-model="d"  ng-change="setLocation(d)">
                     <option value=""  >
                         <option>All</option>
                         <option ng-repeat="d in allLocation"  ng-selected="d.me == 1">{{d.current_location}}</option>
-                </select>&ndash;&gt;
+                </select>-->
         <select class="pull-right" ng-options="item as item.current_location for item in allLocation| orderBy:'current_location'" ng-model="myselect" ng-change="setLocation(myselect)">
         </select>
 
@@ -224,7 +224,7 @@
                                 </span>
                             <span class="percentile">
                                     <div class="progress-wrapper">
-                                        &lt;!&ndash;<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>&ndash;&gt;
+                                        <!--<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>-->
                                         <round-progress
                                                 max="max"
                                                 current="current"
@@ -266,7 +266,7 @@
                         <h4 class="bold"><span class="sprite percentile-icon"></span>
                             <span class="percentile">
                                     <div class="progress-wrapper">
-                                        &lt;!&ndash;<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>&ndash;&gt;
+                                        <!--<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>-->
                                         <round-progress
                                                 max="max"
                                                 current="current"
@@ -296,110 +296,107 @@
         </div>
         <div ng-if="getleaderDataResult == 0">
             <div class="empty-state">
-                &lt;!&ndash;<img src="<?php echo PAGE_IMAGES_PATH ?>/no-rewards.png" alt="" />&ndash;&gt;
+                <!--<img src="<?php echo PAGE_IMAGES_PATH ?>/no-rewards.png" alt="" />-->
                 <h6 class="bold margin-t-20"> No Data</h6>
-                &lt;!&ndash;<h6>You have not received any rewards</h6>&ndash;&gt;
+                <!--<h6>You have not received any rewards</h6>-->
             </div>
         </div>
     </div>
     <div ng-if="rankingCount > 5;
             rankingCount != getleaderDataResult.length;" class="header-hold loadMore cursor-pointer" ng-click="loadMore($event, myselect)"><a>Loadmore <img src="<?php echo PAGE_IMAGES_PATH ?>/load.png" alt="" /></a></div>
-    &lt;!&ndash;        <div ng-if="items.length != 0; "  class="header-hold loadMore cursor-pointer" ng-click="loadMore($event)"><a>Load More...</a></div>
-            <div ng-if="getleaderData.length != 0" class="header-hold loadMore cursor-pointer" ng-click="loadMore($event)"><a>Load More...</a></div>&ndash;&gt;
-</div>&lt;!&ndash;leaderboard&ndash;&gt;
-<div id="contactInfo" class="popup" style="display: none;" ng-init="updateApiMe()" >
-    <div class="pop-header">
-        <figure>
-            <img ng-src="{{userData[0].profile_image}}" alt=""/>
-        </figure>
-        <div>
-            <h3>{{userData[0].name}}</h3>
-            <p>Welcome to Happystry</p>
+    <!--        <div ng-if="items.length != 0; "  class="header-hold loadMore cursor-pointer" ng-click="loadMore($event)"><a>Load More...</a></div>
+            <div ng-if="getleaderData.length != 0" class="header-hold loadMore cursor-pointer" ng-click="loadMore($event)"><a>Load More...</a></div>-->
+</div><!--leaderboard-->
+    <div id="contactInfo" class="popup" style="display: none" >
+        <div class="pop-header">
+            <figure>
+                <img ng-src="{{userData[0].profile_image}}" alt=""/>
+            </figure>
+            <div>
+                <h3>{{userData[0].name}}</h3>
+                <p>Welcome to Happystry</p>
+            </div>
         </div>
-    </div>
-    <div class="pop-body profile-section">
-        <form  novalidate>
-            <div class="fieldholder">
-                <label >City</label>
-                <div>
-                    &lt;!&ndash;                        <input type="text" id="uloc" class="form-control"  value="{{userData[0].location}}" />&ndash;&gt;
-                    <input type="text" id="uloc" class="form-control" ng-autocomplete="result" details="details" options="options" value="{{userData[0].location}}" placeholder="Please enter your city (Bangalore, Delhi)" required/>
+        <div class="pop-body profile-section">
+            <form  novalidate>
+                <div class="fieldholder">
+                    <label >City</label>
+                    <div>
+                        <input type="text" id="uloc" class="form-control"  ng-autocomplete="result" details="details" options="options"  placeholder="Please enter your city (Bangalore, Delhi)" required/>
 
-                    <span id="errorloc" class="error"></span>
+                        <span id="errorloc" class="error"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="fieldholder noborder">
-                <label for="">Phone number</label>
-                <div class="code-mob">
-                    <select id="countrycode" ng-change="showSelCode(selCode)" ng-model="selCode" class="form-control ng-hide pop-inp-code">
-                        <option ng-repeat="item in countryData| orderBy:'iso3'" value="{{item.phonecode}}" ng-selected="item.phonecode == selCode">{{item.iso3}}({{item.phonecode}})</option>
-                    </select>
-                    <input type="text" id="umobile" class="form-control  pop-inp-num-wel" minlength="10" maxlength="15"  value="{{userData[0].mobile}}" />
-                    <span id="errorphone" class="error"></span>
+                <div class="fieldholder noborder">
+                    <label for="">Phone number</label>
+                    <div class="code-mob">
+                        <select id="countrycode"  ng-model="user.selCode" class="form-control ng-hide pop-inp-code">
+                            <option ng-repeat="item in countryData | orderBy:'iso3'" value="{{item.phonecode}}" ng-selected="item.phonecode == selCode">{{item.iso3}}({{item.phonecode}})</option>
+                        </select>
+                        <input type="text" id="umobile" class="form-control  pop-inp-num-wel" minlength="10" maxlength="15"  ng-model="user.mobileNo" />
+                        <span id="errorphone" class="error"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="fieldholder">
-                <label >Email</label>
-                <div>
-                    <input type="email" id="uemail" class="form-control" value="{{userData[0].email}}" />
-                    <span id="erroremail" class="error"></span>
+                <div class="fieldholder">
+                    <label>Email</label>
+                    <div>
+                        <input type="email" id="uemail" class="form-control" ng-model="user.email" />
+                        <span id="erroremail" class="error"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="fieldholder noborder" >
-                <p>By signing in I agree to the <a href="<?php echo APP_SOURCE ?>home/terms_condition" target="_blank">Terms &amp; Conditions</a></p>
-            </div>
-            <div class="btnHolder">
-                <button ng-click="goToMobileVerf($event)"  class="btn btn-success greebBtn" type="submit">Continue</button>
-            </div>
-        </form>
-    </div>
-</div>&lt;!&ndash;contact info popup&ndash;&gt;
-<div id="otp" style="display: none" >
-    <div class="popup">
-        <h3 class="text-center nomargin">Verify mobile number</h3>
-        <p class="text-center margin-t-20">We've sent a OTP to your number</p>
-        <p class="nomargin text-center ">{{umobile}}</p>
-        <form class=" profile-section nopadding">
-            <div class="fieldholder">
-                <label>OTP</label>
-                <div>
-                    <input type="hidden" id="umob" value="{{umobile}}"/>
-                    <input type="hidden" id="umcode" value="{{umcode}}"/>
-                    <input type="hidden" id="umflag" value="{{umflag}}"/>
-                    <input type="text" id="otp-no" class="form-control" />
-                    <span id="errorphone1" class="error"></span>
+                <div class="fieldholder noborder" >
+                    <p>By signing in I agree to the <a href="<?php echo APP_SOURCE ?>home/terms_condition" target="_blank">Terms &amp; Conditions</a></p>
                 </div>
-            </div>
-            <div class="btnHolder">
-                <button ng-click="otpMobileVerf($event)" class="btn btn-success greebBtn" type="submit">Continue</button>
-            </div>
-        </form>
-        <p class="resend text-center">Did not receive SMS? <a class="cursor-pointer" ng-click="resend(umobile)">Resend</a></p>
-    </div>
-    <p ng-click="wrongNo($event)" class="btm-sec text-center cursor-pointer">Entered wrong number</p>
-</div>&lt;!&ndash;otp popup&ndash;&gt;
-<div id="change-mob-no" style="display: none">
-    <div class="popup">
-        <h3 class="text-center nomargin">Change mobile number</h3>
-        <form class=" profile-section nopadding">
-            <div class="fieldholder noborder">
-                <label for="">Phone number</label>
-                <div class="code-mob">
-                    <select id="countrycode1" ng-change="showSelCode(selCode)" ng-model="selCode" class="form-control ng-hide pop-inp-code">
-                        <option ng-repeat="item in countryData" value="{{item.phonecode}}" ng-selected="item.phonecode == selCode">{{item.iso3}}({{item.phonecode}})</option>
-                    </select>
-                    <input type="text" id="mobile1" class="form-control  pop-inp-num" minlength="10" maxlength="15"  value="" />
-                    <span id="errorphone2" class="error"></span>
+                <div class="btnHolder">
+                    <button ng-click="goToMobileVerf(user)"  class="btn btn-success greebBtn" type="submit">Continue</button>
                 </div>
-            </div>
-            <div class="btnHolder">
-                <button class="btn btn-success greebBtn" ng-click="changeno()"  type="submit">Continue</button>
-            </div>
-        </form>
-    </div>
-    <p ng-click="goBack()" class="btm-sec text-center cursor-pointer">Go back</p>
-</div>
-<div id="user-blocked" class="report" style="display: none" >
+            </form>
+        </div>
+    </div><!--contact info popup-->
+    <div id="otp" style="display: none" >
+        <div class="popup">
+            <h3 class="text-center nomargin">Verify mobile number</h3>
+            <p class="text-center margin-t-20">We've sent a OTP to your number</p>
+            <p class="nomargin text-center ">{{umobile}}</p>
+            <form class=" profile-section nopadding">
+                <div class="fieldholder">
+                    <label>OTP</label>
+                    <div>
+                        <input type="hidden" id="umob" value="{{umobile}}"/>
+                        <input type="text" id="otp-no" class="form-control" ng-model="otpNo" />
+                        <span id="errorphone1" class="error"></span>
+                    </div>
+                </div>
+                <div class="btnHolder">
+                    <button ng-click="OTPVerify(otpNo)" class="btn btn-success greebBtn" type="submit">Continue</button>
+                </div>
+            </form>
+            <p class="resend text-center">Did not receive SMS? <a class="cursor-pointer" ng-click="resendOTP(umobile)">Resend</a></p>
+        </div>
+        <p ng-click="wrongNo($event)" class="btm-sec text-center cursor-pointer">Entered wrong number</p>
+    </div><!--otp popup-->
+    <div id="change-mob-no" style="display: none">
+        <div class="popup">
+            <h3 class="text-center nomargin">Change mobile number</h3>
+            <form class=" profile-section nopadding">
+                <div class="fieldholder noborder">
+                    <label for="countrycode1">Phone number</label>
+                    <div class="code-mob">
+                        <select id="countrycode1"  ng-model="user.selCode" class="form-control ng-hide pop-inp-code">
+                            <option ng-repeat="item in countryData" value="{{item.phonecode}}" ng-selected="item.phonecode == selCode">{{item.iso3}}({{item.phonecode}})</option>
+                        </select>
+                        <input type="text" id="mobile1" class="form-control  pop-inp-num" minlength="10" maxlength="15"  value=""  ng-model="user.mobile"/>
+                        <span id="errorphone2" class="error"></span>
+                    </div>
+                </div>
+                <div class="btnHolder">
+                    <button class="btn btn-success greebBtn" ng-click="changeno(user)"  type="submit">Continue</button>
+                </div>
+            </form>
+        </div>
+        <p ng-click="goBack()" class="btm-sec text-center cursor-pointer">Go back</p>
+    </div><!--wrong number popup-->
+    <div id="user-blocked" class="report" style="display: none" >
     <h3 class="text-center nomargin">Notification</h3>
     <div class="popup">
         <form class=" profile-section nopadding">
@@ -419,7 +416,7 @@
     </div>
 </div>
 <div id="loginPop" class="report new-report" style="display: none" >
-    <h3><img src="<?php echo PAGE_IMAGES_PATH ?>/happystry-logo.png" alt="" /></h3>
+    <h3><img src="/app/images/happystry-logo.png" alt="" /></h3>
     <div class="popup">
         <form class=" profile-section nopadding lp">
             <p>Please login to continue</p>
@@ -465,7 +462,7 @@
             </div>
         </div>
     </div>
-</div>-->
+</div>
     <script>
         $(document).ready(function () {
             $(".fancybox").fancybox();

@@ -1,4 +1,4 @@
-angular.module('Happystry.services').factory('ViewService', function ($http) {
+angular.module('Happystry.services').factory('ViewService2', function ($http) {
     var previousPost;
     var previouspromPost;
     var page;

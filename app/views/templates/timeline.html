@@ -1,9 +1,9 @@
 <div class="margin-t-90" >
-    <div ng-if="isBookmark" ng-cloak  id="bookmarkWrap">
+    <!--<div ng-if="isBookmark" ng-cloak  id="bookmarkWrap">
         <div class="page-title-holder">
             <h3 style="vertical-align: -webkit-baseline-middle;">Bookmarks</h3>
         </div>
-        <!--<ul class="dynamic-grid grid" angular-grid="getBookmarkData" ag-grid-width="240" ag-gutter-size="5" ag-id="postData" ag-infinite-scroll="loadMoreShots()">-->
+        &lt;!&ndash;<ul class="dynamic-grid grid" angular-grid="getBookmarkData" ag-grid-width="240" ag-gutter-size="5" ag-id="postData" ag-infinite-scroll="loadMoreShots()">&ndash;&gt;
         <ul class="dynamic-grid grid postfeeds_flex in_timeline">
             <li ng-repeat="item in getBookmarkData| unique: 'post_id' |  filter:{ user_report: 0}  track by $id($index)" class="posts wow " my-posts ></li>
         </ul>
@@ -11,7 +11,7 @@
             <span class="sprite no-search-icons"></span>
             <h4>No results found</h4>
         </div>
-    </div>
+    </div>-->
     <div ng-if="!isDesc && searchurl" ng-cloak>
         <div class="page-title-holder ">
             <h3>Search results</h3>

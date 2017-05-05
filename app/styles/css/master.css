@@ -7544,7 +7544,7 @@ p {
   margin-top: 40px; }
 
 .margin-t-90 {
-  margin-top: 92px; }
+  margin-top: 114px; }
 
 .margin-t-100 {
   margin-top: 100px; }
@@ -9600,7 +9600,7 @@ textarea {
     top: -36px;
     left: auto; }
     .carousel .carousel-control.left .glyphicon-chevron-left {
-      background-image: url("../images/left.png");
+      background-image: url("/app/images/left.png");
       display: inline-block;
       width: 9px;
       height: 16px;
@@ -9611,7 +9611,7 @@ textarea {
     right: 10px;
     top: -36px; }
     .carousel .carousel-control.right .glyphicon-chevron-right {
-      background-image: url("../images/right.png");
+      background-image: url("/app/images/right.png");
       display: inline-block;
       width: 9px;
       height: 16px;
