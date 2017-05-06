@@ -10,7 +10,7 @@ angular.module('Happystry.router', [])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider
             .state('login', {
-            url: "/Home",
+            url: "/",
             title: 'Login',
             views: {
                 '': {
@@ -22,7 +22,7 @@ angular.module('Happystry.router', [])
                 }
             }
         }).state('login.about', {
-            url: '/aboutUs',
+            url: 'aboutUs',
             views: {
                 '': {
                     templateUrl: 'public/shared/controlDashboard.html'
@@ -33,7 +33,7 @@ angular.module('Happystry.router', [])
                 }
             }
         }).state('login.contact', {
-            url: '/contact_us',
+            url: 'contact_us',
             views: {
                 '': {
                     templateUrl: 'public/shared/controlDashboard.html'

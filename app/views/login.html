@@ -260,7 +260,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 logo-hold ">
-                    <a href="" ng-click="refreshPage()" ><img src="app/images/logo.png" alt="" /><span class="logo-text">Happystry</span></a>
+                    <a ui-sref="login" ui-sref-opts="{reload: true}" ><img src="app/images/logo.png" alt="" /><span class="logo-text">Happystry</span></a>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 right-align" style="display: inline-block; margin: 5px 0;">
                     <a class="google-play-btn black-btn andr-img-hold"  href="https://play.google.com/store/apps/details?id=com.happy.happystry">
@@ -353,8 +353,8 @@
     <section class="subscribe-section ">
         <h2>Subscribe and stay informed</h2>
         <form  class="subs" novalidate>
-            <input type="email" id="subscribe" class="subs-email" placeholder="Enter your email address" />
-            <input type="submit" ng-click="submitSub()" class="subs-submit" value="Subscribe"/>
+            <input type="email" id="subscribe" class="subs-email" placeholder="Enter your email address" ng-model="email" />
+            <input type="submit" ng-click="submitSub(email)" class="subs-submit" value="Subscribe"/>
             <span id="error_email" class="error"></span>  
         </form>
         <p class="download-text"> A community that exchanges Dlites</p>
