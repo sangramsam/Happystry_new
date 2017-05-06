@@ -1,6 +1,6 @@
 angular.module('Happystry.controllers').controller('headerController', ['$scope','$state', 'logOut', 'UserVerify', 'Settings', 'ezfb', '$rootScope', '$http', '$timeout', '$window', 'roundProgressService', '$compile', 'commonService', '$location', 'angularGridInstance', '$localStorage', 'dynamicNotifications','OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService',
     function ($scope,$state, logOut, UserVerify, Settings, ezfb, $rootScope, $http, $timeout, $window, roundProgressService, $compile, commonService, $location, angularGridInstance, $localStorage, dynamicNotifications,OTP, OTPVerify, CountryCode, FacebookService, LoginService) {
-        $scope.logged_res = false;
+        $rootScope.logged_res = false;
         $scope.otpNo='';
         $scope.loggin_pop = function (e) {
             jQuery.fancybox({
@@ -16,7 +16,7 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
             UserVerify.verifyUser().then(function (res) {
                 console.log(res);
                 if (res.data.logged === false) {
-
+                    $rootScope.logged_res = true;
                 } else {
                     if (res.data.user_details) {
                         $scope.userData = res.data.user_details;
@@ -53,6 +53,7 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
         $scope.appLogout = function () {
             logOut.logout().then(function (response) {
                 console.log(response);
+                localStorage.clear();
                 $state.go('login');
             })
         }
@@ -307,4 +308,6 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
                 }
             });
         };
+
+
     }]);

@@ -14,5 +14,24 @@ angular.module('Happystry.controllers').controller('timelineController', ['Setti
             $scope.getColor = function () {
                 return $scope.gradient ? 'url(#gradient)' : $scope.roundProgress.currentColor;
             };
+
+            //like
+            $scope.sendLike = function (postid, event) {
+                if ($scope.logged_res == true) {
+                    $scope.loggin_pop(event);
+                } else {
+                    likeFuntion.sendLike(postid, event);
+                }
+            };
+            $scope.loggin_pop = function (e) {
+                jQuery.fancybox({
+                    'href': '#loginPop',
+                    'closeBtn': true,
+                    keys: {
+                        close: null
+                    }
+                });
+                e.preventDefault();
+            }
         }]);
 

@@ -46,12 +46,12 @@
                     <typeahead  subtitle="BillingCity" displaykey="key" retkey="AccId"  modelret="valRet" modeldisplay="valDis" ng-keypress="checkIfEnterKeyWasPressed($event)" />
 
                 </div> </li>
-            <li  class="main-menu on-clk diffInMob">
+            <li  class="main-menu on-clk diffInMob" ng-hide="logged_res==true">
                 <a ng-href="#/rewards" class="sprite gift-box-icon">
                     <span class="customSpanMobile hidden-sm hidden-md hidden-lg">Rewards</span>
                 </a>
             </li>
-            <li  class="main-menu on-clk diffInMob moretop" > <!--ng-controller="notificationsController"-->
+            <li  class="main-menu on-clk diffInMob moretop"  ng-hide="logged_res==true"> <!--ng-controller="notificationsController"-->
                 <a href="" class="sprite notification-icon">
                     <span id="mybadge" ng-class="(getNotificationData1.length > 0) ? 'badge' : ''"></span>
                     <span class="customSpanMobile hidden-sm hidden-md hidden-lg">Notifications</span>
@@ -106,7 +106,7 @@
                                             </div>-->
                 </div>
             </li>
-            <li  class="main-menu on-clk diffInMob moretop20"  > <!--ng-controller="messagesController"-->
+            <li  class="main-menu on-clk diffInMob moretop20"   ng-hide="logged_res==true"> <!--ng-controller="messagesController"-->
                 <a class="sprite message-icon cursor-pointer">
                     <span id="mybadge" ng-class="(msgnotify1 > 0) ? 'badge' : ''"></span>
                     <span class="customSpanMobile hidden-sm hidden-md hidden-lg">Messages</span>
@@ -145,9 +145,9 @@
                     </div>
                 </div>
             </li><!--message notification--> <!--ng-click="(logged_res) ? loggin_pop($event) : ''"-->
-            <li class="main-menu on-clk">
-                <a href="" class="sprite user-icon" ng-click="(logged_res)"></a>
-                <div  class="sub-menu">
+            <li class="main-menu on-clk" >
+                <a href="" class="sprite user-icon" ng-click="(logged_res) ? loggin_pop($event) : ''"></a>
+                <div  class="sub-menu" ng-hide="logged_res==true">
                     <ul>
                         <li><div class="menu-arrow-top"></div></li>
                         <li><a ng-href="#/rewards" class="cursor-pointer hidden-sm hidden-md hidden-lg"><span class="sprite gift-box-icon"></span>Delights</a></li>

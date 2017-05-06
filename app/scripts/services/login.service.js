@@ -92,7 +92,8 @@ angular.module('Happystry.services')
                                     } else {
                                         jQuery.fancybox.close();
                                         console.log("Login Success  !!!");
-                                        $state.go('timeline');
+                                        $state.go('timeline', {}, {reload: 'timeline'}, {inherit: false}, {notify: true});
+                                        //$state.go('timeline');
                                     }
                                 });
                             });
