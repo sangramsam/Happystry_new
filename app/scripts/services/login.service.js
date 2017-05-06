@@ -90,6 +90,7 @@ angular.module('Happystry.services')
                                         angular.element('body').find('#contactInfo').parents('.fancybox-wrap .fancybox-outer').siblings('a').addClass('aa');
                                         return false;
                                     } else {
+                                        jQuery.fancybox.close();
                                         console.log("Login Success  !!!");
                                         $state.go('timeline');
                                     }

@@ -1,9 +1,6 @@
 angular.module('Happystry.controllers').controller('headerController', ['$scope','$state', 'logOut', 'UserVerify', 'Settings', 'ezfb', '$rootScope', '$http', '$timeout', '$window', 'roundProgressService', '$compile', 'commonService', '$location', 'angularGridInstance', '$localStorage', 'dynamicNotifications','OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService',
     function ($scope,$state, logOut, UserVerify, Settings, ezfb, $rootScope, $http, $timeout, $window, roundProgressService, $compile, commonService, $location, angularGridInstance, $localStorage, dynamicNotifications,OTP, OTPVerify, CountryCode, FacebookService, LoginService) {
         $scope.logged_res = false;
-        $rootScope.umobile='';
-        $rootScope.umcode ='';
-        $rootScope.umflag = '';
         $scope.otpNo='';
         $scope.loggin_pop = function (e) {
             jQuery.fancybox({
@@ -51,11 +48,8 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
 
             })
         }
-
         verifyUser();
-
         //logout
-
         $scope.appLogout = function () {
             logOut.logout().then(function (response) {
                 console.log(response);
@@ -71,7 +65,6 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
             })
         };
         //otp Verification
-
         $rootScope.goToMobileVerf = function (user) {
             /*console.log(user)
              console.log(location_city,lat,lng);*/

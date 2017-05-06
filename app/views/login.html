@@ -255,8 +255,7 @@
     /* end */
 
 </style>
-
-    <div class="lp">
+    <div class="lp"   >
     <header class="header-new-home">
         <div class="container">
             <div class="row">
@@ -311,9 +310,9 @@
             </div>        
         </div>
     </section>
-    <section class="feed-section">
+    <section class="feed-section"  >
         <div class="first-filter" >
-        <div class="container">
+        <div class="container"   >
             <ul>
                 <li ng-class="{'SelectedCollection': SelectedCollection === 'All'}" ng-click="collectionFilter('All')">All</li>
                 <li ng-repeat="coll in getCollectionData track by $index" ng-if="coll.collection_api_name!='Happystreet' " ng-click="collectionFilter(coll.collection_api_name)" ng-class="{SelectedCollection: coll.collection_api_name === SelectedCollection}">
@@ -370,11 +369,11 @@
             <ul class="quick-links">
                 <li class=""><a href="#"  style="visibility: visible; animation-delay: 500ms; animation-name: fadeInUp;"><img src="app/images/happystry-logo.jpg" alt=""></a></li>
                 <li><a  class="active" href="javascript:;"  style="visibility: visible; animation-delay: 1000ms; animation-name: fadeInUp;">Home</a></li>
-                <li class=""><a href="<?php echo APP_SOURCE ?>home/about_us" target="_blank" style="visibility: visible; animation-delay: 1100ms; animation-name: fadeInUp;">About Us</a></li>
+                <li class=""><a ui-sref=".about" style="visibility: visible; animation-delay: 1100ms; animation-name: fadeInUp;">About Us</a></li>
                 <li class=""><a href="https://happystry.wordpress.com/" target="_blank" style="visibility: visible; animation-delay: 1100ms; animation-name: fadeInUp;">Blog</a></li>
-                <li class=""><a href="<?php echo APP_SOURCE ?>home/contact_us" target="_blank"  style="visibility: visible; animation-delay: 1200ms; animation-name: fadeInUp;">Contact Us</a></li>
-                <li class=""><a href="<?php echo APP_SOURCE ?>home/terms_condition" target="_blank" style="visibility: visible; animation-delay: 1300ms; animation-name: fadeInUp;">Terms &amp; Condition</a></li>
-                <li class=""><a href="<?php echo APP_SOURCE ?>home/terms_condition" target="_blank" style="visibility: visible; animation-delay: 1400ms; animation-name: fadeInUp;">Privacy Policy</a></li>
+                <li class=""><a ui-sref=".contact"  style="visibility: visible; animation-delay: 1200ms; animation-name: fadeInUp;">Contact Us</a></li>
+                <li class=""><a ui-sref=".term" style="visibility: visible; animation-delay: 1300ms; animation-name: fadeInUp;">Terms &amp; Condition</a></li>
+                <li class=""><a ui-sref=".term" style="visibility: visible; animation-delay: 1400ms; animation-name: fadeInUp;">Privacy Policy</a></li>
             </ul>
             <ul class="social-links">
                 <li class=""><a href="https://www.facebook.com/Happystry-1124403420991917/?fref=nf" target="_blank"><img src="app/images/fs.png" alt="" /></a></li>
@@ -486,7 +485,7 @@
     </div><!--User Blocked popup-->
 
     <div id="loginPop" class="report new-report" style="display: none" >
-        <h3><img src="<?php echo PAGE_IMAGES_PATH ?>/happystry-logo.png" alt="" /></h3>
+        <h3><img src="/app/images/happystry-logo.png" alt="" /></h3>
         <div class="popup">
             <form class=" profile-section nopadding lp">
                 <p>Please login to continue</p>  

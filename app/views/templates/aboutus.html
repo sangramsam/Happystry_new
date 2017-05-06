@@ -1,32 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Happystry</title>
-        <link rel="shortcut icon" href="<?php echo PAGE_IMAGES_PATH ?>favicon.png" type="image/x-icon">
-        <link rel="stylesheet" href="<?php echo PAGE_PLUGINS_PATH ?>/wow/css/animate.css" />
-        <link rel="stylesheet" href="<?php echo PAGE_PLUGINS_PATH ?>/fancybox/jquery.fancybox.css" />
-        <link rel="stylesheet" href="<?php echo PAGE_CSS_PATH ?>/master.css" />
-        <link rel="stylesheet" href="<?php echo PAGE_CSS_PATH ?>/responsive.css" />
-        <meta charset="windows-1252">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <span id="fb_appid" data-val=<?php echo FBAPP_ID ?>></span>
-    <span id="api_url" data-val=<?php echo APP_SOURCE ?>></span>
-    <span id="api_key" data-val=<?php echo HAPPIKEY ?>></span>
-    <span id="sess_cookie" data-val=<?php echo USER_COOKIE ?>></span>
-    <script>
-        var fb_appid = document.getElementById("fb_appid").getAttribute("data-val");
-        var api_url = document.getElementById("api_url").getAttribute("data-val");
-        var api_key = document.getElementById("api_key").getAttribute("data-val");
-        var sess_cookie = document.getElementById("sess_cookie").getAttribute("data-val");
-    </script>
-</head>
-<body class="lp footer-inner" ng-controller="MainCtrl">
-    <div class="preloader1" id="preloader"></div>
+<body class="lp footer-inner" >
     <header>
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 logo-hold ">
-                    <a href="<?php echo APP_SOURCE ?>" ><img src="/assets/pages/images/logo.png" alt="" /><span class="logo-text">Happystry</span></a>
+                    <a ui-sref="login" ><img src="/app/images/logo.png" alt="" /><span class="logo-text">Happystry</span></a>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 right-align" style="display: inline-block; margin: 5px 0;">
                     <a class="google-play-btn black-btn andr-img-hold"  href="https://play.google.com/store/apps/details?id=com.happy.happystry">
@@ -35,14 +12,12 @@
                             Android
                         </p>
                     </a>
-                    <!--<a class="fb" ng-click="login()" ng-disabled="loginStatus.status == 'connected'">Connect using facebook</a>-->
                 </div>
             </div>
         </div>
     </header>
 
     <section class="margin-t-75 ">
-
         <div class="col-org">
             <div class="container">
                 <div class="abt-topsec">
@@ -56,7 +31,7 @@
         <div class="container">
             <div class="abt-img-sec">
 
-                <img src="<?php echo PAGE_IMAGES_PATH ?>about-image.png" alt="" />
+                <img src="/app/images/about-image.png" alt="" />
 
             </div>
         </div>
@@ -75,7 +50,7 @@
             <h6>Through these interactions, we strive to create a happier connected world. Entrepreneurs can showcase their products to individuals and corporates. </h6>
             <h6 class="margin-b-30">    Similarly, we enable corporates and social enterprises to reach out to a larger community. </h6>
             <figure class="text-center">
-                <img src="<?php echo PAGE_IMAGES_PATH ?>dlite.png" alt="" />
+                <img src="/app/images/dlite.png" alt="" />
             </figure>
             <h6>These interactions and activities on the platform generate a currency "Dlites", </h6>
             <h6 class="margin-b-30">which going forward can be used for transactions both within the platform, and outside through our partner ecosystem. </h6>
@@ -90,8 +65,8 @@
     <section class="subscribe-section">
         <h2>Subscribe and stay informed</h2>
         <form  class="subs" novalidate>
-            <input type="email" id="subscribe" class="subs-email" placeholder="Enter your email address" />
-            <input type="submit" ng-click="submitSub()" class="subs-submit" />
+            <input type="email" id="subscribe" class="subs-email" placeholder="Enter your email address" ng-model="email" />
+            <input type="submit" ng-click="submitSub(email)" class="subs-submit"  />
             <span id="error_email" class="error"></span>  
         </form>
         <p class="download-text">Download the app. Share your smiley deeds.</p>
@@ -105,57 +80,22 @@
     <footer class="">
         <div class="container">
             <ul class="quick-links">
-                <li class=""><a href="#"  style="visibility: visible; animation-delay: 500ms; animation-name: fadeInUp;"><img src="<?php echo PAGE_IMAGES_PATH ?>happystry-logo.jpg" alt=""></a></li>
-                <li><a href="<?php echo APP_SOURCE ?>home/index_page" target="_blank"  style="visibility: visible; animation-delay: 1000ms; animation-name: fadeInUp;">Home</a></li>
+                <li class=""><a href="#"  style="visibility: visible; animation-delay: 500ms; animation-name: fadeInUp;"><img src="/app/images/happystry-logo.jpg" alt=""></a></li>
+                <li><a ui-sref="login"  style="visibility: visible; animation-delay: 1000ms; animation-name: fadeInUp;">Home</a></li>
                 <li class=""><a class="active" href="javascript:;" style="visibility: visible; animation-delay: 1100ms; animation-name: fadeInUp;">About Us</a></li>
                 <li class=""><a href="https://happystry.wordpress.com/" target="_blank" style="visibility: visible; animation-delay: 1100ms; animation-name: fadeInUp;">Blog</a></li>
-                <li class=""><a href="<?php echo APP_SOURCE ?>home/contact_us" target="_blank"  style="visibility: visible; animation-delay: 1200ms; animation-name: fadeInUp;">Contact Us</a></li>
-                <li class=""><a  href="<?php echo APP_SOURCE ?>home/terms_condition" target="_blank" style="visibility: visible; animation-delay: 1300ms; animation-name: fadeInUp;">Terms &amp; Condition</a></li>
-                <li class=""><a href="<?php echo APP_SOURCE ?>home/terms_condition" target="_blank" style="visibility: visible; animation-delay: 1400ms; animation-name: fadeInUp;">Privacy Policy</a></li>
+                <li class=""><a ui-sref="login.contact"  style="visibility: visible; animation-delay: 1200ms; animation-name: fadeInUp;">Contact Us</a></li>
+                <li class=""><a  ui-sref="login.term"  style="visibility: visible; animation-delay: 1300ms; animation-name: fadeInUp;">Terms &amp; Condition</a></li>
+                <li class=""><a  ui-sref="login.term" style="visibility: visible; animation-delay: 1400ms; animation-name: fadeInUp;">Privacy Policy</a></li>
             </ul>
             <ul class="social-links">
-                <li class=""><a href="https://www.facebook.com/Happystry-1124403420991917/?fref=nf" target="_blank"><img src="<?php echo PAGE_IMAGES_PATH ?>fs.png" alt="" /></a></li>
-                <li class=""><a href="https://twitter.com/HappystryMedia" target="_blank"><img src="<?php echo PAGE_IMAGES_PATH ?>ts.png" alt="" /></a></li>
-                <li class=""><a href="https://in.pinterest.com/happystry/" target="_blank"><img src="<?php echo PAGE_IMAGES_PATH ?>pt.png" alt="" /></a></li>
+                <li class=""><a href="https://www.facebook.com/Happystry-1124403420991917/?fref=nf" target="_blank"><img src="/app/images/fs.png" alt="" /></a></li>
+                <li class=""><a href="https://twitter.com/HappystryMedia" target="_blank"><img src="/app/images/ts.png" alt="" /></a></li>
+                <li class=""><a href="https://in.pinterest.com/happystry/" target="_blank"><img src="/app/images/pt.png" alt="" /></a></li>
             </ul>
         </div>
     </footer>
     <div class="copy-right">
         <p>Copyright © Happystry</p>
     </div>
-<input type="" id="uloc" style="display: none;" />
-</body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<!--<script src="<?php echo PAGE_JS_PATH ?>jquery-migrate.min.js"></script>-->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwinKbVFU3K6hMp-0Xr-RRjXVs95FVgKc&libraries=places"></script>
-<script src="<?php echo PAGE_JS_PATH ?>angular.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
-<script src="<?php echo PAGE_JS_PATH ?>/ng-autocomplete.js"></script>
-<script src="<?php echo PAGE_PLUGINS_PATH ?>fb-login/js/fb-app.js"></script>
-<script src="<?php echo PAGE_PLUGINS_PATH ?>/fb-login/js/highlight.min.js"></script>
-<script src="<?php echo PAGE_PLUGINS_PATH ?>fb-login/js/angular-highlight.min.js"></script>
-<script src="<?php echo PAGE_PLUGINS_PATH ?>fb-login/js/angular-easyfb.min.js"></script>
-<script type="text/javascript" src="<?php echo PAGE_PLUGINS_PATH ?>/fancybox/jquery.fancybox.js"></script>
-<script type="text/javascript" src="<?php echo PAGE_PLUGINS_PATH ?>bootstrap/js/bootstrap.js"></script>
-<script src="<?php echo PAGE_JS_PATH ?>roundProgress.min.js"></script> 
-<script src="<?php echo PAGE_JS_PATH ?>time-interval-services.js"></script>
-<script src="<?php echo PAGE_JS_PATH ?>time-interval-directives.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-<script src="<?php echo PAGE_PLUGINS_PATH ?>slider/js/jquery.sliderPro.min.js"></script> 
-<script src="<?php echo PAGE_JS_PATH ?>angular-route.min.js"></script> 
-<script>
-                jQuery(document).ready(function ($) {
 
-// site preloader -- also uncomment the div in the header and the css style for #preloader
-                    $(window).load(function () {
-                        $('#preloader').fadeOut('slow', function () {
-                            $(this).remove();
-                        });
-                    });
-
-                });
-                new WOW().init();
-
-</script>
-
-</html>

@@ -19,13 +19,23 @@ angular.module('Happystry', [
     'ngAutocomplete',
     'angularGrid',
     'ngStorage',
-    'angular.filter'
+    'angular.filter',
+    'angular-img-cropper',
+    'infinite-scroll'
 ]).config(function (ezfbProvider) {
     ezfbProvider.setInitParams({
         appId: '312638455759153'
     });
-});
-
+}).run(['$rootScope', function ($rootScope) {
+    $rootScope.$on('$viewContentLoaded', function () {
+        var interval = setInterval(function () {
+            if (document.readyState == "complete") {
+                window.scrollTo(0, 0);
+                clearInterval(interval);
+            }
+        }, 2);
+    });
+}]);
 angular.module('Happystry.controllers', ['ui.bootstrap']);
 angular.module('Happystry.directives', ['ui.bootstrap']);
 angular.module('Happystry.services', []);

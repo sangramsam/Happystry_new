@@ -8,13 +8,17 @@
 angular.module('Happystry.controllers')
     .controller('AuthCtrl', ['$scope', '$http', 'OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService', 'ViewService', '$state', '$rootScope', 'Settings', function ($scope, $http, OTP, OTPVerify, CountryCode, FacebookService, LoginService, ViewService, $state, $rootScope, Settings) {
         'use strict';
-
-        ViewService.getFeeds({page: 0}).then(function (response) {
-            $scope.getPostData = response.data.Posts;
-            $scope.getPromotedData = response.data.Promoted;
-        }, function (response) {
-        });
-
+        $scope.pageFlag = 0;
+        function loadPost() {
+            ViewService.getFeeds({page: $scope.pageFlag}).then(function (response) {
+                $scope.pageFlag += 10;
+                $scope.getPostData = response.data.Posts;
+                $scope.getPromotedData = response.data.Promoted;
+            }, function (response) {
+            });
+            $scope.busy = false;
+        }
+        loadPost();
         ViewService.getCollections().then(function (response) {
             $scope.getCollectionData = response.data.collections;
         }, function (response) {
@@ -36,6 +40,34 @@ angular.module('Happystry.controllers')
             return $scope.gradient ? 'url(#gradient)' : $scope.roundProgress.currentColor;
         };
         /*------------------ end of round circle feeds ---------------------------*/
+        //collection filter
+        $scope.collectionFilter = function (coll_name) {
+            $scope.SelectedCollection = coll_name;
+            ViewService.getFilterCollections(coll_name, 0).then(function (response) {
+                $scope.getPostData = response.data.Posts;
+                //console.log(response);
+                $scope.getPromotedData = response.data.Promoted;
+                //console.log($scope.getPostData, $scope.getPromotedData);
+            })
+
+        };
+        //hashtag filter
+        $scope.hashFilter = function (hash_name) {
+            $scope.SelectedHash = hash_name;
+            $scope.SelectedCollection = 'All';
+            ViewService.getFilterHashTag(hash_name, 0).then(function (response) {
+                $scope.getPostData = response.data.Posts;
+                //console.log(response);
+                $scope.getPromotedData = response.data.Promoted;
+                //console.log($scope.getPostData, $scope.getPromotedData);
+            })
+        };
+        $scope.loadMore = function () {
+            $scope.busy = true;
+            console.log("called lazy loading");
+            loadPost();
+        };
+
 
         //facebook login
         $scope.login = function () {
@@ -48,8 +80,8 @@ angular.module('Happystry.controllers')
 
 
         //OTP verification
-        $scope.umobile='';
-        $scope.otpNo='';
+        $scope.umobile = '';
+        $scope.otpNo = '';
         $scope.goToMobileVerf = function (user) {
             /*console.log(user)
              console.log(location_city,lat,lng);*/
@@ -167,7 +199,7 @@ angular.module('Happystry.controllers')
         };
         $scope.OTPVerify = function (otpNo) {
             var umob = $scope.umobile;
-            console.log("otpVerify daata",umob,$scope.umobile);
+            console.log("otpVerify daata", umob, $scope.umobile);
             var otpno = otpNo;
             var valid = 0;
             if (otpno === '') {
@@ -233,7 +265,7 @@ angular.module('Happystry.controllers')
         $scope.changeno = function (user) {
             var umobcode = user.selCode;
             var umob1 = user.mobile;
-            $scope.umobile=user.mobile;
+            $scope.umobile = user.mobile;
             var valid = 0;
             var onlyNum = /^\d+$/;
             if (umobcode === undefined) {
@@ -279,7 +311,7 @@ angular.module('Happystry.controllers')
                                 close: null
                             }
                         });
-                    }else if (response.data.user_type == 'mobile') {
+                    } else if (response.data.user_type == 'mobile') {
                         angular.element('#errorphone2').text('Mobile Number Already Exists');
                         angular.element('#mobile1').parents('.fieldholder').css('border-bottom', '1px solid #f00');
                         angular.element('#mobile1').focus();
@@ -297,5 +329,23 @@ angular.module('Happystry.controllers')
                 }
             });
         };
+
+        //like button
+        $scope.sendLike = function (postid, event) {
+            $scope.loggin_pop(event);
+            return false;
+        };
+        $scope.loggin_pop = function (e) {
+            jQuery.fancybox({
+                'href': '#loginPop',
+                'closeBtn': true,
+                keys: {
+                    close: null
+                }
+            });
+            e.preventDefault();
+        }
+
+
     }]);
     

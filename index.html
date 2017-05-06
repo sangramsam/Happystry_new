@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>    
     <meta charset="windows-1252">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="app/styles/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/app/styles/images/favicon.png" type="image/x-icon">
     <title>Happystry</title>
     <base href="/">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <link rel="stylesheet" type="text/css" href="app/styles/libs/font-awesome.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
 
 <!-- plugins css -->
     <link rel="stylesheet" href="app/styles/plugins/wow/css/animate.css"/>
@@ -23,11 +23,12 @@
     <link rel="stylesheet" href="app/styles/css/master.css"/>
     <link rel="stylesheet" href="app/styles/css/responsive.css"/>
     <link rel="stylesheet" href="app/styles/css/newstyle.css"/>
+   <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
 
   </head>
-    <body>
+    <body  class="lp">
     
-    <div ui-view ></div>
+    <div ui-view  autoscroll="false"></div>
 
 <!-- library -->
     <!-- <script src="https://code.angularjs.org/1.2.27/angular.js"></script> -->
@@ -48,6 +49,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
 
 <!-- javscript plugins-->
+    <script src="app/styles/libs/ng-infinite-scroll.js"></script>
     <script src="app/styles/libs/time-interval-services.js"></script>
     <script src="app/styles/libs/time-interval-directives.js"></script>
     <script src="app/styles/plugins/box-loading/js/angulargrid.min.js" defer></script>
@@ -81,11 +83,13 @@
     <script src="app/scripts/directives/typeheadSeach.js"></script>
     <script src="app/scripts/directives/removeEmptyString.js"></script>
     <script src="app/scripts/directives/onfinishRender.js"></script>
+    <script src="app/scripts/directives/infiniteScroll.js"></script>
 <!-- Filter -->
     <script src="app/scripts/filters/custom-filter.js"></script>
     <script src="app/scripts/filters/lowerCase.js"></script>
 
     <script src="app/scripts/controllers/auth.ctrl.js"></script>
+    <script src="app/scripts/controllers/aboutUs.ctrl.js"></script>
     <script src="app/scripts/controllers/auto.js"></script>
     <script src="app/scripts/controllers/notification.crtl.js"></script>
     <script src="app/scripts/controllers/message.ctrl.js"></script>
@@ -94,6 +98,7 @@
     <script src="app/scripts/controllers/search.ctrl.js"></script>
     <script src="app/scripts/controllers/postdetails.ctrl.js"></script>
     <script src="app/scripts/services/fbuser.services.js"></script>
+    <script src="app/scripts/services/subscribe.service.js"></script>
     <script src="app/scripts/services/userVerify.service.js"></script>
     <script src="app/scripts/services/logout.service.js"></script>
     <script src="app/scripts/services/message.services.js"></script>

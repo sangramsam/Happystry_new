@@ -10,7 +10,7 @@ angular.module('Happystry.router', [])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider
             .state('login', {
-            url: "/",
+            url: "/Home",
             title: 'Login',
             views: {
                 '': {
@@ -21,7 +21,52 @@ angular.module('Happystry.router', [])
                     controller: "AuthCtrl"
                 }
             }
+        }).state('login.about', {
+            url: '/aboutUs',
+            views: {
+                '': {
+                    templateUrl: 'public/shared/controlDashboard.html'
+                },
+                'body@login': {
+                    templateUrl: "/app/views/templates/aboutus.html",
+                    controller: 'aboutUs'
+                }
+            }
+        }).state('login.contact', {
+            url: '/contact_us',
+            views: {
+                '': {
+                    templateUrl: 'public/shared/controlDashboard.html'
+                },
+                'body@login': {
+                    templateUrl: "/app/views/templates/contactus.html",
+                    controller: 'aboutUs'
+                }
+            }
+        }).state('login.term', {
+            url: '/terms_condition',
+            views: {
+                '': {
+                    templateUrl: 'public/shared/controlDashboard.html'
+                },
+                'body@login': {
+                    templateUrl: "/app/views/templates/terms.html",
+                    controller: 'aboutUs'
+                }
+            }
+        }).state('login.policy', {
+            url: '/policy',
+            views: {
+                '': {
+                    templateUrl: 'public/shared/controlDashboard.html'
+                },
+                'body@login': {
+                    templateUrl: "/app/views/templates/policy.html",
+                    controller: 'aboutUs'
+                }
+            }
         })
+
             .state('timeline', {
                 url: "/timeline",
                 views: {
@@ -55,7 +100,7 @@ angular.module('Happystry.router', [])
                 controller: "PostDetailsCtrl"
             })
 
-        // $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise("/Home");
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: false

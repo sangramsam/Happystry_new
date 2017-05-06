@@ -83,6 +83,48 @@ angular.module('Happystry.services')
                 });
                 return deferred.promise;
             }
+            function getFilterCollections(searchColl,args){
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: Settings.BASE_URL+'post/indexweb?collection=' + searchColl + '&'+'page=' + args,
+                    headers: {'Content-Type': 'application/json',
+                             'HAPPI-API-KEY': "TRR36-PDTHB-9XBHC-PPYQK-GBPKQ"
+                    }
+                }).then(function (response, status, headers, config) {
+                    deferred.resolve({
+                        status: status,
+                        data: response.data.allPosts
+                    });
+                },function(response, status, headers, config){
+                    deferred.reject({
+                        status: status,
+                        data: response.data.allPosts
+                    });
+                });
+                return deferred.promise;
+            }
+            function getFilterHashTag(searchhash,args){
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: Settings.BASE_URL+'post/indexweb?hashtag=' + searchhash + '&'+'page=' + args,
+                    headers: {'Content-Type': 'application/json',
+                             'HAPPI-API-KEY': "TRR36-PDTHB-9XBHC-PPYQK-GBPKQ"
+                    }
+                }).then(function (response, status, headers, config) {
+                    deferred.resolve({
+                        status: status,
+                        data: response.data.allPosts
+                    });
+                },function(response, status, headers, config){
+                    deferred.reject({
+                        status: status,
+                        data: response.data.allPosts
+                    });
+                });
+                return deferred.promise;
+            }
 
             function getTrendingHashTag(){
                 var deferred = $q.defer();
@@ -124,7 +166,9 @@ angular.module('Happystry.services')
         getCollections: getCollections,
         getFeeds:getFeeds,
         openFancyBox: openFancyBox,
-        roundProgressInitialization: roundProgressInitialization
+        roundProgressInitialization: roundProgressInitialization,
+        getFilterCollections:getFilterCollections,
+        getFilterHashTag:getFilterHashTag
     };
 
 });
