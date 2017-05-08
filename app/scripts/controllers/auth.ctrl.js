@@ -6,7 +6,7 @@
  * Controller of the Happystry used in login state
  */
 angular.module('Happystry.controllers')
-    .controller('AuthCtrl', ['$scope', '$http', 'userSubscription', 'OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService', 'ViewService', '$state', '$rootScope', 'Settings', '$window', function ($scope, $http, userSubscription, OTP, OTPVerify, CountryCode, FacebookService, LoginService, ViewService, $state, $rootScope, Settings, $window) {
+    .controller('AuthCtrl', ['$scope', '$http', 'userSubscription', 'OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService', 'ViewService', '$state', '$rootScope', 'Settings', '$window','$document', function ($scope, $http, userSubscription, OTP, OTPVerify, CountryCode, FacebookService, LoginService, ViewService, $state, $rootScope, Settings, $window,$document) {
         'use strict';
         $scope.pageFlag = 0;
         $scope.SelectedCollection = 'All';
@@ -16,6 +16,8 @@ angular.module('Happystry.controllers')
         var collectionFlag = false;
         $scope.getPostData = [];
         $scope.getPromotedData = [];
+        $scope.totalPosts = 0;
+        $scope.postCount = 0;
         function resetProperty() {
             $scope.pageFlag = 0;
             scroll = true;
@@ -34,13 +36,10 @@ angular.module('Happystry.controllers')
             ViewService.getFeeds({page: $scope.pageFlag}).then(function (response) {
                 $scope.pageFlag += 10;
                 scroll = true;
-                console.log(response.data.Posts);
-                //$scope.getPostData.push(response.data.Posts);
-                //$scope.getPromotedData.push(response.data.Promoted);
+                //console.log(response.data.Posts);
                 $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
-
-                console.log("post data", $scope.getPostData, $scope.getPostData.length);
+                $scope.totalPosts=response.data.post_count;
             }, function (response) {
             });
             $scope.busy = false;
@@ -70,34 +69,53 @@ angular.module('Happystry.controllers')
         /*------------------ end of round circle feeds ---------------------------*/
         //collection filter
         $scope.collectionFilter = function (coll_name) {
-            if (collectionFlag === false || coll_name=='All' ) {
-                resetProperty();
-            }
+            resetProperty();
             $scope.SelectedCollection = coll_name;
             ViewService.getFilterCollections(coll_name, $scope.pageFlag).then(function (response) {
-                collectionFlag = true;
+                scroll = true;
                 $scope.pageFlag += 10;
+                $scope.totalPosts=response.data.post_count;
                 $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
 
-                //console.log($scope.getPostData, $scope.getPromotedData);
+                console.log("filter collection",$scope.getPostData, $scope.getPromotedData);
             })
 
         };
-        //hashtag filter
-        $scope.hashFilter = function (hash_name) {
-            if (hashFlag === false) {
-                resetProperty();
-            }
-            $scope.SelectedHash = hash_name;
-            $scope.SelectedCollection = 'All';
-            ViewService.getFilterHashTag(hash_name, $scope.pageFlag).then(function (response) {
-                hashFlag = true;
+        function loadDataCollectionFilter(coll_name) {
+            ViewService.getFilterCollections(coll_name, $scope.pageFlag).then(function (response) {
+                scroll = true;
                 $scope.pageFlag += 10;
+                $scope.totalPosts=response.data.post_count;
                 $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
 
-                //console.log($scope.getPostData, $scope.getPromotedData);
+                console.log($scope.getPostData, $scope.getPromotedData);
+            })
+        }
+        function loadDataHashTagFilter(hash_name) {
+            ViewService.getFilterHashTag(hash_name, $scope.pageFlag).then(function (response) {
+                scroll = true;
+                $scope.pageFlag += 10;
+                $scope.totalPosts=response.data.post_count;
+                $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
+                $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
+
+                console.log($scope.getPostData, $scope.getPromotedData);
+            })
+        }
+        //hashtag filter
+        $scope.hashFilter = function (hash_name) {
+            resetProperty();
+            $scope.SelectedHash = hash_name;
+            $scope.SelectedCollection = 'All';
+            ViewService.getFilterHashTag(hash_name, $scope.pageFlag).then(function (response) {
+                scroll = true;
+                $scope.totalPosts=response.data.post_count;
+                $scope.pageFlag += 10;
+                $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
+                $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
+                console.log("filter hashTag",$scope.getPostData, $scope.getPromotedData);
             })
         };
         $scope.loadMore = function () {
@@ -419,10 +437,15 @@ angular.module('Happystry.controllers')
             }
         };
 
+        $scope.stateName = $state.current.name.split('.')[0];
+        console.log($scope.stateName);
         //lazy loading
-        angular.element($window).on('scroll', function () {
+        angular.element($document).on('scroll', function () {
+            var fixed='';
+                if($scope.stateName==='login'){
+                    var fixed = $(".discover-more-fixed").offset().top;
+                }
 
-            var fixed = $(".discover-more-fixed").offset().top;
             // 315
             if ($(this).scrollTop() >= fixed) {
                 $('.header-new-home').addClass('header-up');
@@ -439,14 +462,14 @@ angular.module('Happystry.controllers')
 
             var relative = $('.discover-more-relative').offset().top;
 
-            if (($('.discover-more-relative').isOnScreen() === true || $(this).scrollTop() >= relative) && scroll === true) {
+            if (($('.discover-more-relative').isOnScreen() === true || $(this).scrollTop() >= relative) && scroll === true &&  ($scope.pageFlag < $scope.totalPosts)) {
                 scroll = false;
                 console.log("called scroll");
                 if ($scope.SelectedCollection != 'All') {
                     console.log("called load collection", $scope.SelectedCollection);
-                    $scope.collectionFilter($scope.SelectedCollection);
+                    loadDataCollectionFilter($scope.SelectedCollection);
                 } else if ($scope.SelectedHash != '') {
-                    $scope.hashFilter($scope.SelectedHash);
+                    loadDataHashTagFilter($scope.SelectedHash);
                 } else {
                     console.log("called load post");
                     loadPost();
@@ -477,6 +500,9 @@ angular.module('Happystry.controllers')
 
             return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
         };
+        $scope.$on('$destroy', function() {
+            $document.unbind('scroll');
+        });
 
     }]);
     

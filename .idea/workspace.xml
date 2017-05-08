@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cdaa253-4fae-4ff3-bbaa-92fe9549702d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/auth.ctrl.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/auth.ctrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/login.html" afterPath="$PROJECT_DIR$/app/views/login.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,18 +23,21 @@
       <file leaf-file-name="auth.ctrl.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/scripts/controllers/auth.ctrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-63">
-              <caret line="72" column="59" lean-forward="false" selection-start-line="72" selection-start-column="59" selection-end-line="72" selection-end-column="59" />
+            <state relative-caret-position="413">
+              <caret line="123" column="23" lean-forward="true" selection-start-line="123" selection-start-column="23" selection-end-line="123" selection-end-column="23" />
               <folding>
-                <element signature="e#4949#10616#0" expanded="false" />
-                <element signature="e#10662#12686#0" expanded="false" />
-                <element signature="e#12731#13068#0" expanded="false" />
-                <element signature="e#13108#13362#0" expanded="false" />
-                <element signature="e#13406#16039#0" expanded="false" />
-                <element signature="e#16076#16274#0" expanded="false" />
-                <element signature="e#16468#16702#0" expanded="false" />
-                <element signature="e#16777#18518#0" expanded="false" />
-                <element signature="e#20318#20914#0" expanded="false" />
+                <element signature="e#6003#11670#0" expanded="false" />
+                <element signature="e#11716#13740#0" expanded="false" />
+                <element signature="e#13785#14122#0" expanded="false" />
+                <element signature="e#14162#14416#0" expanded="false" />
+                <element signature="e#14460#17093#0" expanded="false" />
+                <element signature="e#17130#17328#0" expanded="false" />
+                <element signature="e#17522#17756#0" expanded="false" />
+                <element signature="e#17831#19572#0" expanded="false" />
+                <element signature="e#19833#19924#0" expanded="false" />
+                <element signature="e#19991#20135#0" expanded="false" />
+                <element signature="e#20141#20290#0" expanded="false" />
+                <element signature="e#21622#22218#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -451,12 +452,12 @@
       <workItem from="1493868509368" duration="27453000" />
       <workItem from="1493955220288" duration="23919000" />
       <workItem from="1493985921684" duration="12775000" />
-      <workItem from="1494056014509" duration="22516000" />
+      <workItem from="1494056014509" duration="26772000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156206000" />
+    <option name="totallyTimeSpent" value="160462000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -471,7 +472,7 @@
     <frame x="55" y="24" width="1311" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19147287" sideWeight="0.49386504" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19147287" sideWeight="0.49386504" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.63496935" sideWeight="0.50620157" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -517,7 +518,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -916,14 +917,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/services/view.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="40" column="21" lean-forward="false" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -939,20 +932,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/services/view.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="40" column="21" lean-forward="false" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/controllers/auth.ctrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-63">
-          <caret line="72" column="59" lean-forward="false" selection-start-line="72" selection-start-column="59" selection-end-line="72" selection-end-column="59" />
+        <state relative-caret-position="413">
+          <caret line="123" column="23" lean-forward="true" selection-start-line="123" selection-start-column="23" selection-end-line="123" selection-end-column="23" />
           <folding>
-            <element signature="e#4949#10616#0" expanded="false" />
-            <element signature="e#10662#12686#0" expanded="false" />
-            <element signature="e#12731#13068#0" expanded="false" />
-            <element signature="e#13108#13362#0" expanded="false" />
-            <element signature="e#13406#16039#0" expanded="false" />
-            <element signature="e#16076#16274#0" expanded="false" />
-            <element signature="e#16468#16702#0" expanded="false" />
-            <element signature="e#16777#18518#0" expanded="false" />
-            <element signature="e#20318#20914#0" expanded="false" />
+            <element signature="e#6003#11670#0" expanded="false" />
+            <element signature="e#11716#13740#0" expanded="false" />
+            <element signature="e#13785#14122#0" expanded="false" />
+            <element signature="e#14162#14416#0" expanded="false" />
+            <element signature="e#14460#17093#0" expanded="false" />
+            <element signature="e#17130#17328#0" expanded="false" />
+            <element signature="e#17522#17756#0" expanded="false" />
+            <element signature="e#17831#19572#0" expanded="false" />
+            <element signature="e#19833#19924#0" expanded="false" />
+            <element signature="e#19991#20135#0" expanded="false" />
+            <element signature="e#20141#20290#0" expanded="false" />
+            <element signature="e#21622#22218#0" expanded="false" />
           </folding>
         </state>
       </provider>
