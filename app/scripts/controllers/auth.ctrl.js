@@ -6,18 +6,46 @@
  * Controller of the Happystry used in login state
  */
 angular.module('Happystry.controllers')
-    .controller('AuthCtrl', ['$scope', '$http','userSubscription', 'OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService', 'ViewService', '$state', '$rootScope', 'Settings', function ($scope, $http,userSubscription, OTP, OTPVerify, CountryCode, FacebookService, LoginService, ViewService, $state, $rootScope, Settings) {
+    .controller('AuthCtrl', ['$scope', '$http', 'userSubscription', 'OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService', 'ViewService', '$state', '$rootScope', 'Settings', '$window', function ($scope, $http, userSubscription, OTP, OTPVerify, CountryCode, FacebookService, LoginService, ViewService, $state, $rootScope, Settings, $window) {
         'use strict';
         $scope.pageFlag = 0;
+        $scope.SelectedCollection = 'All';
+        $scope.SelectedHash = '';
+        var scroll = true;
+        var hashFlag = false;
+        var collectionFlag = false;
+        $scope.getPostData = [];
+        $scope.getPromotedData = [];
+        function resetProperty() {
+            $scope.pageFlag = 0;
+            scroll = true;
+            $scope.showNoPost = false;
+            $scope.getPostData = [];
+            $scope.getPromotedData = [];
+            $scope.totalPosts = 0;
+            $scope.postCount = 0;
+            $('.fb-more').removeClass('fb-fixed');
+            $scope.total = 25;
+            $scope.propmotedLimit = 0;
+            $scope.normalPostLimit = 0;
+        }
+
         function loadPost() {
             ViewService.getFeeds({page: $scope.pageFlag}).then(function (response) {
                 $scope.pageFlag += 10;
-                $scope.getPostData = response.data.Posts;
-                $scope.getPromotedData = response.data.Promoted;
+                scroll = true;
+                console.log(response.data.Posts);
+                //$scope.getPostData.push(response.data.Posts);
+                //$scope.getPromotedData.push(response.data.Promoted);
+                $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
+                $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
+
+                console.log("post data", $scope.getPostData, $scope.getPostData.length);
             }, function (response) {
             });
             $scope.busy = false;
         }
+
         loadPost();
         ViewService.getCollections().then(function (response) {
             $scope.getCollectionData = response.data.collections;
@@ -42,23 +70,33 @@ angular.module('Happystry.controllers')
         /*------------------ end of round circle feeds ---------------------------*/
         //collection filter
         $scope.collectionFilter = function (coll_name) {
+            if (collectionFlag === false || coll_name=='All' ) {
+                resetProperty();
+            }
             $scope.SelectedCollection = coll_name;
-            ViewService.getFilterCollections(coll_name, 0).then(function (response) {
-                $scope.getPostData = response.data.Posts;
-                //console.log(response);
-                $scope.getPromotedData = response.data.Promoted;
+            ViewService.getFilterCollections(coll_name, $scope.pageFlag).then(function (response) {
+                collectionFlag = true;
+                $scope.pageFlag += 10;
+                $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
+                $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
+
                 //console.log($scope.getPostData, $scope.getPromotedData);
             })
 
         };
         //hashtag filter
         $scope.hashFilter = function (hash_name) {
+            if (hashFlag === false) {
+                resetProperty();
+            }
             $scope.SelectedHash = hash_name;
             $scope.SelectedCollection = 'All';
-            ViewService.getFilterHashTag(hash_name, 0).then(function (response) {
-                $scope.getPostData = response.data.Posts;
-                //console.log(response);
-                $scope.getPromotedData = response.data.Promoted;
+            ViewService.getFilterHashTag(hash_name, $scope.pageFlag).then(function (response) {
+                hashFlag = true;
+                $scope.pageFlag += 10;
+                $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
+                $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
+
                 //console.log($scope.getPostData, $scope.getPromotedData);
             })
         };
@@ -346,7 +384,7 @@ angular.module('Happystry.controllers')
             e.preventDefault();
         }
 
-    //email subscription
+        //email subscription
         $scope.submitSub = function (email) {
             var subEmail = email;
             var valid = 0;
@@ -380,5 +418,65 @@ angular.module('Happystry.controllers')
                 });
             }
         };
+
+        //lazy loading
+        angular.element($window).on('scroll', function () {
+
+            var fixed = $(".discover-more-fixed").offset().top;
+            // 315
+            if ($(this).scrollTop() >= fixed) {
+                $('.header-new-home').addClass('header-up');
+                $('.first-filter').addClass('first-filter-fixed');
+
+            } else {
+                $('.header-new-home').removeClass('header-up');
+                $('.first-filter').removeClass('first-filter-fixed');
+            }
+
+            /* scroll to end */
+            var footer_distance = 70;
+            var document_height = $(document).height();
+
+            var relative = $('.discover-more-relative').offset().top;
+
+            if (($('.discover-more-relative').isOnScreen() === true || $(this).scrollTop() >= relative) && scroll === true) {
+                scroll = false;
+                console.log("called scroll");
+                if ($scope.SelectedCollection != 'All') {
+                    console.log("called load collection", $scope.SelectedCollection);
+                    $scope.collectionFilter($scope.SelectedCollection);
+                } else if ($scope.SelectedHash != '') {
+                    $scope.hashFilter($scope.SelectedHash);
+                } else {
+                    console.log("called load post");
+                    loadPost();
+                }
+            }
+
+            if ($('.discover-more-relative').isOnScreen() === true || $(".discover-more-fixed").isOnScreen() === true || $('footer').isOnScreen() === true) {
+                $('.fb-more').removeClass('fb-fixed');
+            } else if ($(".discover-more-fixed").isOnScreen() === false) {
+                $('.fb-more').addClass('fb-fixed');
+            }
+
+        });
+
+        $.fn.isOnScreen = function () {
+            var win = $(window);
+
+            var viewport = {
+                top: win.scrollTop(),
+                left: win.scrollLeft()
+            };
+            viewport.right = viewport.left + win.width();
+            viewport.bottom = viewport.top + win.height();
+
+            var bounds = this.offset();
+            bounds.right = bounds.left + this.outerWidth();
+            bounds.bottom = bounds.top + this.outerHeight();
+
+            return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+        };
+
     }]);
     
