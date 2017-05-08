@@ -68,7 +68,6 @@ angular.module('Happystry.router', [])
         })
 
             .state('timeline', {
-                url: "/timeline",
                 views: {
                     '': {
                         templateUrl: '/app/views/controlDashboard.html'
@@ -81,6 +80,7 @@ angular.module('Happystry.router', [])
                 }
 
             }).state('timeline.post', {
+             url: "/timeline",
                 views: {
                     '': {
                         templateUrl: '/app/views/controlDashboard.html'
@@ -88,6 +88,33 @@ angular.module('Happystry.router', [])
                     'container@timeline': {
                         templateUrl:"/app/views/templates/timeline.html",
                         controller:'timelineController'
+                    }
+
+                }
+
+            })
+            .state('timeline.post.search', {
+                url: '/search/hashtag/:tag',
+                views: {
+                    '': {
+                        templateUrl: '/app/views/controlDashboard.html'
+                    },
+                    'container@timeline': {
+                        templateUrl:"/app/views/templates/timeline.html",
+                        controller:'searchController'
+                    }
+
+                }
+
+            }).state('timeline.post.searchCollection', {
+                url: '/search/collection/:collection',
+                views: {
+                    '': {
+                        templateUrl: '/app/views/controlDashboard.html'
+                    },
+                    'container@timeline': {
+                        templateUrl:"/app/views/templates/timeline.html",
+                        controller:'searchController'
                     }
 
                 }

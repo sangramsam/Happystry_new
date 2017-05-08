@@ -15,6 +15,7 @@ angular.module('Happystry.services').service('likeFuntion', function ($http,Sett
                 angular.element(event.currentTarget).find('span.likes-comments').text(+likenum + +1);
 
             }
+            var user_id=localStorage.getItem("user_id");
             var postId = postid;
 
             return $http({
@@ -24,7 +25,7 @@ angular.module('Happystry.services').service('likeFuntion', function ($http,Sett
                     post_id: postId,
                     like: result
                 },
-                headers: {'Content-Type': 'application/json', 'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'}
+                headers: {'Content-Type': 'application/json', 'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ',  'User-Id':user_id}
             }).then(function successCallback(response) {
             }, function errorCallback(response) {
             });

@@ -12,12 +12,14 @@
             <h4>No results found</h4>
         </div>
     </div>-->
-    <div ng-if="!isDesc && searchurl" ng-cloak>
+    <div ng-if="searchurl" ng-cloak>
         <div class="page-title-holder ">
             <h3>Search results</h3>
             <div class="lists">
+<!--
                 <span ng-if="geoGlobal != ''"><a>Near me<span ng-click="removeNearMe()" class="sprite small-close-icon"></span></a></span>
-                <span><a href="#/timeline">{{dd}}<span class="sprite small-close-icon"></span></a></span>
+-->
+                <span><a ui-sref="timeline" ui-sref-opts="{reload: true}">{{tag || collection}}<span class="sprite small-close-icon"></span></a></span>
             </div>
         </div>
         <div id="searchCH" class="post-card-holder">
@@ -30,11 +32,9 @@
                 <div id="loader">
                     <span></span>
                 </div></div>
-            <div class="no-search-results" ng-show="getPostData.length == 0 && getPromotedData.length == 0">
+            <div class="no-search-results" ng-if="getPostData.length == 0 && getPromotedData.length == 0">
                 <span class="sprite no-search-icons"></span>
                 <h4>No results found</h4>
-                <!--        <p>Your search did not match with any post. Refine your search criteria</p>
-                        <a href="" class="btn-default">Search again</a>-->
             </div>
         </div>
     </div>
@@ -204,12 +204,12 @@
             </div>
         </div>
     </div>
-    <div class="page-title-holder clearfix custom-height" ng-if="!isDesc && !searchurl && !isBookmark" ng-cloak>
+    <div class="page-title-holder clearfix custom-height" ng-if="!searchurl " ng-cloak>
         <div class="pull-left">
             <h3>Trending</h3>
             <div class="lists">
                 <span ng-repeat="hash in getTrendingData">
-                    <a ng-if="hash.trend_name.indexOf('#') != 0" ng-href="#/search/hashtag/{{hash.tag_name| lowercasenospace}}">#{{hash.tag_name}}</a>
+                    <a ng-if="hash.trend_name.indexOf('#') != 0" ui-sref="timeline.post.search({tag:hash.tag_name})">#{{hash.tag_name}}</a>
                     <!--<a ng-href="/search/hashtag/{{hash.tag_name| lowercasenospace}}">#{{hash.tag_name}}</a>-->
                 </span>
             </div>
@@ -231,7 +231,7 @@
                                     <li ng-repeat="coll in getCollectionData track by $index">
                                         <!--<label for="" ng-click="searchClick($event);">-->
                                         <label for="">
-                                            <a class="nopadding" ng-click="searchChash(coll.collection_api_name)">
+                                            <a class="nopadding" ui-sref=".searchCollection({collection:coll.collectionname})" >
                                                 <img src="{{coll.collection_img}}" alt="" />
                                                 <div class="overlay col-overlay"></div>
                                                 <!--<input type="checkbox" id="checkbox1" class="ickecked">-->
@@ -242,7 +242,7 @@
                                     <li>
                                         <label for="" >
                                             <a class="nopadding" ng-click="searchChash('Sale')">
-                                                <img src="/assets/pages/images/forsale.png" alt="" />
+                                                <img src="/app/images/forsale.png" alt="" />
                                                 <div class="overlay col-overlay"></div>
                                                 <!--<input type="checkbox" id="checkbox1" class="ickecked">-->
                                                 <span>Shop</span>

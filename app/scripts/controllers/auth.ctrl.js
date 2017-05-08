@@ -78,7 +78,7 @@ angular.module('Happystry.controllers')
                 $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
 
-                console.log("filter collection",$scope.getPostData, $scope.getPromotedData);
+                //console.log("filter collection",$scope.getPostData, $scope.getPromotedData);
             })
 
         };
@@ -90,7 +90,7 @@ angular.module('Happystry.controllers')
                 $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
 
-                console.log($scope.getPostData, $scope.getPromotedData);
+                //console.log($scope.getPostData, $scope.getPromotedData);
             })
         }
         function loadDataHashTagFilter(hash_name) {
@@ -101,7 +101,7 @@ angular.module('Happystry.controllers')
                 $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
 
-                console.log($scope.getPostData, $scope.getPromotedData);
+                //console.log($scope.getPostData, $scope.getPromotedData);
             })
         }
         //hashtag filter
@@ -115,7 +115,7 @@ angular.module('Happystry.controllers')
                 $scope.pageFlag += 10;
                 $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
-                console.log("filter hashTag",$scope.getPostData, $scope.getPromotedData);
+                //console.log("filter hashTag",$scope.getPostData, $scope.getPromotedData);
             })
         };
         $scope.loadMore = function () {
