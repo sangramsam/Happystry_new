@@ -42,7 +42,6 @@ angular.module('Happystry.controllers')
                 $scope.totalPosts=response.data.post_count;
             }, function (response) {
             });
-            $scope.busy = false;
         }
 
         loadPost();
@@ -117,11 +116,6 @@ angular.module('Happystry.controllers')
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
                 //console.log("filter hashTag",$scope.getPostData, $scope.getPromotedData);
             })
-        };
-        $scope.loadMore = function () {
-            $scope.busy = true;
-            console.log("called lazy loading");
-            loadPost();
         };
 
 
