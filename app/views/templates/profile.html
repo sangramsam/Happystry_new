@@ -1,0 +1,190 @@
+<div class="margin-t-50" >
+    <div class="container-medium clearfix profile-responsive">
+        <div class="profile-details-holder">
+            <div class="profile_cover_loader"style="display: none;width:100%;position: absolute;height: 100%;z-index: 2;background: url(/assets/pages/images/happystry.gif) no-repeat scroll 50% 50% #fff;"></div>
+            <div class="profile-cover image-holder">
+                <input type="file" name="file" id="coverpic" ng-model="coverimg" onchange="angular.element(this).scope().uploadFile(this.files);this.value = null;return false;"/>
+                <label ng-if="getProfileDetails.user_details[0].user_own == 1" for="coverpic">
+                    <img src="<?php echo PAGE_IMAGES_PATH ?>/camera.png" alt="">
+                </label>
+                <img ng-src="{{getProfileDetails.user_details[0].cover_image}}" alt="" />
+            </div>
+            <div class="overlay"></div>
+            <div class="profile-dp-details">
+                <div class="profile-holder">
+                    <a>
+                        <div class="progress-wrapper progress-nwrap">
+                            <round-progress
+                                    max="max"
+                                    current="getProfileDetails.user_details[0].percentile"
+                                    color="{{ getColor()}}"
+                                    bgcolor="{{ bgColor}}"
+                                    radius="50"
+                                    semi="isSemi"
+                                    rounded="rounded"
+                                    stroke="{{ stroke}}"
+                                    clockwise="clockwise"
+                                    responsive="responsive"
+                                    duration="{{ duration}}"
+                                    animation="{{ currentAnimation}}"
+                                    offset="{{ offset}}"
+                                    animation-delay="{{ animationDelay}}"
+                                    on-render="showPrecisseCurrent"
+                            >
+                            </round-progress>
+                        </div>
+                        <img ng-src="{{getProfileDetails.user_details[0].profile_image}}" alt="" />
+                    </a>
+                </div>
+                <div class="dp-address">
+                    <div class="name">
+                        <h4>{{getProfileDetails.user_details[0].name}}</h4>
+                    </div>
+                    <div class="store-name">
+                        <h5>{{getProfileDetails.user_details[0].shop_name}}</h5>
+                    </div>
+                    <div class="address">
+                        <p>{{getProfileDetails.user_details[0].address1}} {{getProfileDetails.user_details[0].address2}} {{getProfileDetails.user_details[0].city}} {{getProfileDetails.user_details[0].pincode}} {{getProfileDetails.user_details[0].state}} {{getProfileDetails.user_details[0].country}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="uniqueUrl">
+            <h4 ng-if="getProfileDetails.user_details[0].happy_handler == null && getProfileDetails.user_details[0].user_own == 1">
+                Create your happystry profile URL. <span ng-click="createUrl()">Create Now</span>
+            </h4>
+            <h4 ng-if="getProfileDetails.user_details[0].happy_handler != null">
+                Profile: <a class="light-grey">
+                <?php echo APP_SOURCE; ?>#/profile/{{getProfileDetails.user_details[0].happy_handler}}</a>
+            </h4>
+        </div>
+        <div class="profile-info-strip">
+            <ul>
+                <li>
+                    <div class="profile-holder">
+                        <h4 ><span class="sprite gift"></span> Dlites: <span>
+                                {{getProfileDetails.user_details[0].current_points}}
+                            </span>
+                        </h4>
+                    </div>
+                </li>
+                <li>
+                    <div class="profile-holder percentile-hold">
+                        <h4><span class="sprite percentile-icon"></span>
+                            Percentile:
+                            <span class="percentile">
+                                <div class="progress-wrapper">
+                                    <round-progress
+                                            max="max"
+                                            current="getProfileDetails.user_details[0].percentile"
+                                            color="{{ getColor()}}"
+                                            bgcolor="{{ bgColor}}"
+                                            radius="{{ radius}}"
+                                            semi="isSemi"
+                                            rounded="rounded"
+                                            stroke="{{ stroke}}"
+                                            clockwise="clockwise"
+                                            responsive="responsive"
+                                            duration="{{ duration}}"
+                                            animation="{{ currentAnimation}}"
+                                            offset="{{ offset}}"
+                                            animation-delay="{{ animationDelay}}"
+                                            on-render="showPrecisseCurrent"
+                                    >
+                                    </round-progress>
+                                </div>
+                                {{getProfileDetails.user_details[0].percentile| number:0}}
+                            </span></h4>
+                    </div>
+                </li>
+                <li>
+                    <h4 id="user-followers" ng-click="getFollowers(getProfileDetails.user_details[0].user_id)" class=" cursor-pointer" ><span>{{getProfileDetails.user_details[0].total_followers}}</span> Followers</h4>
+                </li>
+                <li>
+                    <h4 id="user-following" ng-click="getFollowing(getProfileDetails.user_details[0].user_id)" class="cursor-pointer" >{{getProfileDetails.user_details[0].total_following}} Following</h4>
+                </li>
+                <li ng-if="getProfileDetails.user_details[0].user_own == 1"  class="follow-unfollow">
+                    <a ng-href="#/editprofile"><div  ng-class="getProfileDetails.user_details[0].user_own == 1 ? 'bluebtn-edit' : ''" >
+                        Edit Profile
+                    </div>
+                    </a>
+                </li>
+                <li ng-click="userFollow($event, getProfileDetails.user_details[0].user_id)" ng-if="getProfileDetails.user_details[0].user_own != 1" class="follow-unfollow">
+                    <a ng-if="getProfileDetails.user_details[0].user_follow != 1" class="cursor-pointer"><div class="cursor-pointer">Follow</div></a>
+                    <a ng-if="getProfileDetails.user_details[0].user_follow == 1" class="cursor-pointer"><div class="cursor-pointer unfollow">Following</div></a>
+                    <!--<a ng-click="writeMsg(getProfileDetails.user_details[0].user_id)" class="sprite message-icon cursor-pointer m-lt-10"></a>-->
+                </li>
+                <li ng-hide="logged_res" ng-if="getProfileDetails.user_details[0].user_own != 1"><a ng-click="writeMsg(getProfileDetails.user_details[0].user_id)" class="sprite message-icon cursor-pointer m-lt-10"></a></li>
+            </ul>
+
+            <div ng-if="getProfileDetails.user_details[0].aboutme" class="abtMe"><h4 class="bold">Bio</h4><p>{{getProfileDetails.user_details[0].aboutme}} </p></div>
+        </div>
+        <div class="post-card-holder">
+            <ul class="dynamic-grid grid prof-grid postfeeds_flex in_profile" ag-id="getProfileDetails" ng-init="loadMoreProfShots()">
+                <li  ng-repeat="item in getProfileDetails.posts" class="wow posts" my-posts ng-if="item.user_report == 0"></li>
+            </ul>
+            <!--<div  class="loader margin-t-15" ng-show="loader"><img src=">loader.gif" alt="" /></div>-->
+            <div class="loader ng-hide" ng-show="loader">
+                <div id="loader">
+                    <span></span>
+                </div></div>
+        </div>
+    </div>
+</div>
+<div id="followers" class="popup follow" style="display: none">
+    <h3>Followers</h3>
+    <div class="card">
+        <div ng-if="getFollowersPopupData" class="header-hold" ng-repeat="l in getFollowersPopupData">
+            <div class="profile-holder">
+                <a ng-click="closeFollowingPopup()" href="#/profile/{{l.user_id}}"><img ng-src="{{l.profile_image}}" alt="" style="width: 38px;" class="img-loaded"></a>
+            </div>
+            <div class="profile-details">
+                <h4 class="ng-binding"><a ng-click="closeFollowingPopup()"  href="#/profile/{{l.user_id}}">{{l.name}}</a></h4>
+            </div>
+            <div ng-click="userFollow($event, l.user_id)" class="transbutton" ng-if="l.own_user == 0">
+                <a ng-if="l.user_follow != 1" class="cursor-pointer"><div >Follow</div></a>
+                <a ng-if="l.user_follow == 1" class="cursor-pointer"><div class="unfollow">Following</div></a>
+            </div>
+        </div>
+        <!--<div class="loader text-center" ng-show="loader"><img src="loader.gif" alt="" /></div>-->
+        <div class="loader ng-hide" ng-show="loader">
+            <div id="loader">
+                <span></span>
+            </div></div>
+        <div ng-if="getFollowersPopupData.length === 0">No Data</div>
+    </div>
+</div><!--followers popup-->
+
+<div id="following" class="popup follow" style="display: none">
+    <h3>Following</h3>
+    <div class="card">
+        <div ng-if="getFollowingPopupData" class="header-hold" ng-repeat="l in getFollowingPopupData">
+            <div class="profile-holder">
+                <a ng-click="closeFollowingPopup()" href="#/profile/{{l.user_id}}"><img ng-src="{{l.profile_image}}" alt="" style="width: 38px;" class="img-loaded"></a>
+            </div>
+            <div class="profile-details">
+                <a ng-click="closeFollowingPopup()" href="#/profile/{{l.user_id}}"><h4 class="ng-binding">{{l.name}}</h4></a>
+            </div>
+            <div ng-click="userFollow($event, l.user_id)" class="transbutton"  ng-if="l.own_user == 0">
+                <a ng-if="l.user_follow != 1" class="cursor-pointer"><div>Follow</div></a>
+                <a ng-if="l.user_follow == 1" class="cursor-pointer"><div  class="unfollow" >Following</div></a>
+            </div>
+        </div>
+        <!--<div class="loader text-center" ng-show="loader"><img src="loader.gif" alt="" /></div>-->
+        <div class="loader ng-hide" ng-show="loader">
+            <div id="loader">
+                <span></span>
+            </div></div>
+        <div ng-if="getFollowingPopupData.length === 0">No data</div>
+    </div>
+</div><!--followers popup-->
+
+<div id="create-url" class="popup" style="display: none">
+    <h3>Create your happystry profile url</h3>
+    <div class="uniq-url-hold">
+        <?php echo APP_SOURCE; ?>#profile/<input type="text" id="u-url" maxlength="30" ng-model="uniqUrl"/>
+        <div id="urlerror" class="error"></div>
+    </div>
+    <button class="btn btn-success" ng-click="checkUrlAvail(uniqUrl)" type="submit" >Post</button>
+</div><!--create-url popup-->
