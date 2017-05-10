@@ -5,13 +5,13 @@
     <div class="menu left">
         <div class="menu-left">
             <ul class="clearfix">
-                <li><a ng-click="refreshtimePage()" href="" ng-hide="logged_res">
+                <li><a  ui-sref="timeline.post" ui-sref-opts="{reload: true}" ng-hide="logged_res">
                             <span class="logo-holder">
                                 <img class="hidden-xs" src="app/images/happystry-logo.png" alt="" />
                                 <img class="hidden-sm hidden-md hidden-lg" src="app/images/mobile-logo.png" alt="" />
                             </span>
                 </a>
-                    <a ng-click="refreshtimePage()" href="" ng-show="logged_res">
+                    <a ui-sref="timeline.post" ui-sref-opts="{reload: true}" ng-show="logged_res">
                             <span class="logo-holder">
                                 <img class="hidden-xs" src="app/images/happystry-logo.png" alt="" />
                                 <img class="hidden-sm hidden-md hidden-lg" src="app/images/mobile-logo.png" alt="" />
