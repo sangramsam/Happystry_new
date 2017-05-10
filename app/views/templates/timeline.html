@@ -19,22 +19,7 @@
 <!--
                 <span ng-if="geoGlobal != ''"><a>Near me<span ng-click="removeNearMe()" class="sprite small-close-icon"></span></a></span>
 -->
-                <span><a ui-sref="timeline" ui-sref-opts="{reload: true}">{{tag || collection}}<span class="sprite small-close-icon"></span></a></span>
-            </div>
-        </div>
-        <div id="searchCH" class="post-card-holder">
-            <ul class="dynamic-grid grid margin-b-30 postfeeds_flex in_timeline" ag-id="postdata">
-                <li ng-repeat="item in getPostData| unique: 'post_id' |  filter:{ user_report: 0}  track by $id($index)" class="posts wow " my-posts  ></li>
-                <li ng-repeat="item in getPromotedData| unique: 'post_id' |  filter:{ user_report: 0}  track by $id($index)" class="posts wow " my-posts ng-show="item.user_report == 0" ></li>
-            </ul>
-            <div class="loadmore-relative"></div>
-            <div class="loader ng-hide" ng-show="loadmore">
-                <div id="loader">
-                    <span></span>
-                </div></div>
-            <div class="no-search-results" ng-if="getPostData.length == 0 && getPromotedData.length == 0">
-                <span class="sprite no-search-icons"></span>
-                <h4>No results found</h4>
+                <span><a ui-sref="timeline.post" ui-sref-opts="{reload: true}">{{tag || collection}}<span class="sprite small-close-icon"></span></a></span>
             </div>
         </div>
     </div>
@@ -259,7 +244,7 @@
             </ul>
         </div>
     </div>
-    <div  ng-if="!isDesc && !searchurl && !isBookmark" ng-cloak class="clearfix">
+    <div  ng-cloak class="clearfix">
         <div class="posts-holder" id="postFeeds">
             <ul class="dynamic-grid grid postfeeds_flex in_timeline hidden-lg hidden-md promobottom">
                 <li ng-repeat="item in getPromotedData| unique: 'post_id' |  filter:{ user_report: 0} track by $id($index)" class="posts wow " my-posts  on-finish-render="ngRepeatFinished"></li>

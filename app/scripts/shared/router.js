@@ -73,8 +73,7 @@ angular.module('Happystry.router', [])
                         templateUrl: '/app/views/controlDashboard.html'
                     },
                     'body@timeline': {
-                        templateUrl:"/app/views/templates/dashboard.html",
-                        controller:'autoselect'
+                        templateUrl:"/app/views/templates/dashboard.html"
                     }
 
                 }

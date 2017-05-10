@@ -213,5 +213,8 @@ angular.module('Happystry.controllers').controller('timelineController', ['Setti
 
             return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
         };
+        $scope.$on('$destroy', function() {
+            $document.unbind('scroll');
+        });
     }]);
 
