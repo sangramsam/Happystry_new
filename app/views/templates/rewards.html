@@ -1,0 +1,106 @@
+<div class="margin-t-50"  style="margin-top: 77px;!important;">
+    <div class="container-medium">
+        <div class="card reward-margin">
+            <div class="row padding-0-15 tab-hold">
+                <div class="col-md-5">
+                    <ul class="tab-btns">
+                        <li><a href="" ng-class="voucher ? 'active' : ''" ng-click="voucher = true;
+                            history = false">Delights</a></li>
+                        <li ng-hide="logged_res" ng-click="redeemHistory()"><a href="" ng-class="history ? 'active' : ''" ng-click="history = true;
+                            voucher = false">My Delights</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="margin-t-15" ng-show="voucher">
+    <div class="container-medium">
+        <div class="row">
+            <div  ng-if="getRewardsData.length != 0"class="col-md-4" ng-repeat="item in getRewardsData">
+                <div class="reward-hold">
+                    <div class="card">
+                        <div class="img-hold">
+                            <img ng-src="{{item.voucher_img}}" style="width: 100%" alt="" />
+                        </div>
+                        <div class="reward-content">
+                            <div ng-if="item.reward_title.length < limitTitle">
+                                <p class="reward-title">{{item.reward_title| limitTo:limitTitle}}</p>
+                            </div>
+                            <div ng-if="item.reward_title.length > limitTitle">
+                                <p class="reward-title">{{item.reward_title| limitTo:limitTitle}}..</p>
+                            </div>
+                            <div ng-if="item.subtext.length < limitSubtext">
+                                <p class="reward-date">{{item.subtext| limitTo:limitSubtext}}</p>
+                            </div>
+                            <div ng-if="item.subtext.length > limitSubtext">
+                                <p class="reward-date">{{item.subtext| limitTo:limitSubtext}}...</p>
+                            </div>
+                        </div>
+                        <div class="redeemer">
+                            <a ui-sref=".rewardDetails({id:item.reward_id})" class="redeem-count full"> View </a>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div ng-if="getRewardsData.length == 0">
+                <div class="empty-state">
+                    <img src="/app/images/no-rewards.png" alt="" />
+                    <h6 class="bold margin-t-20">Sorry!!</h6>
+                    <h6>You have not received any Delights</h6>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="margin-t-15"  ng-show="history">
+    <div class="container-medium">
+        <div class="row">
+            <div ng-if="getRedeemHistoryData.length != 0" class="col-md-4" ng-repeat="item in getRedeemHistoryData">
+                <div class="reward-hold">
+                    <div class="card">
+                        <div class="img-hold">
+                            <img ng-src="{{item.voucher_img}}" style="width: 100%" alt="" />
+                        </div>
+                        <div class="reward-content">
+                            <!--                            <p class="reward-title">{{item.reward_title}}</p>
+                                                        <p class="reward-date">{{item.subtext}}</p>-->
+                            <div ng-if="item.reward_title.length < limitTitle">
+                                <p class="reward-title">{{item.reward_title| limitTo:limitTitle}}</p>
+                            </div>
+                            <div ng-if="item.reward_title.length > limitTitle">
+                                <p class="reward-title">{{item.reward_title| limitTo:limitTitle}}..</p>
+                            </div>
+                            <div ng-if="item.subtext.length < limitSubtext">
+                                <p class="reward-date">{{item.subtext| limitTo:limitSubtext}}</p>
+                            </div>
+                            <div ng-if="item.subtext.length > limitSubtext">
+                                <p class="reward-date">{{item.subtext| limitTo:limitSubtext}}...</p>
+                            </div>
+                        </div>
+                        <div class="redeemer">
+                            <a ng-href="#/rewardsdetails/{{item.reward_id}}" class="redeem-count full"> View </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="getRedeemHistoryData.length == 0">
+                <div class="empty-state">
+                    <img src="/app/images/no-rewards.png" alt="" />
+                    <h6 class="bold margin-t-20">Sorry!!</h6>
+                    <h6>You have not received any Delights</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

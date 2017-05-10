@@ -38,10 +38,45 @@ angular.module('Happystry.services')
             });
             return deferred.promise;
         };
+        function userData() {
+            var user_id=localStorage.getItem("user_id");
+            console.log("userid",user_id);
+            var header='';
+            if(user_id){
+                header={
+                    'Content-Type': 'application/json',
+                    'User-Id':user_id,
+                    'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'
+                }
+            }else{
+                 header={
+                    'Content-Type': 'application/json',
+                    'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'
+                }
+            }
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: Settings.BASE_URL+ 'user',
+                headers:header
+            }).then(function (response, status, headers, config) {
+                deferred.resolve({
+                    status: status,
+                    data: response.data
+                });
+            }, function (response, status, headers, config) {
+                deferred.reject({
+                    status: status,
+                    data: response.data
+                });
+            });
+            return deferred.promise;
+        };
 
 
         return {
-            verifyUser: verifyUser
+            verifyUser: verifyUser,
+            userData:userData
         }
 
     });

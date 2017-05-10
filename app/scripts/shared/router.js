@@ -91,6 +91,32 @@ angular.module('Happystry.router', [])
 
                 }
 
+            }).state('timeline.reward', {
+             url: "/rewards",
+                views: {
+                    '': {
+                        templateUrl: '/app/views/controlDashboard.html'
+                    },
+                    'container@timeline': {
+                        templateUrl:"/app/views/templates/rewards.html",
+                        controller:'rewardsdetailsController'
+                    }
+
+                }
+
+            }).state('timeline.reward.rewardDetails', {
+             url: "/rewardDetails/:id",
+                views: {
+                    '': {
+                        templateUrl: '/app/views/controlDashboard.html'
+                    },
+                    'container@timeline': {
+                        templateUrl:"/app/views/templates/rewardDetails.html",
+                        controller:'rewardsdetailsController'
+                    }
+
+                }
+
             })
             .state('timeline.post.search', {
                 url: '/search/hashtag/:tag',
@@ -126,7 +152,7 @@ angular.module('Happystry.router', [])
                 controller: "PostDetailsCtrl"
             })
 
-        $urlRouterProvider.otherwise("/Home");
+        $urlRouterProvider.otherwise("/");
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: false

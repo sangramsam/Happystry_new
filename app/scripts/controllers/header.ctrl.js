@@ -49,6 +49,20 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
             })
         }
         verifyUser();
+        //get userDetail
+        UserVerify.userData().then(function (response) {
+            if (response.data.logged === false) {
+                $rootScope.logged_res = true;
+            } else {
+                if (response.data.profile) {
+                    $scope.defaultLoc = response.data.profile.personal[0].current_location;
+                    $scope.getEditProfileData = response.data.profile.personal[0];
+                    $scope.getUserLat = response.data.profile.personal[0].location_lat;
+                    $scope.getUserLng = response.data.profile.personal[0].location_lng;
+                    $scope.businessEditData = response.data.profile.business[0];
+                }
+            }
+        })
         //logout
         $scope.appLogout = function () {
             logOut.logout().then(function (response) {

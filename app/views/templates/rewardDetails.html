@@ -1,0 +1,23 @@
+<div class="margin-t-90" >
+    <div class="container-medium clearfix"  >
+        <div class="page-title-holder">
+            <h3>Delight Details</h3>
+        </div>
+        <div class="rewards-details-holder">
+            <div class="card">
+                <div class="image-holder">
+                    <img ng-src="{{getRewardInnerData.voucher_img}}" alt=""/>
+                </div>
+                <div class="details">
+                    <h3>{{getRewardInnerData.reward_title}}</h3>
+                    <h5>{{getRewardInnerData.subtext}}</h5>
+                    <div class="redeemed" ng-show="getRewardInnerData.redeemed === 1">
+                        <h4>Details for redeeming delight has been sent to your mail id. Please check your inbox.</h4>
+                        <p>Didn't received email? <a class="cursor-pointer">Click here</a> to resend</p>
+                    </div>
+                    <p>{{getRewardInnerData.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
