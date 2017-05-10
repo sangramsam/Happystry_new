@@ -1,5 +1,5 @@
-angular.module('Happystry.controllers').controller('headerController', ['$scope','$state', 'logOut', 'UserVerify', 'Settings', 'ezfb', '$rootScope', '$http', '$timeout', '$window', 'roundProgressService', '$compile', 'commonService', '$location', 'angularGridInstance', '$localStorage', 'dynamicNotifications','OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService',
-    function ($scope,$state, logOut, UserVerify, Settings, ezfb, $rootScope, $http, $timeout, $window, roundProgressService, $compile, commonService, $location, angularGridInstance, $localStorage, dynamicNotifications,OTP, OTPVerify, CountryCode, FacebookService, LoginService) {
+angular.module('Happystry.controllers').controller('headerController', ['$scope','$state', 'logOut','notify', 'UserVerify', 'Settings', 'ezfb', '$rootScope', '$http', '$timeout', '$window', 'roundProgressService', '$compile', 'commonService', '$location', 'angularGridInstance', '$localStorage', 'dynamicNotifications','OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService',
+    function ($scope,$state, logOut,notify, UserVerify, Settings, ezfb, $rootScope, $http, $timeout, $window, roundProgressService, $compile, commonService, $location, angularGridInstance, $localStorage, dynamicNotifications,OTP, OTPVerify, CountryCode, FacebookService, LoginService) {
         $rootScope.logged_res = false;
         $scope.otpNo='';
         $scope.loggin_pop = function (e) {
@@ -322,6 +322,7 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
                 }
             });
         };
-
+        dynamicNotifications.notifyNow();
+        //notification
 
     }]);

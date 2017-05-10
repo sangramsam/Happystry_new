@@ -104,6 +104,32 @@ angular.module('Happystry.router', [])
 
                 }
 
+            }).state('timeline.notificationViewall', {
+             url: "/notifications",
+                views: {
+                    '': {
+                        templateUrl: '/app/views/controlDashboard.html'
+                    },
+                    'container@timeline': {
+                        templateUrl:"/app/views/templates/notification.html",
+                        controller:'notificationsController'
+                    }
+
+                }
+
+            }).state('timeline.message', {
+             url: "/message/:id",
+                views: {
+                    '': {
+                        templateUrl: '/app/views/controlDashboard.html'
+                    },
+                    'container@timeline': {
+                        templateUrl:"/app/views/templates/message.html",
+                        controller:'messagesController'
+                    }
+
+                }
+
             }).state('timeline.reward.rewardDetails', {
              url: "/rewardDetails/:id",
                 views: {

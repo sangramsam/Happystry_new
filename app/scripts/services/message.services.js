@@ -15,7 +15,7 @@ angular.module('Happystry.services').service('msgServices', function (Settings) 
         },
         this.notifyReadFxn = function (data) {
             for (i in notifyList) {
-                if (notifyList[i].user_id == data.user_id) {
+                if (notifyList[i].user_id === data.user_id) {
                     notifyList[i].msgcount = 0;
                 }
             }

@@ -1,10 +1,11 @@
 angular.module('Happystry.services').service('dynamicNotifications', function ($http, $rootScope, msgServices,Settings) {
     return {
         notifyNow: function () {
+            var user_id=localStorage.getItem("user_id");
             $http({
                 method: 'GET',
                 url: Settings.BASE_URL + "rewards/usersmsg",
-                headers: {'Content-Type': 'application/json', 'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'}
+                headers: {'Content-Type': 'application/json', 'User-Id':user_id, 'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'}
             }).then(function successCallback(response) {
                 if (response.data.logged == false) {
                 } else {
@@ -21,7 +22,7 @@ angular.module('Happystry.services').service('dynamicNotifications', function ($
             return $http({
                 method: 'GET',
                 url: Settings.BASE_URL + "rewards/notification?call=0",
-                headers: {'Content-Type': 'application/json', 'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'}
+                headers: {'Content-Type': 'application/json', 'User-Id':user_id, 'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'}
             }).then(function successCallback(response) {
                 $rootScope.getNotificationData1 = response.data.notification;
                 if ($rootScope.getNotificationData1.length > 0) {

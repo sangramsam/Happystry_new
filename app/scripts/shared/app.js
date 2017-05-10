@@ -21,7 +21,9 @@ angular.module('Happystry', [
     'ngStorage',
     'angular.filter',
     'angular-img-cropper',
-    'infinite-scroll'
+    'infinite-scroll',
+    'timeIntervalDirectives',
+    'timeIntervalServices'
 ]).config(function (ezfbProvider) {
     ezfbProvider.setInitParams({
         appId: '312638455759153'

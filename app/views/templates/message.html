@@ -1,0 +1,77 @@
+<div class="margin-t-90" >
+    <div class="container-medium clearfix"  >
+        <div class="page-title-holder">
+            Messages    </div>
+        <div class="msg-row row">
+
+            <div class="col-md-5 c-list-holder" ng-if="getNotificationDataAll.length > 0">
+                <div class="rewards-details-holder">
+                    <div class="card">
+                        <div class="notifications-holder">
+                            <ul class="msg-hold">
+                                <li ng-repeat="data in getNotificationDataAll" >
+                                    <a ng-click="pickMessage(data.user_id, $event)" id="user_{{data.user_id}}" ng-class="(data.msgcount == 0) ? 'read' : 'unread'; loggedinUser == data.user_id ? 'activeEle' : ''" class="cursor-pointer">
+                                        <div class="profile-holder">
+                                            <img ng-src="{{data.profile_image}}" alt="" style="width: 38px;" class="img-loaded">
+                                        </div>
+                                        <div class="profile-details">
+                                            <h6>
+                                                <span class="location ng-binding"><strong>{{data.name}}<span class="comment-time" ng-if="data.messages"><abbr><time-ago from-time='{{data.cret_date}}'></time-ago></abbr></span></strong><i>{{data.messages}}</i></span>
+                                                <span class="notification" ng-if="data.msgcount > 0">{{data.msgcount}}</span>
+                                            </h6>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 msg-holder">
+                <div class="msg-box" ng-if="msgBox">
+                    <div class="msg-box-header">
+                        <div class="profile-holder">
+                            <a href="#/profile/{{getMsgContact.user_id}}"><img ng-src="{{getMsgContact.profile_image}}" alt="" width='30px' class="img-circle"></a>
+                        </div>
+                        <div class="profile-details">
+                            <a href="#/profile/{{getMsgContact.user_id}}"><span class="msg-name">{{getMsgContact.name}}</span></a>
+                            <span class="msg-block-hold" uib-dropdown="" keyboard-nav="" class="dropdown">
+                            <span class="msg-block-text" ng-if="getMsgContact.you_block == 1">You are not allowed to message</span>
+                            <span class="msg-block-text" ng-if="getMsgContact.contact_block == 1">You are not allowed to message</span>
+                                <!--<span class="msg-block-text">You can not message this user</span>-->
+                            <i class="sprite downarrow-icon" ng-if="getMsgContact.contact_block == 0" aria-hidden="true" uib-dropdown-toggle="" class="dropdown-toggle"></i>
+                            <ul class="dropdown-menu msg-dropdown" ng-if="getMsgContact.contact_block == 0" uib-dropdown-menu="" role="menu" aria-nglabelledby="simple-btn-keyboard-nav">
+                                <li ng-if="getMsgContact.you_block == 0" role="menuitem" ng-click="msgContBlock(getMsgContact.you_block, getMsgContact.user_id)">block contact</li>
+                                <li ng-if="getMsgContact.you_block == 1" role="menuitem" ng-click="msgContBlock(getMsgContact.you_block, getMsgContact.user_id)">Unblock contact</li>
+                            </ul>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="msg-box-content" >
+                        <div class="msg-box-hold clearfix" ng-repeat="data in getMsgBox| reverseOrder">
+                            <div class="msg-hold" ng-class="(data.me == 1) ? 'right' : 'left'" >
+                                <p>{{data.message}}</p>
+                                <span><abbr><time-ago from-time='{{data.cret_date}}'></time-ago></abbr></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="msg-box-footer">
+                        <div class="input-group">
+                            <textarea type="text" ng-model="$parent.ownMessage" class="form-control msg-input "placeholder="Type message" ng-keyup="$event.keyCode == 13 && !$event.shiftKey && msgSendClick(ownMessage, getMsgContact.you_block, getMsgContact.contact_block)"></textarea>
+                            <span class="input-group-btn ">
+                            <button class="btn btn-msg" ng-disabled="(getMsgContact.you_block == 1) || (getMsgContact.contact_block == 1)" ng-click="msgSendClick(ownMessage, getMsgContact.you_block, getMsgContact.contact_block)"  type="button"><img src="/app/images/btn-msg.png" width="17px"></button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="getNotificationDataAll.length == 0">
+                <div class="empty-state">
+                    <img src="/app/images/no-message.png" alt="" />
+                    <h6 class="bold margin-t-20">Sorry!!</h6>
+                    <h6>No messages</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

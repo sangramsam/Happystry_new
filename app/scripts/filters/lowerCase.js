@@ -4,3 +4,9 @@ angular.module('Happystry.filters').filter("lowercasenospace", function () {
         return str.toLowerCase();
     }
 });
+angular.module('Happystry.filters').filter('reverseOrder', function () {
+    return function (items) {
+        return items.slice().reverse();
+    };
+});
+

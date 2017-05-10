@@ -1,0 +1,31 @@
+<div class="margin-t-90" >
+    <div class="container-medium clearfix"  >
+        <div class="page-title-holder">
+            <h3>Notifications</h3>
+        </div>
+        <div class="rewards-details-holder">
+            <div class="card">
+                <div class="notifications-holder">
+                    <ul>
+                        <li ng-repeat="n in getNotificationDataAll" ng-click="notified(n)">
+                            <a ng-class="(n.status === 'S') ? 'read' : 'unread'">
+                                <div class="profile-holder">
+                                    <img ng-if="n.profile_image != 'Image'" ng-src="{{n.profile_image}}" alt="" style="width: 38px;" class="img-loaded">
+                                    <img ng-if="n.profile_image == 'Image'" ng-src="<?php echo PAGE_IMAGES_PATH ?>unknown.png" alt="" style="width: 38px;" class="img-loaded img-circle">
+                                </div>
+                                <div class="profile-details">
+                                    <h6>
+                                    <span class="location ng-binding clearfix"><strong>{{n.name}}
+                                            <span class="comment-time"><abbr><time-ago from-time='{{n.mod_date}}'></time-ago></abbr></span>
+                                        </strong> {{n.content}}
+                                    </span>
+                                    </h6>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

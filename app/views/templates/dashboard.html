@@ -51,8 +51,8 @@
                     <span class="customSpanMobile hidden-sm hidden-md hidden-lg">Rewards</span>
                 </a>
             </li>
-            <li  class="main-menu on-clk diffInMob moretop"  ng-hide="logged_res==true"> <!--ng-controller="notificationsController"-->
-                <a href="" class="sprite notification-icon">
+            <li  class="main-menu on-clk diffInMob moretop"  ng-hide="logged_res==true"  ng-controller="notificationsController"> <!---->
+                <a href="" class="sprite notification-icon" ng-click="getNo()">
                     <span id="mybadge" ng-class="(getNotificationData1.length > 0) ? 'badge' : ''"></span>
                     <span class="customSpanMobile hidden-sm hidden-md hidden-lg">Notifications</span>
                 </a>
@@ -99,15 +99,12 @@
                     </ul>
                     <div ng-if="getNotificationData1.length > 0;
                         getNotificationDataAll.length > 0" class="menu-footer">
-                        <a class="cursor-pointer" ng-href="#/notifications">View all</a>
+                        <a class="cursor-pointer" ui-sref=".notificationViewall">View all</a>
                     </div>
-                    <!--                        <div ng-if="getNotificationDataAll.length != 0" class="menu-footer">
-                                                <a class="cursor-pointer" ng-href="#/notifications">View all</a>
-                                            </div>-->
                 </div>
             </li>
-            <li  class="main-menu on-clk diffInMob moretop20"   ng-hide="logged_res==true"> <!--ng-controller="messagesController"-->
-                <a class="sprite message-icon cursor-pointer">
+            <li  class="main-menu on-clk diffInMob moretop20"   ng-hide="logged_res==true" ng-controller="messagesController">
+                <a class="sprite message-icon cursor-pointer" ng>
                     <span id="mybadge" ng-class="(msgnotify1 > 0) ? 'badge' : ''"></span>
                     <span class="customSpanMobile hidden-sm hidden-md hidden-lg">Messages</span>
                 </a>
@@ -119,7 +116,7 @@
                         <li><div class="menu-arrow-top"></div></li>
                         <li ng-if="getNotificationDataAll1.length == 0">
                             <div class="empty-state">
-                                <img src="<?php echo PAGE_IMAGES_PATH ?>/no-message.png" alt="" />
+                                <img src="/app/images/no-message.png" alt="" />
                                 <div>
                                     <h6 class="bold">Sorry!!</h6>
                                     <h6>No messages</h6>
@@ -127,7 +124,7 @@
                             </div>
                         </li>
                         <li ng-if="getNotificationDataAll1.length > 0" ng-repeat="data in getNotificationDataAll1" >
-                            <a ng-click="pickMessage(data.user_id)" ng-class="(data.msgcount == 0) ? 'read' : 'unread'" class="cursor-pointer">
+                            <a ui-sref=".message({id:data.user_id})" ng-class="(data.msgcount == 0) ? 'read' : 'unread'" class="cursor-pointer">
                                 <div class="profile-holder">
                                     <img ng-src="{{data.profile_image}}" alt="" style="width: 38px;" class="img-loaded img-circle">
                                 </div>
@@ -141,7 +138,7 @@
                         </li>
                     </ul>
                     <div ng-if="getNotificationDataAll1.length > 0" class="menu-footer">
-                        <a class="cursor-pointer" ng-click="viewMsgAll()">View all</a>
+                        <a class="cursor-pointer" ui-sref=".message({id:data.user_id})">View all</a>
                     </div>
                 </div>
             </li><!--message notification--> <!--ng-click="(logged_res) ? loggin_pop($event) : ''"-->
