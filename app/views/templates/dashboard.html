@@ -152,10 +152,10 @@
                             <span class="sprite notification-icon"><span id="mybadge" class="badge" ng-if="getNotificationData1.length != 0"></span></span>Notifications</a></li>
                         <!--ng-controller="messagesController"--> <li ><a class="cursor-pointer hidden-sm hidden-md hidden-lg" ng-click="viewMsgAll()">
                             <span class="sprite message-icon"><span id="mybadge" class="badge" ng-if="msgnotify1 != 0"></span></span>Messages</a></li>
-                        <li><a style="text-overflow: ellipsis;max-width: 170px; overflow: hidden; white-space: nowrap;" ng-href="#/profile/{{getEditProfileData.user_id}}"><span class="sprite user-small-icon"></span>{{getEditProfileData.name}} </a></li>
+                        <li><a style="text-overflow: ellipsis;max-width: 170px; overflow: hidden; white-space: nowrap;" ui-sref=".profile({id:getEditProfileData.user_id})"><span class="sprite user-small-icon"></span>{{getEditProfileData.name}} </a></li>
                         <li><a leadership-popup class="cursor-pointer" ><span class="sprite leader-board-icon"></span>Leaderboard</a></li>
                         <li><a href="#/bookmark"><span class="sprite bookmark-icon"></span>Bookmarks</a></li>
-                        <li><a href="#/editprofile"><span class="sprite settings-icon"></span>Settings</a></li>
+                        <li><a ui-sref="timeline.editProfile"><span class="sprite settings-icon"></span>Settings</a></li>
                         <li><a ng-click="appLogout()" class="cursor-pointer"><span class="sprite logout-icon"></span>Logout</a></li>
                     </ul>
                 </div>
@@ -194,14 +194,8 @@
 </div>
 <div id="leader-board" class="popup" style="display: none">
     <div class="clearfix border-btm"><h3 class="pull-left">Leaderboard</h3>
-        <!--            <select class="pull-right" name="" id="" ng-model="d"  ng-change="setLocation(d)">
-                    <option value=""  >
-                        <option>All</option>
-                        <option ng-repeat="d in allLocation"  ng-selected="d.me == 1">{{d.current_location}}</option>
-                </select>-->
         <select class="pull-right" ng-options="item as item.current_location for item in allLocation| orderBy:'current_location'" ng-model="myselect" ng-change="setLocation(myselect)">
         </select>
-
     </div>
     <div class="card" >
         <div class="row-hold" ng-repeat="lead in getleaderDataResult">

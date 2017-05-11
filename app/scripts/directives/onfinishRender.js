@@ -8,3 +8,14 @@ angular.module('Happystry.directives').directive('onFinishRender', function ($ti
         }
     }
 });
+
+angular.module('Happystry.directives').directive("leadershipPopup", [function () {
+    return {
+        restrict: "A",
+        link: function ($scope, element, attrs) {
+            element.bind('click', function () {
+                $.fancybox("#leader-board");
+            });
+        }
+    };
+}]);

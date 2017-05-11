@@ -1,7 +1,7 @@
 <div class="card" id="postcard_{{item.post_id}}">
     <div class="header-hold">
         <div class="profile-holder">
-            <a href="#/profile/{{item.user_id}}">
+            <a ui-sref="timeline.profile({id:item.user_id})">
                 <div class="progress-wrapper">
                     <!--<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>-->
                     <round-progress
@@ -27,7 +27,7 @@
             </a>
         </div>
         <div class="profile-details">
-            <a href="#/profile/{{item.user_id}}"><h4>{{item.name}}</h4></a>
+            <a ui-sref="timeline.profile({id:item.user_id})"><h4>{{item.name}}</h4></a>
             <h6 class="lmt-loc">
                 <span class="location">{{item.location}}</span>
             </h6>

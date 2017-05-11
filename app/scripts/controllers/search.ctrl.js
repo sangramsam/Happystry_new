@@ -1,8 +1,8 @@
 /**
  * Created by appy-tech-18 on 5/5/17.
  */
-angular.module('Happystry.controllers').controller('searchController', ['$scope','$window','$document','$stateParams', '$http','ViewService','ViewService2',
-function ($scope,$window,$document,$stateParams, $http,ViewService,ViewService2) {
+angular.module('Happystry.controllers').controller('searchController', ['$scope','$window','$document','$stateParams','$state', '$http','ViewService','ViewService2',
+function ($scope,$window,$document,$stateParams,$state, $http,ViewService,ViewService2) {
     $scope.allusers = false;
     $scope.allposts = true;
 
@@ -87,8 +87,10 @@ function ($scope,$window,$document,$stateParams, $http,ViewService,ViewService2)
         var footer_distance = 80;
         var document_height = $(document).height();
         console.log("scroll");
-        var relative = $('.loadmore-relative').offset().top;
-
+        var relative='';
+        if($state.current.name.split('.')[2]==='search'){
+            var relative = $('.loadmore-relative').offset().top;
+        }
         if (($('.loadmore-relative').isOnScreen() === true || $(this).scrollTop() >= relative) && scroll === true &&  ($scope.pageFlag <= $scope.totalPosts)) {
             console.log("scroll called !!");
             scroll = false;

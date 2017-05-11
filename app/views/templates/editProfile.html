@@ -1,0 +1,143 @@
+<div class="margin-t-50" style=" margin: 72px!important;" >
+    <div class="container-medium clearfix">
+        <div class="card custom-space">
+            <form name="myForm"  novalidate>
+                <div class="title">
+                    <h4>Profile settings</h4>
+                    <div class="edit-holder editBtn" ng-model="editBtn" ng-show="editPrf" ng-click="editPrf = !editPrf; editClk($event)">
+                        <div class="edit">
+                            <span class="sprite edit-icon"></span>
+                        </div>
+                        <div class="edit-button">
+                            <span>Edit Profile</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <div class="fieldholder">
+                        <label for="">Name</label>
+                        <h5 ng-show="editPrf">{{getEditProfileData.name}}</h5>
+                        <div ng-show="!editPrf">
+                            <input type="text" id="name" name="myName" class="form-control"  value="{{getEditProfileData.name}}" placeholdet="{{getEditProfileData.name}}" maxlength="30" required/>
+                            <span id="error_name" class="error"></span>
+
+                        </div>
+                    </div>
+                    <div class="fieldholder">
+                        <label for="">City</label>
+                        <h5 ng-show="editPrf">{{getEditProfileData.current_location}}</h5>
+                        <div ng-show="!editPrf">
+                            <input type="hidden" id="location_chan" value="{{getEditProfileData.current_location}}">
+                            <input type="hidden" id="location_lat" value="{{getEditProfileData.location_lat}}">
+                            <input type="hidden" id="location_lng" value="{{getEditProfileData.location_lng}}">
+                            <input type="text" id="loc" class="form-control" ng-autocomplete="result1" details="details1" options="options1" ng-model="location" value="{{getEditProfileData.current_location}}" placeholder="Please enter your city (Bangalore, Delhi)" required ng-click="auto_loca()"/>
+                            <span id="error_loc" class="error"></span>
+                        </div>
+                    </div>
+                    <div class="fieldholder">
+                        <label for="">E-mail Id</label>
+                        <h5>{{getEditProfileData.email}}</h5>
+                    </div>
+                    <div class="fieldholder noborder ">
+                        <label for="">Phone number</label>
+                        <div ng-show="editPrf">
+                            <h5 ng-if="getEditProfileData.mobile_code" class="country-code" ng-show="editPrf">{{getEditProfileData.mobile_code}}</h5>
+                            <h5 ng-if="!getEditProfileData.mobile_code" class="country-code" ng-show="editPrf">IND(91)</h5>
+                            <h5 class="phone-num" ng-show="editPrf">{{getEditProfileData.mobile}}</h5>
+                        </div>
+
+                        <div ng-show="!editPrf" class="code-mob">
+                            <!--<select ng-show="!editPrf || !show" ng-options="item as item.phonecode for item in countryData" ng-model="selCode" id="countrycode" ng-change="showSelCode(selCode)" class="form-control ng-hide"></select>-->
+                            <select ng-show="!editPrf || !show" id="countrycode" ng-change="showSelCode(selCode)" ng-model="selCode" class="form-control ng-hide">
+                                <option ng-repeat="item in countryData | orderBy:'iso3'" value="{{item.phonecode}}" ng-selected="item.phonecode == selCode">{{item.iso3}}({{item.phonecode}})</option>
+                            </select>
+                            <input type="text" id="mobile" class="form-control" value="{{getEditProfileData.mobile}}" minlength="10" maxlength="10" required/>
+                            <span id="error_phone" class="error"></span>
+                        </div>
+                    </div>
+                    <div class="fieldholder">
+                        <label for="">Gender</label>
+                        <h5 >{{getEditProfileData.gender}}</h5>
+                    </div>
+                    <div class="fieldholder">
+                        <label for="">Bio</label>
+                        <h5 ng-show="editPrf">{{getEditProfileData.aboutme}}</h5>
+                        <textarea ng-show="!editPrf" type="text" id="aboutme" class="form-control" maxlength="120">{{getEditProfileData.aboutme}}</textarea>
+                    </div>
+                </div>
+                <div class="title">
+                    <h4>Business</h4>
+                    <p class="mrgtop" ng-show="show">Enter all details once to add your business to Happystry</p>
+                    <div class="edit-holder editBtn" ng-model="editBtn" ng-show="show" ng-click="show = !show; editClk($event); addClk($event)">
+                        <div class="edit">
+                            <span class="sprite add-icon"></span>
+                        </div>
+                        <div class="edit-button">
+                            <span>Add</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-section" ng-show="!show">
+                    <div class="fieldholder">
+                        <h3>Give a name to your shop</h3>
+                        <label for="">Store name</label>
+                        <h5 ng-show="editPrf || show">{{businessEditData.shop_name}}</h5>
+                        <input ng-show="!editPrf || !show" type="text" id="shop-name" class="form-control" value="{{businessEditData.shop_name}}" maxlength="80" required/>
+                        <span id="error_shopname" class="error"></span>
+                    </div>
+                    <div class="fieldholder">
+                        <label for="">Preferred Currency</label>
+                        <h5 ng-show="editPrf || show">{{businessEditData.currency}}</h5>
+                        <select ng-show="!editPrf || !show"  ng-model="selCurr" id="currency" ng-change="showSelCurr(selCurr)" class="form-control ng-hide">
+                            <option ng-repeat="item in currencyData" value="{{item.currency_code}}" ng-selected="item.currency_code == selCurr">{{item.currency_code}}</option>
+                        </select>
+                        <!--<select ng-show="!editPrf || !show" ng-options="item as  for item in currencyData"></select>-->
+                        <span id="error_currency" class="error"></span>
+                    </div>
+                    <div class="fieldholder">
+                        <h3>Add address</h3>
+                        <label for="">Address1</label>
+                        <h5 ng-show="editPrf || show">{{businessEditData.address1}}</h5>
+                        <input ng-show="!editPrf || !show" type="text" id="address1" class="form-control" value="{{businessEditData.address1}}" maxlength="40" required/>
+                        <span id="error_address1" class="error"></span>
+                    </div>
+                    <div class="fieldholder">
+                        <label for="">Address2</label>
+                        <h5 ng-show="editPrf || show">{{businessEditData.address2}}</h5>
+                        <input ng-show="!editPrf || !show" type="text" id="address2" class="form-control" value="{{businessEditData.address2}}" maxlength="40" required/>
+                    </div>
+                    <div class="fieldholder">
+                        <label for="">Country</label>
+                        <h5 ng-show="editPrf || show">{{businessEditData.country}}</h5>
+                        <input ng-show="!editPrf || !show" type="text" id="country" class="form-control" value="{{businessEditData.country}}" maxlength="25" required/>
+                        <span id="error_country" class="error"></span>
+                    </div>
+                    <div class="fieldholder">
+                        <label for="">State</label>
+                        <h5 ng-show="editPrf || show">{{businessEditData.state}}</h5>
+                        <input ng-show="!editPrf || !show" type="text" id="state" class="form-control" value="{{businessEditData.state}}" maxlength="25" required/>
+                        <span id="error_state" class="error"></span>
+                    </div>
+                    <div class="fieldholder">
+                        <label for="">City</label>
+                        <h5 ng-show="editPrf || show">{{businessEditData.city}}</h5>
+                        <input ng-show="!editPrf || !show" type="text" id="city" class="form-control" value="{{businessEditData.city}}" maxlength="25" required/>
+                        <span id="error_city" class="error"></span>
+                    </div>
+                    <div class="fieldholder">
+                        <label for="">Pin</label>
+                        <h5 ng-show="editPrf || show">{{businessEditData.pincode}}</h5>
+                        <input ng-show="!editPrf || !show" type="text" id="pin" class="form-control" value="{{businessEditData.pincode}}" maxlength="10" required/>
+                        <span id="error_pin" class="error"></span>
+                    </div>
+                </div>
+                <div class="button-holder clearfix" ng-show="!editPrf || !show" >
+                    <ul>
+                        <li ><button class="btn btn-success" type="submit" ng-click="saveProfileData(getEditProfileData.name, getEditProfileData.mobile, getEditProfileData.location, businessEditData.shop_name, businessEditData.address1, businessEditData.city, businessEditData.state, businessEditData.pincode, $event)" >Save</button></li>
+                        <li><button class="btn btn-default" ng-click="cancelSave()">Cancel</button></li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
