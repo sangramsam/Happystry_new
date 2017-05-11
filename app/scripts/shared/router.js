@@ -169,6 +169,19 @@ angular.module('Happystry.router', [])
 
             }
 
+        }).state('timeline.bookmark', {
+            url: "/bookmark",
+            views: {
+                '': {
+                    templateUrl: '/app/views/controlDashboard.html'
+                },
+                'container@timeline': {
+                    templateUrl: "/app/views/templates/bookmark.html",
+                    controller: 'bookmark'
+                }
+
+            }
+
         }).state('timeline.reward.rewardDetails', {
             url: "/rewardDetails/:id",
             views: {

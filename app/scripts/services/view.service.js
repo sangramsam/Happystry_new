@@ -1,13 +1,4 @@
 'use strict';
-
-/**
- *services/view.service.js
- * ===========
- * This service is created to use provide service to view controller.
- *
- * @class Happystry.services.ViewService
- * @author Anand Tiwari <anand.tiwari@appinessworld.com>
- */
 angular.module('Happystry.services')
     .factory('ViewService', function ($http, Settings, $state, Properties, roundProgressService, $log, $q) {
 
@@ -188,7 +179,27 @@ angular.module('Happystry.services')
             });
         }
 
-
+        function getBookmark(page) {
+            var deferred = $q.defer();
+            var user_id=localStorage.getItem("user_id");
+            $http({
+                method: 'GET',
+                url: Settings.BASE_URL + 'bookmarks?page=' + page,
+                headers: {'Content-Type': 'application/json', 'HAPPI-API-KEY': "TRR36-PDTHB-9XBHC-PPYQK-GBPKQ",'User-Id':user_id}
+            }).then(function (response, status, headers, config) {
+                deferred.resolve({
+                    status: status,
+                    data: response.data
+                });
+            }, function (response, status, headers, config) {
+                deferred.reject({
+                    status: status,
+                    data: response.data
+                });
+            });
+            return deferred.promise;
+            
+        }    
         return {
             getTrendingHashTag: getTrendingHashTag,
             getCollections: getCollections,
@@ -197,7 +208,8 @@ angular.module('Happystry.services')
             roundProgressInitialization: roundProgressInitialization,
             getFilterCollections: getFilterCollections,
             getFilterHashTag: getFilterHashTag,
-            getFilterLocation:getFilterLocation
+            getFilterLocation:getFilterLocation,
+            getBookmark:getBookmark
         };
 
     });

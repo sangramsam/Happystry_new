@@ -154,7 +154,7 @@
                             <span class="sprite message-icon"><span id="mybadge" class="badge" ng-if="msgnotify1 != 0"></span></span>Messages</a></li>
                         <li><a style="text-overflow: ellipsis;max-width: 170px; overflow: hidden; white-space: nowrap;" ui-sref=".profile({id:getEditProfileData.user_id})"><span class="sprite user-small-icon"></span>{{getEditProfileData.name}} </a></li>
                         <li><a leadership-popup class="cursor-pointer" ><span class="sprite leader-board-icon"></span>Leaderboard</a></li>
-                        <li><a href="#/bookmark"><span class="sprite bookmark-icon"></span>Bookmarks</a></li>
+                        <li><a ui-sref="timeline.bookmark"><span class="sprite bookmark-icon"></span>Bookmarks</a></li>
                         <li><a ui-sref="timeline.editProfile"><span class="sprite settings-icon"></span>Settings</a></li>
                         <li><a ng-click="appLogout()" class="cursor-pointer"><span class="sprite logout-icon"></span>Logout</a></li>
                     </ul>
