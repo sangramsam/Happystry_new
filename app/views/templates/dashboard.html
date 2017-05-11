@@ -163,6 +163,112 @@
         </ul>
     </div>
 </header>
+    <div id="leader-board" class="popup" style="display: none">
+        <div class="clearfix border-btm"><h3 class="pull-left">Leaderboard</h3>
+            <select class="pull-right" ng-options="item as item.current_location for item in allLocation| orderBy:'current_location'" ng-model="myselect" ng-change="setLocation(myselect)">
+            </select>
+        </div>
+        <div class="card" >
+            <div class="row-hold" ng-repeat="lead in getleaderDataResult">
+                <div ng-if="lead.me == 0">
+                    <div class="index">
+                        <p>{{lead.rank}}</p>
+                    </div>
+                    <div class="header-hold">
+                        <div ng-click="profileCLk(lead.user_id)" class="profile-holder cursor-pointer">
+                            <img ng-src="{{lead.profile_image}}" alt="" style="width: 38px;" class="img-loaded">
+                        </div>
+                        <div ng-click="profileCLk(lead.user_id)" class="profile-details cursor-pointer">
+                            <h4>{{lead.name}}</h4>
+                        </div>
+                        <div class="profile-holder second percentile-hold">
+                            <h4 class="bold"><span class="sprite percentile-icon">
+                                </span>
+                                <span class="percentile">
+                                    <div class="progress-wrapper">
+                                        <!--<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>-->
+                                        <round-progress
+                                                max="max"
+                                                current="current"
+                                                color="{{ getColor()}}"
+                                                bgcolor="{{ bgColor}}"
+                                                radius="{{ radius}}"
+                                                semi="isSemi"
+                                                rounded="rounded"
+                                                stroke="{{ stroke}}"
+                                                clockwise="clockwise"
+                                                responsive="responsive"
+                                                duration="{{ duration}}"
+                                                animation="{{ currentAnimation}}"
+                                                offset="{{ offset}}"
+                                                animation-delay="{{ animationDelay}}"
+                                                on-render="showPrecisseCurrent"
+                                                ng-init="current = lead.percentile">
+                                            </round-pssrogress>
+                                    </div>
+                                    <i>{{lead.percentile| number:0}}</i></span></h4>
+                        </div>
+                        <div class="profile-holder second">
+                            <h5 class="bold"><span class="sprite gift"></span><span class="reward-pts">{{lead.current_points}}</span></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="orange"  ng-if="lead.me == 1">
+                    <div class="index">
+                        <p>{{lead.rank}}</p>
+                    </div>
+                    <div class="header-hold">
+                        <div  ng-click="profileCLk()" ui-sref="timeline.profile({id:lead.user_id})" class="profile-holder cursor-pointer">
+                            <img ng-src="{{lead.profile_image}}" alt="" style="width: 38px;" class="img-loaded">
+                        </div>
+                        <div ng-click="profileCLk()" ui-sref="timeline.profile({id:lead.user_id})" class="profile-details cursor-pointer">
+                            <h4>{{lead.name}}</h4>
+                        </div>
+                        <div class="profile-holder second percentile-hold">
+                            <h4 class="bold"><span class="sprite percentile-icon"></span>
+                                <span class="percentile">
+                                    <div class="progress-wrapper">
+                                        <!--<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>-->
+                                        <round-progress
+                                                max="max"
+                                                current="current"
+                                                color="{{ getColor()}}"
+                                                bgcolor="{{ bgColor}}"
+                                                radius="{{ radius}}"
+                                                semi="isSemi"
+                                                rounded="rounded"
+                                                stroke="{{ stroke}}"
+                                                clockwise="clockwise"
+                                                responsive="responsive"
+                                                duration="{{ duration}}"
+                                                animation="{{ currentAnimation}}"
+                                                offset="{{ offset}}"
+                                                animation-delay="{{ animationDelay}}"
+                                                on-render="showPrecisseCurrent"
+                                                ng-init="current = lead.percentile">
+                                            </round-pssrogress>
+                                    </div>
+                                    <i>{{lead.percentile| number:0}}</i></span></h4>
+                        </div>
+                        <div class="profile-holder second">
+                            <h5 class="bold"><span class="sprite gift"></span><span class="reward-pts">{{lead.current_points}}</span></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="getleaderDataResult == 0">
+                <div class="empty-state">
+                    <!--<img src="<?php echo PAGE_IMAGES_PATH ?>/no-rewards.png" alt="" />-->
+                    <h6 class="bold margin-t-20"> No Data</h6>
+                    <!--<h6>You have not received any rewards</h6>-->
+                </div>
+            </div>
+        </div>
+        <div ng-if="rankingCount > 5;
+            rankingCount != getleaderDataResult.length;" class="header-hold loadMore cursor-pointer" ng-click="loadMore($event, myselect)"><a>Loadmore <img src="/app/images/load.png" alt="" /></a></div>
+        <!--        <div ng-if="items.length != 0; "  class="header-hold loadMore cursor-pointer" ng-click="loadMore($event)"><a>Load More...</a></div>
+                <div ng-if="getleaderData.length != 0" class="header-hold loadMore cursor-pointer" ng-click="loadMore($event)"><a>Load More...</a></div>-->
+    </div>
 </div>
 
 <div>
@@ -192,112 +298,7 @@
         </div>
     </div>
 </div>
-<div id="leader-board" class="popup" style="display: none">
-    <div class="clearfix border-btm"><h3 class="pull-left">Leaderboard</h3>
-        <select class="pull-right" ng-options="item as item.current_location for item in allLocation| orderBy:'current_location'" ng-model="myselect" ng-change="setLocation(myselect)">
-        </select>
-    </div>
-    <div class="card" >
-        <div class="row-hold" ng-repeat="lead in getleaderDataResult">
-            <div ng-if="lead.me == 0">
-                <div class="index">
-                    <p>{{lead.rank}}</p>
-                </div>
-                <div class="header-hold">
-                    <div ng-click="profileCLk(lead.user_id)" class="profile-holder cursor-pointer">
-                        <img ng-src="{{lead.profile_image}}" alt="" style="width: 38px;" class="img-loaded">
-                    </div>
-                    <div ng-click="profileCLk(lead.user_id)" class="profile-details cursor-pointer">
-                        <h4>{{lead.name}}</h4>
-                    </div>
-                    <div class="profile-holder second percentile-hold">
-                        <h4 class="bold"><span class="sprite percentile-icon">
-                                </span>
-                            <span class="percentile">
-                                    <div class="progress-wrapper">
-                                        <!--<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>-->
-                                        <round-progress
-                                                max="max"
-                                                current="current"
-                                                color="{{ getColor()}}"
-                                                bgcolor="{{ bgColor}}"
-                                                radius="{{ radius}}"
-                                                semi="isSemi"
-                                                rounded="rounded"
-                                                stroke="{{ stroke}}"
-                                                clockwise="clockwise"
-                                                responsive="responsive"
-                                                duration="{{ duration}}"
-                                                animation="{{ currentAnimation}}"
-                                                offset="{{ offset}}"
-                                                animation-delay="{{ animationDelay}}"
-                                                on-render="showPrecisseCurrent"
-                                                ng-init="current = lead.percentile">
-                                            </round-pssrogress>
-                                    </div>
-                                    <i>{{lead.percentile| number:0}}</i></span></h4>
-                    </div>
-                    <div class="profile-holder second">
-                        <h5 class="bold"><span class="sprite gift"></span><span class="reward-pts">{{lead.current_points}}</span></h5>
-                    </div>
-                </div>
-            </div>
-            <div class="orange"  ng-if="lead.me == 1">
-                <div class="index">
-                    <p>{{lead.rank}}</p>
-                </div>
-                <div class="header-hold">
-                    <div ng-click="profileCLk(lead.user_id)" class="profile-holder cursor-pointer">
-                        <img ng-src="{{lead.profile_image}}" alt="" style="width: 38px;" class="img-loaded">
-                    </div>
-                    <div ng-click="profileCLk(lead.user_id)" class="profile-details cursor-pointer">
-                        <h4>{{lead.name}}</h4>
-                    </div>
-                    <div class="profile-holder second percentile-hold">
-                        <h4 class="bold"><span class="sprite percentile-icon"></span>
-                            <span class="percentile">
-                                    <div class="progress-wrapper">
-                                        <!--<div class="progress ng-cloak" ng-style="getStyle()">{{ lead.percentile}}%</div>-->
-                                        <round-progress
-                                                max="max"
-                                                current="current"
-                                                color="{{ getColor()}}"
-                                                bgcolor="{{ bgColor}}"
-                                                radius="{{ radius}}"
-                                                semi="isSemi"
-                                                rounded="rounded"
-                                                stroke="{{ stroke}}"
-                                                clockwise="clockwise"
-                                                responsive="responsive"
-                                                duration="{{ duration}}"
-                                                animation="{{ currentAnimation}}"
-                                                offset="{{ offset}}"
-                                                animation-delay="{{ animationDelay}}"
-                                                on-render="showPrecisseCurrent"
-                                                ng-init="current = lead.percentile">
-                                            </round-pssrogress>
-                                    </div>
-                                    <i>{{lead.percentile| number:0}}</i></span></h4>
-                    </div>
-                    <div class="profile-holder second">
-                        <h5 class="bold"><span class="sprite gift"></span><span class="reward-pts">{{lead.current_points}}</span></h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ng-if="getleaderDataResult == 0">
-            <div class="empty-state">
-                <!--<img src="<?php echo PAGE_IMAGES_PATH ?>/no-rewards.png" alt="" />-->
-                <h6 class="bold margin-t-20"> No Data</h6>
-                <!--<h6>You have not received any rewards</h6>-->
-            </div>
-        </div>
-    </div>
-    <div ng-if="rankingCount > 5;
-            rankingCount != getleaderDataResult.length;" class="header-hold loadMore cursor-pointer" ng-click="loadMore($event, myselect)"><a>Loadmore <img src="<?php echo PAGE_IMAGES_PATH ?>/load.png" alt="" /></a></div>
-    <!--        <div ng-if="items.length != 0; "  class="header-hold loadMore cursor-pointer" ng-click="loadMore($event)"><a>Load More...</a></div>
-            <div ng-if="getleaderData.length != 0" class="header-hold loadMore cursor-pointer" ng-click="loadMore($event)"><a>Load More...</a></div>-->
-</div><!--leaderboard-->
+<!--leaderboard-->
     <div id="contactInfo" class="popup" style="display: none" >
         <div class="pop-header">
             <figure>

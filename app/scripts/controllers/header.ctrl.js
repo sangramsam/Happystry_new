@@ -60,9 +60,82 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
                     $scope.getUserLat = response.data.profile.personal[0].location_lat;
                     $scope.getUserLng = response.data.profile.personal[0].location_lng;
                     $scope.businessEditData = response.data.profile.business[0];
+                    UserVerify.userLeaderboard($scope.getUserLat,$scope.getUserLng).then(function successCallback(response) {
+                        start_val = 1;
+                        console.log("leader",response);
+                        $scope.rankingCount = response.data.leaderboard.ranking_count;
+                        var getleaderDataLoc = response.data.leaderboard.location;
+                        var getleaderDataLoc1 = response.data.leaderboard.ranking;
+                        $scope.getleaderDataLoc = response.data.leaderboard.location;
+                        $rootScope.allLocation = [];
+                        angular.forEach(response.data.leaderboard.location, function (v, k) {
+                            $rootScope.allLocation.push(v);
+                        });
+                        $scope.allLocation.push({'current_location': 'All'});
+                        angular.forEach($scope.allLocation, function (v, k) {
+                            if (v.current_location.indexOf($scope.defaultLoc) > -1) {
+                                $scope.myselect = $scope.allLocation[k];
+                            }
+                        });
+                        $scope.getleaderDataResult = response.data.leaderboard.ranking;
+                    }, function errorCallback(response) {});
                 }
             }
         })
+        //leardership
+        $scope.profileCLk = function (id) {
+            $.fancybox.close('#leader-board');
+        }
+        $scope.card = true;
+        $scope.setLocation = function (val) {
+            $scope.card = true;
+            start_val = 1;
+            if (val.current_location == 'All') {
+                var allSel = 'All';
+                UserVerify.userLeaderboardbyLocation(allSel).then(function successCallback(response) {
+                    $scope.rankingCount = response.data.leaderboard.ranking_count;
+                    $scope.getleaderDataResult = response.data.leaderboard.ranking;
+                    $scope.resultLength = $scope.getleaderDataResult.length;
+                }, function errorCallback(response) {});
+            } else {
+                $scope.getUserLat = val.location_lat;
+                $scope.getUserLng = val.location_lng;
+                UserVerify.userLeaderboard($scope.getUserLat,$scope.getUserLng).then(function successCallback(response) {
+                    $scope.rankingCount = response.data.leaderboard.ranking_count;
+                    $scope.getleaderDataResult = response.data.leaderboard.ranking;
+                }, function errorCallback(response) {});
+            }
+        }
+        $scope.loadMore = function (event, myselect) {
+            if (myselect.current_location == 'All') {
+                UserVerify.lazyLeaderboardbyLocation(start_val).then(function (items) {
+                    $scope.rankingCount = items.data.leaderboard.ranking_count;
+                    var data = items.data.leaderboard.ranking;
+                    if (start_val == 1) {
+                        $scope.getleaderDataResult = data;
+                    } else {
+                        // Append the items to the list
+                        $scope.nextItems = data;
+                        $scope.getleaderDataResult = ($scope.getleaderDataResult).concat($scope.nextItems);
+                    }
+                    start_val += 10;
+                });
+            } else {
+                UserVerify.userLeaderboardForLazy(myselect.location_lat,myselect.location_lng,start_val).then(function (items) {
+                    $scope.rankingCount = items.data.leaderboard.ranking_count;
+                    var data = items.data.leaderboard.ranking;
+                    if (start_val == 1) {
+                        $scope.getleaderDataResult = data;
+                    } else {
+                        // Append the items to the list
+                        $scope.nextItems = data;
+                        $scope.getleaderDataResult = ($scope.getleaderDataResult).concat($scope.nextItems);
+                    }
+                    start_val += 10;
+                });
+            }
+        };
+
         //logout
         $scope.appLogout = function () {
             logOut.logout().then(function (response) {
@@ -323,6 +396,69 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
             });
         };
         dynamicNotifications.notifyNow();
-        //notification
 
+        //cricular progressbar
+        $scope.max = 100;
+        $scope.offset = 0;
+        $scope.timerCurrent = 0;
+        $scope.uploadCurrent = 0;
+        $scope.stroke = 2;
+        $scope.radius = 17;
+        $scope.isSemi = false;
+        $scope.rounded = false;
+        $scope.responsive = false;
+        $scope.clockwise = true;
+        $scope.currentColor = '#f47354';
+        $scope.bgColor = '#ccc';
+        $scope.duration = 800;
+        $scope.currentAnimation = 'easeOutCubic';
+        $scope.animationDelay = 0;
+        $scope.animations = [];
+
+        angular.forEach(roundProgressService.animations, function (value, key) {
+            $scope.animations.push(key);
+        });
+        $scope.getStyle = function () {
+            var transform = ($scope.isSemi ? '' : 'translateY(-50%)') + 'translateX(-50%)';
+            return {
+                'top': $scope.isSemi ? 'auto' : '50%',
+                // 'bottom': $scope.isSemi ? '5%' : 'auto',
+                'left': '50%',
+                'transform': transform,
+                '-moz-transform': transform,
+                '-webkit-transform': transform,
+                // 'font-size': $scope.radius/3.5 + 'px'
+                'font-size': 15 + 'px'
+            };
+        };
+        $scope.getColor = function () {
+            return $scope.gradient ? 'url(#gradient)' : $scope.currentColor;
+        };
+        $scope.showPreciseCurrent = function (amount) {
+
+
+            $timeout(function () {
+                if (amount <= 0) {
+                    $scope.preciseCurrent = $scope.current;
+                } else {
+                    var math = $window.Math;
+                    $scope.preciseCurrent = math.min(math.round(amount), $scope.max);
+                }
+            });
+        };
+        var getPadded = function (val) {
+            return val < 10 ? ('0' + val) : val;
+        };
+        //circular progress bar
+        $scope.searchClick = function (event) {
+            if (angular.element(event.currentTarget).hasClass('active')) {
+                angular.element(event.currentTarget).removeClass('active');
+            } else {
+                angular.element(event.currentTarget).addClass('active');
+            }
+        };
+        $scope.profileCLk = function (id) {
+            $.fancybox.close('#leader-board');
+            $location.path('/profile/' + id);
+        }
     }]);
