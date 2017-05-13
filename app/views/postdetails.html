@@ -1,4 +1,4 @@
-<div class="margin-t-40 social-fix">
+<div class="margin-t-40 social-fix" style="margin-top: 63px;">
     <style type="text/css">
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
             display: none !important;
@@ -12,7 +12,7 @@
                         <div class="card mar-rt-7">
                             <div class="header-hold drop-position">
                                 <div class="profile-holder">
-                                    <a href="#/profile/{{postdetails.posts[0].user_id}}">
+                                    <a ui-sref="timeline.profile({id:postdetails.posts[0].user_id})">
                                         <div class="progress-wrapper">
                                             <round-progress
                                                 max="roundProgress.max"
@@ -36,7 +36,7 @@
                                     </a>
                                 </div>
                                 <div class="profile-details">
-                                    <a href="#/profile/{{postdetails.posts[0].user_id}}"><h4>{{postdetails.posts[0].name}}</h4></a>
+                                    <a ui-sref="timeline.profile({id:postdetails.posts[0].user_id})"><h4>{{postdetails.posts[0].name}}</h4></a>
                                     <h6>
                                         <span ng-if="postdetails.posts[0].cret_date != nan">
                                             {{ postdetails.posts[0].cret_date | timeago}}
@@ -63,7 +63,7 @@
                                 <a ng-repeat="thumb in postdetails.posts[0].post_image track by $index" rel="detailsGallery1" class="fancybox" ng-href="{{thumb}}" ng-show="$first">
                                     <img ng-src="{{postdetails.posts[0].post_image[0]}}" alt="" />
                                     <span class="top-img" ng-show="postdetails.posts[0].promoted == 'Y'">
-                                        <img src="../../../../assets/pages/images/featured.png" alt="image" class="for-promoted-icon img-responsive"/>
+                                        <img src="/app/images/featured.png" alt="image" class="for-promoted-icon img-responsive"/>
                                     </span>
                                 </a>
                                 <div class="thumbnial-img" ng-if="postdetails.posts[0].post_image.length > 1">

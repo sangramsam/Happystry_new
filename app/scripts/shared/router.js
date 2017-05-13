@@ -65,9 +65,7 @@ angular.module('Happystry.router', [])
                     controller: 'aboutUs'
                 }
             }
-        })
-
-            .state('timeline', {
+        }).state('timeline', {
                 views: {
                     '': {
                         templateUrl: '/app/views/controlDashboard.html'
@@ -222,14 +220,26 @@ angular.module('Happystry.router', [])
 
             }
 
-        })
-            .state('postdetails', {
+        })/*.state('postdetails', {
                 url: "/postdetails/:post_id",
                 templateUrl: "/app/views/postdetails.html",
                 title: 'postdetails',
                 controller: "PostDetailsCtrl"
-            })
+            })*/
+            .state('timeline.postdetails', {
+                url: "/postdetails/:post_id",
+                views: {
+                    '': {
+                        templateUrl: '/app/views/controlDashboard.html'
+                    },
+                    'container@timeline': {
+                        templateUrl: "/app/views/postdetails.html",
+                        controller: "PostDetailsCtrl"
+                    }
 
+                }
+
+            })
         $urlRouterProvider.otherwise("/");
         $locationProvider.html5Mode({
             enabled: true,

@@ -23,7 +23,7 @@ angular.module('Happystry', [
     'angular-img-cropper',
     'infinite-scroll',
     'timeIntervalDirectives',
-    'timeIntervalServices'
+    'timeIntervalServices', '720kb.socialshare'
 ]).config(function (ezfbProvider) {
     ezfbProvider.setInitParams({
         appId: '312638455759153'
