@@ -46,7 +46,7 @@
                                 </div>
                                 <!--<span ng-click="writeMsg()" class="sprite message-icon cursor-pointer msg-icon"></span>-->
                                 <div ng-hide="logged_res" class="post-options">
-                                    <span ng-if="postdetails.posts[0].own_post == 0" ng-click="writeMsg(postdetails.posts[0].user_id)" class="sprite message-icon cursor-pointer msg-icon"></span>
+                                    <span ng-if="postdetails.posts[0].own_post == 0" ui-sref="timeline.message({id:postdetails.posts[0].user_id})" class="sprite message-icon cursor-pointer msg-icon"></span>
                                     <div uib-dropdown keyboard-nav>
                                         <div id="simple-btn-keyboard-nav" type="button" uib-dropdown-toggle>
                                             <span class="sprite downarrow-icon"></span>
@@ -134,7 +134,7 @@
                                     <p compile="postdetails.posts[0].description"></p>
                                 </div>
                                 <div class="tags">
-                                    <span ng-repeat="coll in postdetails.posts[0].collections" ng-if="coll != ''"><a class="cursor-pointer" ng-click="searchChash(coll)">{{coll}}</a></span>
+                                    <span ng-repeat="coll in postdetails.posts[0].collections" ng-if="coll != ''"><a class="cursor-pointer"  ui-sref="timeline.post.search({tag:coll})">{{coll}}</a></span>
                                 </div>
                                 <div ng-show="postdetails.posts[0].for_sale == 'Y'" class="premium-details-holder">
                                     <ul>
@@ -155,11 +155,11 @@
                             <div class="post-comment-holder">
                                 <div class="header-hold commentSection new-comment-hold" ng-repeat="cmnt in postdetailsCmts | orderBy: 'comment_id' ">
                                     <div class="profile-holder">
-                                        <a href="#/profile/{{cmnt.user_id}}">
+                                        <a  ui-sref="timeline.profile({id:cmnt.user_id})">
                                             <img ng-src="{{cmnt.profile_image}}" alt="" style="width: 38px; height: 38px;" /></a>
                                     </div>
                                     <div class="profile-details">
-                                        <a href="#/profile/{{cmnt.user_id}}"><h4>{{cmnt.name}}</h4></a>
+                                        <a ui-sref="timeline.profile({id:cmnt.user_id})"><h4>{{cmnt.name}}</h4></a>
                                         <h6>
                                             <abbr><time-ago from-time='{{cmnt.commented_time}}'></time-ago></abbr>
                                             <div class="post-options" ng-if="cmnt.edit == 1">
@@ -225,25 +225,11 @@
         </div>
     </div>
 </div>
-<!--<div id="delete-post" class="popup" style="display: none">
-    <h3>Delete Post</h3>
-    <h3>Do you really want to delete the post</h3>
-    <div class="button-holder clearfix" >
-        <ul>
-            <li><button class="btn btn-success" type="button"><a href="#/timeline"  ng-click="deletePost(postdetails.posts[0].post_id)">Delete</a></button></li>
-            <li><button class="btn btn-default" type="button" close-popup>Cancel</button></li>
-        </ul>
-    </div> 
-</div>-->
 <div id="delete-post" class="report" style="display: none" >
     <h3 class="text-center nomargin">Delete Post</h3>
     <div class="popup">
         <form class=" profile-section nopadding">
             <p class="pad-l-r-10">Do you really want to delete the post</p>
-            <!--                        <div class="btnHolder">
-                                        <button class="btn btn-success greebBtn" ng-click="reportPost(postdetails.posts[0].post_id)" >Continue</button>
-                                        <button class="btn btn-default" close-popup>Cancel</button>
-                                    </div>-->
             <div class="button-holder clearfix" >
                 <ul>
                     <li><button class="btn btn-success greebBtn" type="button" ng-click="deletePost(postdetails.posts[0].post_id)">Delete</button></li>

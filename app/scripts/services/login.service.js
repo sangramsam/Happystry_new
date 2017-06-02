@@ -9,7 +9,7 @@
  * @author Anand Tiwari <anand.tiwari@appinessworld.com>
  */
 angular.module('Happystry.services')
-    .factory('LoginService', function ($http, Settings,$state, $log, $q, $rootScope, ezfb,$window) {
+    .factory('LoginService', function ($http, Settings,$state, $log, $q, $rootScope, ezfb,$location) {
         function getLogin() {
             console.log('called Login');
             //var deferred = $q.defer();
@@ -92,10 +92,10 @@ angular.module('Happystry.services')
                                     } else {
                                         jQuery.fancybox.close();
                                         console.log("Login Success  !!!");
-                                        if(localStorage.getItem("path")){
-                                            /*$location.url(localStorage.getItem("path"));
-                                           window.location.reload();*/
-                                            $window.location.href=localStorage.getItem("path");
+                                        if(localStorage.getItem("postDetail")){
+                                            //$location.path(localStorage.getItem("postDetail"));
+                                            window.location.reload();
+                                            $window.location.href=localStorage.getItem("postDetail");
                                         }else {
                                             $state.go('timeline.post', {}, {reload: 'timeline.post'}, {inherit: false}, {notify: true});
                                             //$state.go('timeline');

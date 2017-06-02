@@ -58,7 +58,7 @@
                 </div>-->
 
         <div class="tags">
-            <span ng-repeat="coll in item.collections| limitTo:1 track by $index" ng-if="coll != ''" ><a class="cursor-pointer" ng-click="searchChash(coll)">{{coll}}</a></span>
+            <span ng-repeat="coll in item.collections| limitTo:1 track by $index" ng-if="coll != ''" ><a class="cursor-pointer" ui-sref="timeline.post.search({tag:coll})">{{coll}}</a></span>
         </div>
     </div> 
     <div class="like-comment-holder clearfix">

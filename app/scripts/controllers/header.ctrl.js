@@ -2,7 +2,7 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
     function ($scope,$state, logOut,notify, UserVerify, Settings, ezfb, $rootScope, $http, $timeout, $window, roundProgressService, $compile, commonService, $location, angularGridInstance, $localStorage, dynamicNotifications,OTP, OTPVerify, CountryCode, FacebookService, LoginService) {
         $rootScope.logged_res = false;
         $scope.otpNo='';
-        $scope.loggin_pop = function (e) {
+        $rootScope.loggin_pop = function (e) {
             jQuery.fancybox({
                 'href': '#loginPop',
                 'closeBtn': true,
@@ -146,6 +146,8 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
         }
         //login
         $rootScope.login = function () {
+            console.log(window.location.href);
+            localStorage.setItem("postDetail",window.location.href);
             LoginService.getLogin();
             CountryCode.getCountryCode().then(function (resposne) {
                 console.log("country code", resposne);

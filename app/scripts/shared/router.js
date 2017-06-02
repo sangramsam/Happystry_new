@@ -220,12 +220,7 @@ angular.module('Happystry.router', [])
 
             }
 
-        })/*.state('postdetails', {
-                url: "/postdetails/:post_id",
-                templateUrl: "/app/views/postdetails.html",
-                title: 'postdetails',
-                controller: "PostDetailsCtrl"
-            })*/
+        })
             .state('timeline.postdetails', {
                 url: "/postdetails/:post_id",
                 views: {
