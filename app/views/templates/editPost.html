@@ -1,0 +1,168 @@
+<div class="margin-t-50" style="margin-top: 70px;!important;" >
+    <div class="container-medium post-creation">
+        <form action="javascript:;" name="editPostForm" id="editPostForm" ng-submit="Formsave($event)" method="post" enctype="multipart/form-data">
+            <div class="crop-div-holder">
+                <div id="editing_page_loader" style="display: block;width: 100%;height: 300px;text-align: center;padding-top: 150px;"><img src="/app/images/happystry.gif"></div>
+                <div class="main-img" id="editing_page_images" style="display: none;">
+                    <div>
+                        <img ng-src="{{mains3files}}"   ng-click="getImage_data()" />
+                    </div>
+                    <div class="thumb-holder">
+                        <ul>
+                            <li ng-repeat="file in objs3files| limitTo:4 track by $index" ng-click="getImage_data()" id="{{$index}}" style="position: relative;">
+                                <img ng-src="{{file}}" name="file{{$index}}" class="img-responsive" alt="" />
+                            </li>
+                            <li ng-if="objs3files.length < 4" ng-click="getImage_data()" class="add-more-button">
+                                <label>
+                                    <img ng-src="/app/images/upload-image.png" alt=""  />
+                                    <h6>Add image</h6>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="post-sec-holder">
+                    <h3>Collections</h3>
+                    <div class="discription-holder">
+                        <div class="tags" >
+                            <div ng-repeat="coll in postdetailCollection" class="selectInp" >
+                                <input id="checkbox{{$index}}" class="checkbox-custom" ng-checked="true" ng-disabled="true" name="{{coll}}" type="checkbox"  ng-model="coll.winner"  ng-disabled="isChecked == limit && !coll.winner" >
+                                <label for="checkbox{{$index}}"  class="checkbox-custom-label"readonly><span >{{coll}}</span></label>
+                            </div>
+                            <div style="position: relative">
+                                <span class="error_collection error"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-sec-holder">
+                    <div class="tending-hold">
+                        <h4>Trending</h4>
+                        <span ng-repeat="h in getTrendingData" ng-click="hClick(h)" >#{{h.tag_name}} </span>
+                    </div>
+                    <span>
+                        <textarea  class="form-control" id="desc"  name="description" ng-model="descText" type="text">{{postdetailsDesc}}</textarea>
+                    </span>
+                </div>
+                <div class="post-sec-holder">
+                    <div class="info-hold" ng-show="loc">
+                        <span class="sprite grey-location-icon "></span>
+                        <label for="">At</label>
+                        <input type="text" name="location" id="location" ng-autocomplete="result" details="details" options="options" ng-model="location"  class="form-control" ng-click="auto_loca()">
+                        <span class="error-loc error"></span>
+                    </div>
+                    <div class="info-hold " ng-show="cart">
+                        <div class="pricehold">
+                            <span class="sprite grey-cart-icon"></span>
+                            <label for="">Price</label>
+                            <input type="text" maxlength="9" only-digits name="price" id="price" ng-model="price" value="0" class="form-control" placeholder="ex. 100"/>
+
+                        </div>
+                        <div class=" qtyhold">
+                            <label for="">Quantity</label>
+                            <input type="text" name="qty" id="qty" ng-model="qty"   value="0" class="form-control" placeholder="ex. Box of 5"/>
+                        </div>
+                        <i class="close-btn cursor-pointer fa fa-times" ng-click="cart = false"></i>
+                        <span class="error_forsale error"></span>
+                    </div>
+                    <div class="info-hold" ng-show="link">
+                        <span class="sprite grey-link-icon"></span>
+                        <label for="">Link</label>
+                        <input type="text" name="link" id="link" ng-model="hreflink"  class="form-control"/>
+
+                        <i class="close-btn cursor-pointer fa fa-times" ng-click="link = false"></i>
+                        <span class="error_link error"></span>
+                    </div>
+                    <div class="clearfix share-sec">
+                        <div class="pull-left">
+                            <!--<span id="fb-share"  ng-class="isShared ? 'activeblue' : 'share-icon'" class="cursor-pointer" ng-click="isShared = !isShared"><span class="round"><span class="fa fa-facebook "></span></span> Share</span>-->
+                        </div>
+                        <div class="pull-right">
+                            <!--<span class="fa fa-map-marker" id="loc_cls" ng-class="loc ? 'blue' : 'light-grey'" ></span>-->
+                            <span class="shop-cart" id="cart_cls" ng-class="cart ? 'blue' : 'light-grey'" ng-click="cartEditClk()">For Sale</span>
+                            <span class="add-link" id="link_cart" ng-class="link ? 'blue' : 'light-grey'" ng-click="link = true">Add Link</span>
+                        </div>
+                    </div>
+                    <div class="button-holder clearfix">
+                        <ul>
+                            <li><button class="btn btn-success greebBtn" type="submit" id="postData" >Post</button></li>
+                            <li><button class="btn btn-default" type="button" ng-click="cancelEdit()">Cancel</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<div id="edit-profile" style="display: none">
+    <div class="title">
+        <h4>Business</h4>
+        <p>Enter all details once to add your business to Happystry</p>
+    </div>
+    <div class="profile-section">
+        <div class="fieldholder">
+            <h3>Give a name to your shop</h3>
+            <label for="">Store name</label>
+            <input type="text" id="shop-name" class="form-control" value="{{businessEditData.shop_name}}" maxlength="80" required/>
+            <span id="error_shopname" class="error"></span>
+        </div>
+        <div class="fieldholder">
+            <label for="">Preferred Currency</label>
+            <select ng-options="item as item.currency_code for item in currencyData" ng-model="selCurr" id="currency" ng-change="showSelCurr(selCurr)"  value="{{editCurrency}}" class="form-control">
+            </select>
+            <span id="error_currency" class="error"></span>
+        </div>
+        <div class="fieldholder">
+            <h3>Add address</h3>
+            <label for="">Address1</label>
+            <input type="text" id="address1" class="form-control" value="{{businessEditData.address1}}" maxlength="40" required/>
+            <span id="error_address1" class="error"></span>
+        </div>
+        <div class="fieldholder">
+            <label for="">Address2</label>
+            <input type="text" id="address2" class="form-control" value="{{businessEditData.address2}}" maxlength="40" required/>
+        </div>
+        <div class="fieldholder">
+            <label for="">Country</label>
+            <input type="text" id="country" class="form-control" value="{{businessEditData.country}}" maxlength="25" required/>
+            <span id="error_country" class="error"></span>
+        </div>
+        <div class="fieldholder">
+            <label for="">State</label>
+            <input type="text" id="state" class="form-control" value="{{businessEditData.state}}" maxlength="25" required/>
+            <span id="error_state" class="error"></span>
+        </div>
+        <div class="fieldholder">
+            <label for="">City</label>
+            <input type="text" id="city" class="form-control" value="{{businessEditData.city}}" maxlength="25" required/>
+            <span id="error_city" class="error"></span>
+        </div>
+        <div class="fieldholder">
+            <label for="">Pin</label>
+            <input type="text" id="pin" class="form-control" value="{{businessEditData.pincode}}" maxlength="10" required/>
+            <span id="error_pin" class="error"></span>
+        </div>
+    </div>
+    <div class="button-holder clearfix" >
+        <ul>
+            <li ><button class="btn btn-success" type="submit" ng-click="saveProfileData(getEditProfileData.name, getEditProfileData.mobile, getEditProfileData.location, businessEditData.shop_name, businessEditData.address1, businessEditData.city, businessEditData.state, businessEditData.pincode, $event)" >Save</button></li>
+            <!--<li><button class="btn btn-default" ng-click="cancelSave()">Cancel</button></li>-->
+        </ul>
+    </div>
+</div>
+
+<div id="discard-post" class="report" style="display: none" >
+    <h3 class="text-center nomargin">Discard changes</h3>
+    <div class="popup">
+        <form class=" profile-section nopadding">
+            <p>Do you really want to discard the changes</p>
+            <div class="button-holder clearfix" >
+                <ul>
+                    <li><button class="btn btn-success greebBtn" type="button" ng-click="discardEdit()">Discard</button></li>
+                    <li><button class="btn btn-default" type="button" close-popup>Cancel</button></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+<!--discard post popup-->

@@ -4,17 +4,17 @@
 'use strict';
 angular.module('Happystry.services')
     .factory('PostInner', function ($http, Settings, $state, $log, $q) {
-        function getInnerPost(postId,page) {
-            var user_id=localStorage.getItem("user_id");
+        function getInnerPost(postId, page) {
+            var user_id = localStorage.getItem("user_id");
             //console.log("inside factory",user);
-            if(user_id){
-                var header= {
+            if (user_id) {
+                var header = {
                     'Content-Type': 'application/json',
-                    'User-Id':user_id,
+                    'User-Id': user_id,
                     'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'
                 }
-            }else{
-                var header= {
+            } else {
+                var header = {
                     'Content-Type': 'application/json',
                     'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'
                 }
@@ -38,10 +38,82 @@ angular.module('Happystry.services')
             });
             return deferred.promise;
         };
+        function getInnerPostById(postId) {
+            var user_id = localStorage.getItem("user_id");
+            //console.log("inside factory",user);
+            if (user_id) {
+                var header = {
+                    'Content-Type': 'application/json',
+                    'User-Id': user_id,
+                    'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'
+                }
+            } else {
+                var header = {
+                    'Content-Type': 'application/json',
+                    'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'
+                }
+            }
+
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: Settings.BASE_URL + 'post/PostInner?post_id=' + postId ,
+                headers: header
+            }).then(function (response, status, headers, config) {
+                deferred.resolve({
+                    status: status,
+                    data: response.data
+                });
+            }, function (response, status, headers, config) {
+                deferred.reject({
+                    status: status,
+                    data: response.data
+                });
+            });
+            return deferred.promise;
+        };
+        function deletePost(postId) {
+            var user_id = localStorage.getItem("user_id");
+            //console.log("inside factory",user);
+            if (user_id) {
+                var header = {
+                    'Content-Type': 'application/json',
+                    'User-Id': user_id,
+                    'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'
+                }
+            } else {
+                var header = {
+                    'Content-Type': 'application/json',
+                    'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'
+                }
+            }
+
+            var deferred = $q.defer();
+            $http({
+                method: 'PUT',
+                url: Settings.BASE_URL + "post/index_del",data: {
+                    post_id: postId,
+                },
+                headers: header
+            }).then(function (response, status, headers, config) {
+                deferred.resolve({
+                    status: status,
+                    data: response.data
+                });
+            }, function (response, status, headers, config) {
+                deferred.reject({
+                    status: status,
+                    data: response.data
+                });
+            });
+            return deferred.promise;
+        };
 
 
         return {
-            getInnerPost: getInnerPost
+            getInnerPost: getInnerPost,
+            deletePost:deletePost,
+            getInnerPostById:getInnerPostById
         }
 
     });

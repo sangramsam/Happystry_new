@@ -53,7 +53,7 @@
                                         </div>
                                         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
                                             <li role="menuitem"><a class="cursor-pointer" ng-if="postdetails.posts[0].own_post == 0" ng-click="continueReport()">Report post</a></li>
-                                            <li role="menuitem"><a  class="cursor-pointer" ng-if="postdetails.posts[0].own_post == 1" ng-click="editPost(postdetails.posts[0].post_id)">Edit post</a></li>
+                                            <li role="menuitem"><a  class="cursor-pointer" ng-if="postdetails.posts[0].own_post == 1" ui-sref="timeline.editPost({id:postdetails.posts[0].post_id})">Edit post</a></li>
                                             <li role="menuitem"><a class="cursor-pointer" ng-if="postdetails.posts[0].own_post == 1" ng-click="deletePostClk()">Delete post</a></li>
                                         </ul>
                                     </div>                                                                                                                         

@@ -65,7 +65,8 @@ angular.module('Happystry.router', [])
                     controller: 'aboutUs'
                 }
             }
-        }).state('timeline', {
+        })
+            .state('timeline', {
                 views: {
                     '': {
                         templateUrl: '/app/views/controlDashboard.html'
@@ -76,7 +77,8 @@ angular.module('Happystry.router', [])
 
                 }
 
-            }).state('timeline.post', {
+            })
+            .state('timeline.post', {
             url: "/timeline",
             views: {
                 '': {
@@ -230,6 +232,34 @@ angular.module('Happystry.router', [])
                     'container@timeline': {
                         templateUrl: "/app/views/postdetails.html",
                         controller: "PostDetailsCtrl"
+                    }
+
+                }
+
+            })
+            .state('timeline.newPost', {
+                url: "/new-Post",
+                views: {
+                    '': {
+                        templateUrl: '/app/views/controlDashboard.html'
+                    },
+                    'container@timeline': {
+                        templateUrl: "/app/views/templates/newPost.html",
+                        controller:'newPostCtrl'
+                    }
+
+                }
+
+            })
+            .state('timeline.editPost', {
+                url: "/edit-Post/:id",
+                views: {
+                    '': {
+                        templateUrl: '/app/views/controlDashboard.html'
+                    },
+                    'container@timeline': {
+                        templateUrl: "/app/views/templates/editPost.html",
+                        controller:'editpostController'
                     }
 
                 }

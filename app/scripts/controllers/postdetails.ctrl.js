@@ -228,4 +228,20 @@ angular.module('Happystry.controllers')
             $scope.continueReport = function () {
                 $.fancybox('#report-post');
             }
+
+
+            //delete Post
+            $scope.deletePostClk = function () {
+                jQuery.fancybox({
+                    'href': '#delete-post'
+                });
+            }
+            $scope.deletePost = function (postid) {
+                var postId = postid;
+               PostInner.deletePost(postId).then(function successCallback(response) {
+                    postDataUpdate.updateNow(postId);
+                    $.fancybox.close("#delete-post");
+                   $state.go('timeline.post')
+                }, function errorCallback(response) {});
+            }
         }]);

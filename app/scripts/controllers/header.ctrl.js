@@ -1,5 +1,5 @@
-angular.module('Happystry.controllers').controller('headerController', ['$scope','$state', 'logOut','notify', 'UserVerify', 'Settings', 'ezfb', '$rootScope', '$http', '$timeout', '$window', 'roundProgressService', '$compile', 'commonService', '$location', 'angularGridInstance', '$localStorage', 'dynamicNotifications','OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService',
-    function ($scope,$state, logOut,notify, UserVerify, Settings, ezfb, $rootScope, $http, $timeout, $window, roundProgressService, $compile, commonService, $location, angularGridInstance, $localStorage, dynamicNotifications,OTP, OTPVerify, CountryCode, FacebookService, LoginService) {
+angular.module('Happystry.controllers').controller('headerController', ['$scope','ImageUpload','$stateParams','$state', 'logOut','notify', 'UserVerify', 'Settings', 'ezfb', '$rootScope', '$http', '$timeout', '$window', 'roundProgressService', '$compile', 'commonService', '$location', 'angularGridInstance', '$localStorage', 'dynamicNotifications','OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService',
+    function ($scope,ImageUpload,$stateParams,$state, logOut,notify, UserVerify, Settings, ezfb, $rootScope, $http, $timeout, $window, roundProgressService, $compile, commonService, $location, angularGridInstance, $localStorage, dynamicNotifications,OTP, OTPVerify, CountryCode, FacebookService, LoginService) {
         $rootScope.logged_res = false;
         $scope.otpNo='';
         $rootScope.loggin_pop = function (e) {
@@ -462,5 +462,127 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
         $scope.profileCLk = function (id) {
             $.fancybox.close('#leader-board');
             $location.path('/profile/' + id);
+        }
+
+
+        // image upload option
+        $scope.cropper = {};
+        $scope.cropper.sourceImage = null;
+        $scope.cropper.croppedImage = null;
+        $scope.bounds = {};
+        $scope.bounds.left = 0;
+        $scope.bounds.right = 0;
+        $scope.bounds.top = 0;
+        $scope.bounds.bottom = 0;
+        $rootScope.totalFilesAdded = 0;
+        $rootScope.posting_img1 = '';
+        $rootScope.posting_img2 = '';
+        $rootScope.posting_img3 = '';
+        $rootScope.posting_img4 = '';
+        $rootScope.canvasCurrent = 0;
+        $rootScope.isEditing = '';
+
+        $rootScope.deletePostingImage = function (imgNum) {
+            $rootScope.totalFilesAdded = $rootScope.totalFilesAdded - 1;
+            if (imgNum == 1) {
+                $rootScope.posting_img1 = '';
+            } else if (imgNum == 2) {
+                $rootScope.posting_img2 = '';
+            } else if (imgNum == 3) {
+                $rootScope.posting_img3 = '';
+            } else if (imgNum == 4) {
+                $rootScope.posting_img4 = '';
+            }
+            jQuery('.canvas_loadings').hide();
+        }
+        var api_Files = [];
+        $rootScope.proceedToPost = function () {
+            console.log("called post ")
+            jQuery('.fountain_proceed').show();
+            jQuery('.crop_continue').hide();
+            var apiFiles = [];
+            var temp = ['', $rootScope.posting_img1, $rootScope.posting_img2, $rootScope.posting_img3, $rootScope.posting_img4];
+            temp.forEach(function (imgVal, i) {
+                if (i == $rootScope.canvasCurrent) {
+                    if (imgVal != '') {
+                        apiFiles.push(imgVal);
+                    }
+                }
+            });
+            temp.forEach(function (imgVal, j) {
+                if (j != $rootScope.canvasCurrent) {
+                    if (imgVal != '') {
+                        apiFiles.push(imgVal);
+                    }
+                }
+            });
+            function dataURLtoFile1(base64URLData, fileName) {
+                var arr = base64URLData.split(',');
+                var binary = atob(arr[1]);
+                var len = binary.length;
+                var buffer = new ArrayBuffer(len);
+                var view = new Uint8Array(buffer);
+                for (var i = 0; i < len; i++) {
+                    view[i] = binary.charCodeAt(i);
+                }
+                var blob = new Blob([view], {type: 'image/jpeg'});
+                blob.lastModifiedDate = new Date();
+                blob.name = fileName;
+                return blob;
+            }
+            $scope.model = {
+                post_id: ($state.current.name==='timeline.editPost') ? $stateParams.id : 0
+            };
+            var formdata = new FormData();
+            formdata.append('post', angular.toJson($scope.model));
+            angular.forEach(apiFiles, function (value, key) {
+                api_Files[key] = dataURLtoFile1(value, 'image' + key);
+                formdata.append('files' + key, api_Files[key]);
+            });
+            ImageUpload.upload(formdata).then(function (response) {
+                console.log(response);
+                jQuery('.fountain_proceed').hide();
+                if (response.data.message === 'success') {
+                    $rootScope.objs3files = response.data.image.post_image;
+                    $rootScope.mains3files = response.data.image.post_image[0];
+                    $rootScope.objs3files_thumb = response.data.image.post_thumbimage;
+                    $rootScope.post_id = response.data.image.post_id;
+                    $.fancybox.close();
+                    if ($state.current.name === 'timeline.editPost') {
+                        $window.location.reload();
+                    } else {
+                        $state.go('timeline.newPost');
+                    }
+                }
+            });
+        }
+        // image upload option
+
+        $rootScope.proceedTocancel = function () {
+            jQuery('.fountain_proceed').hide();
+                $.fancybox.close();
+                /*$rootScope.totalFilesAdded = 0;
+                $rootScope.posting_img1 = '';
+                $rootScope.posting_img2 = '';
+                $rootScope.posting_img3 = '';
+                $rootScope.posting_img4 = '';
+                $rootScope.canvasCurrent = 0;
+                $rootScope.isEditing = '';*/
+
+        }
+        $rootScope.getImage_data = function () {
+            jQuery('.crop_continue').show();
+            console.log("called getImage")
+            if ($state.current.name === 'timeline.editPost') {
+                $rootScope.isEditing = 1;
+                $rootScope.doWatch($rootScope.posting_img1);
+            }
+            jQuery.fancybox({
+                'href': '#myimage_uploader',
+                'closeBtn': true,
+                keys: {
+                    close: null
+                }
+            });
         }
     }]);

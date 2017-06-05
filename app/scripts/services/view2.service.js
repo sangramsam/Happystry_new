@@ -6,7 +6,7 @@ angular.module('Happystry.services').factory('ViewService2', function ($http) {
     var geo_lat;
     var geo_lng;
     var geo_location;
-    var locationauto;
+    var locationauto=true;
     var stopApiCall = false;
     return{
     };
