@@ -69,7 +69,7 @@
             </a>
         </div>
         <div class="share-like">
-            <a href="#/postdetails/{{item.post_id}}"  >
+            <a  ui-sref="timeline.postdetails({ post_id: item.post_id})"  >
                 <span class="sprite comment-icon"></span>
                 <span class="likes-comments">{{item.total_comments}}</span>
             </a>

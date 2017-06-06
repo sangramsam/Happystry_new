@@ -28,7 +28,7 @@ angular.module('Happystry.controllers')
                 return $scope.gradient ? 'url(#gradient)' : $scope.roundProgress.currentColor;
             };
             /*======================================================================================*/
-
+            $scope.contentLoaded=false;
             $scope.logged_res = false;
             var postId = $stateParams.post_id;
             var page = 0;
@@ -36,6 +36,7 @@ angular.module('Happystry.controllers')
                 if (response.data.message === "failed") {
                     $state.go('timeline');
                 } else {
+                    $scope.contentLoaded=true;
                     if (response.data.logged === false) {
                         $scope.logged_res = true;
                         console.log("login",$scope.logged_res);

@@ -1,10 +1,20 @@
 <div class="margin-t-40 social-fix" style="margin-top: 63px;">
     <style type="text/css">
-        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-            display: none !important;
+        .preloaderNew {
+            background-color: #fff;
+            background-image: url(/app/images/happystry.gif);
+            background-repeat: no-repeat;
+            background-position: center center;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 10;
         }
     </style>
-    <div class="container-medium clearfix post-details" ng-clock>
+    <div  class="preloaderNew " ng-show="contentLoaded==false"></div>
+    <div class="container-medium clearfix post-details" ng-show="contentLoaded==true">
         <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12 nopadding">
             <div class="postdetails-holder">
                 <ul>
