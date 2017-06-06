@@ -264,6 +264,32 @@ angular.module('Happystry.router', [])
 
                 }
 
+            }).state('timeline.Userquery', {
+                url: "/search/query/user/:q",
+                views: {
+                    '': {
+                        templateUrl: '/app/views/controlDashboard.html'
+                    },
+                    'container@timeline': {
+                        templateUrl: "/app/views/templates/search.html",
+                        controller:'searchQueryController'
+                    }
+
+                }
+
+            }).state('timeline.Postquery', {
+                url: "/search/query/post/:q",
+                views: {
+                    '': {
+                        templateUrl: '/app/views/controlDashboard.html'
+                    },
+                    'container@timeline': {
+                        templateUrl: "/app/views/templates/search.html",
+                        controller:'searchQueryController'
+                    }
+
+                }
+
             })
         $urlRouterProvider.otherwise("/");
         $locationProvider.html5Mode({

@@ -5,14 +5,14 @@
 </div>
 <div ng-controller="searchController" class="list-group table-condensed overlap" id="autosugg" ng-hide="!modeldisplay.length || selected" style="width:100%">
     <div class="user-div" ng-if="TypeAheadData.users != undefined">
-        <div class="user-sec"><a style="float:left;color:#8e8e8e;"> Users</a> <a ng-click="allUsers(searchval)" style="cursor:pointer;">All Users</a></div>
+        <div class="user-sec"><a style="float:left;color:#8e8e8e;"> Users</a> <a ui-sref="timeline.Userquery({q:searchval})" timeline.query style="cursor:pointer;">All Users</a></div>
         <div class="list-group-item noTopBottomPad" ng-repeat="item in TypeAheadData.users|filter:model  track by $index" style="cursor:pointer">
             <span class="search-sec1" ng-click="allPosts(searchval)"></span>
             <input type="hidden" id="search_val" value="{{searchval}}">
-            <div class="card" ng-click="goToProfile(item.user_id)">
+            <div class="card" ui-sref="timeline.profile({id:item.user_id})">
                 <div class="header-hold">
                     <div class="profile-holder">
-                        <a href="#/profile/{{item.user_id}}">
+                        <a ui-sref="timeline.profile({id:item.user_id})">
                             <div class="progress-wrapper">
                                 <round-progress
                                         max="max"
@@ -38,7 +38,7 @@
                         </a>
                     </div>
                     <div class="profile-details text-left">
-                        <a href="#/profile/{{item.user_id}}"><h4 class="text-left">{{item.name}}</h4></a>
+                        <a ui-sref="timeline.profile({id:item.user_id})"><h4 class="text-left">{{item.name}}</h4></a>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
         </div>
     </div>
     <div class="post-div" ng-if="TypeAheadData.posts != undefined">
-        <div><a style="float:left;color:#8e8e8e;cursor:default;">Posts</a> <a ng-click="allPosts(searchval)">All Posts</a></div>
+        <div><a style="float:left;color:#8e8e8e;cursor:default;">Posts</a> <a  ui-sref="timeline.Postquery({q:searchval})" >All Posts</a></div>
         <div class="list-group-item noTopBottomPad" ng-repeat="item in TypeAheadData.posts|filter:model  track by $index" style="cursor:pointer" ng-click="postclick(item.post_id)">
             <div class="post-sec">
                 <div class="post-left"><img ng-src="{{item.post_image[0]}}"></div>

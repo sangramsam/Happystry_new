@@ -1,0 +1,153 @@
+<div class="margin-t-90">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" >
+        <ul class="tab-btns post-user-sec">
+            <li>
+                <a ng-class="isPost ? 'active' : ''" ng-click="isPost = true; isUser = false; allPosts(ser_worddd)" class="cursor-pointer">Posts</a>
+            </li>
+            <li>
+                <a ng-class="isUser ? 'active' : ''" ng-click="isPost = false; isUser = true; allUsers(ser_worddd)" class="cursor-pointer">Users</a>
+            </li>
+        </ul>
+        <div ng-cloak class="page-title-holder clearfix" ng-if="searchurl; isPost" id="searchPostUser">
+            <div class="pull-left">
+                <h3>Search results</h3>
+            </div>
+            <div class="lists pull-left">
+                <span class="nomargin"><a ng-click="removeSelected(dd)" ng-if="dd != ''">{{dd}}<span class="sprite small-close-icon cursor-pointer"></span></a></span>
+                <span ng-show="threeFilter && !allFilter" class="threeFilter" ng-repeat="selected in ddmodel| limitTo: 3 track by $index" ng-if="selected != ''"><a ng-click="removeSelected(selected)">{{selected}}<span class="sprite small-close-icon cursor-pointer"></span></a></span>
+                <span class="cursor-pointer filter-more" ng-if="(ddmodel | removeEmptyString).length > 3"><a ng-click="filterMore($event)">{{(ddmodel| removeEmptyString).length - 3}}   more</a></span>
+                <span ng-show="allFilter && !threeFilter" class="allFilter" ng-repeat="selected in ddmodel track by $index" ng-if="selected != ''"><a ng-click="removeSelected(selected)">{{selected}}<span class="sprite small-close-icon cursor-pointer"></span></a></span>
+            </div>
+            <div class="page-title">
+                <ul>
+                    <li class="main-menu on-clk">
+                        <a class="filter-div coll-btn cursor-pointer" ng-click="fcClk($event)">Filter</a>
+                        <div class="sub-menu filter-show filter-width filter-div-sec" ng-click="showSubmenu()">
+                            <div class="holder ">
+                                <ul>
+                                    <li><div class="menu-arrow-top"></div></li>
+                                </ul>
+                                <form action="javascript:;" ng-submit="Formsearch()">
+                                    <div class="search-holder">
+                                        <div class="clearfix">
+                                            <div class="pull-left">
+                                                <div class="fieldholder">
+                                                    <label>Location</label>
+                                                    <input type="text" id="loc" class="form-control" ng-autocomplete="result" details="details" options="options" ng-model="location" />
+                                                    <span class="gl" ng-click="getGeoLoc()"><img src="/app/images/location.png" alt="" /></span>
+                                                </div>
+                                            </div>
+                                            <div class="pull-right forSale">
+                                                <input type="checkbox" name="for-sale" id="isForsale" ng-model="check.accepted" icheck/>
+                                                <label for="for-sale">Shop</label>
+                                            </div>
+                                        </div>
+                                        <div class="title">
+                                            <h3>Collections</h3>
+                                        </div>
+                                        <ul class="clearfix fc list-align">
+                                            <li ng-repeat="coll in getCollectionData| limitTo : 9">
+                                                <!--<label for="" ng-click="searchClick($event);">-->
+                                                <label for="" >
+                                                    <a class="nopadding">
+                                                        <div class="collection-box">
+                                                            <img src="{{coll.collection_img}}" alt="" />
+                                                            <div class="overlay col-overlay"></div>
+                                                            <input type="checkbox" id="checkbox{{$index}}" ng-model="check.accepted" value="{{coll.collection_api_name}}" icheck>
+                                                            <i style="display: none">{{coll.collection_api_name}}</i>
+                                                            <span>{{coll.collectionname}}</span>
+                                                        </div>
+                                                    </a>
+                                                </label>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                    <span class="error_collection"></span>
+
+                                    <div class="btndiv left-align">
+                                        <button class="white" type="reset" ng-click="cancelClkFlt($event)">Cancel</button>
+                                        <button class="green" id="filterBtn" type="F">Apply</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="page-title-holder" ng-if="isUser" ng-cloak>
+            <h3>Search results</h3>
+            <div class="lists">
+                <span><a  ng-click="removeSelected(dd)">{{dd}}<span class="sprite small-close-icon cursor-pointer"></span></a></span>
+            </div>
+        </div>
+        <div ng-if="isPost" class="post-card-holder" ng-cloak id="suggPost">
+            <ul ng-show="getSuggPostData" class="dynamic-grid grid margin-b-30 postfeeds_flex in_timeline" ag-id="postData">
+                <li ng-repeat="item in getSuggPostData| unique: 'post_id' |  filter:{ user_report: 0}  track by $id($index)" class="posts wow " my-posts ng-show="item.user_report == 0" ></li>
+            </ul>
+            <div ng-show="!getSuggPostData" class="clearfix" style="position: relative; height: 50vh">
+                <div class="no-search-results ">
+                    <span class="sprite no-search-icons"></span>
+                    <h4>No results found</h4>
+                </div>
+            </div>
+        </div>
+        <div ng-if="isUser">
+            <ul class="userData" ng-if="getPostUserData.length !== 0" ng-cloak>
+                <li ng-repeat="item in getPostUserData" class="clearfix">
+                    <div class="pull-left">
+                        <div class="header-hold">
+                            <div class="profile-holder">
+                                <a ui-sref="timeline.profile({id:item.user_id})">
+                                    <div class="progress-wrapper">
+                                        <round-progress
+                                                max="max"
+                                                current="current"
+                                                color="{{ getColor()}}"
+                                                bgcolor="{{ bgColor}}"
+                                                radius="{{ radius}}"
+                                                semi="isSemi"
+                                                rounded="rounded"
+                                                stroke="{{ stroke}}"
+                                                clockwise="clockwise"
+                                                responsive="responsive"
+                                                duration="{{ duration}}"
+                                                animation="{{ currentAnimation}}"
+                                                offset="{{ offset}}"
+                                                animation-delay="{{ animationDelay}}"
+                                                on-render="showPrecisseCurrent"
+                                                ng-init="current = item.percentile">
+                                        </round-progress>
+                                    </div>
+                                    <img ng-src="{{item.profile_image}}" alt="" style="width: 38px; height: 38px;" />
+                                </a>
+                            </div>
+                            <div class="profile-details">
+                                <a ui-sref="timeline.profile({id:item.user_id})"><h4>{{item.name}}</h4></a>
+                                <h6>
+                                    <span class="location">{{item.current_location}}</span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <ul>
+                            <li>{{item.total_followers}} Followers</li>
+                            <li ng-click="userFollow($event, item.user_id)" ng-if="item.user_own != 1">
+                                <a ng-if="item.user_follow == 0" class="cursor-pointer"><div>Follow</div></a>
+                                <a ng-if="item.user_follow == 1" class="cursor-pointer"><div>UnFollow</div></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div style="position: relative; height: 50vh"  ng-if="isUser && getPostUserData.length === 0">
+            <div   class="no-search-results">
+                <span class="sprite no-search-icons"></span>
+                <h4>No results found</h4>
+            </div>
+        </div>
+    </div>
+</div>

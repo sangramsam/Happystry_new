@@ -5,23 +5,6 @@ angular.module('Happystry.controllers').controller('searchController', ['$scope'
 function ($scope,$window,$document,$stateParams,$state, $http,ViewService,ViewService2) {
     $scope.allusers = false;
     $scope.allposts = true;
-
-    $scope.allUsers = function (searchVal) {
-        angular.element('#autosugg').hide();
-        window.location.href = "#/search/query/user/" + searchVal;
-    };
-    $scope.allPosts = function (searchVal) {
-        angular.element('#autosugg').hide();
-        window.location.href = "#/search/query/post/" + searchVal;
-    };
-    $scope.goToProfile = function (uid) {
-        angular.element('#autosugg').hide();
-        window.location.href = "#/profile/" + uid;
-    };
-    $scope.postclick = function (id) {
-        angular.element('#autosugg').hide();
-        window.location.href = "#/postdetails/" + id;
-    }
     function resetProperty() {
         $scope.getPostData = [];
         $scope.getPromotedData = [];
