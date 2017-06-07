@@ -1,8 +1,26 @@
 
-angular.module('Happystry.controllers').controller('searchQueryController', ['$scope','$window','$document','$stateParams','$state', '$http','ViewService','FilterService','profileService',
-    function ($scope,$window,$document,$stateParams,$state, $http,ViewService,FilterService,profileService) {
+angular.module('Happystry.controllers').controller('searchQueryController', ['$scope','$rootScope','$window','$document','$stateParams','$state', '$http','ViewService','FilterService','profileService',
+    function ($scope,$rootScope,$window,$document,$stateParams,$state, $http,ViewService,FilterService,profileService) {
         $scope.ddmodel = '';
+        angular.element('.error_collection').hide();
+        $scope.serseled = [];
+        $scope.colseled = [];
+        $scope.forseled = [];
+        $scope.locseled = [];
+        var seaPage = 0;
 
+        $scope.myInterval = 3000;
+        $scope.limitDesc = 70;
+        $scope.threeFilter = true;
+        $scope.allFilter = false;
+        $scope.active = 0;
+        $scope.nearMe = false;
+        $scope.nearMeColl = false;
+        $scope.geoGlobal = '';
+        var page = 0;
+        var Cpage = 0;
+        var Hpage = 0;
+        var simiFeeds = [];
         $scope.isUser=false;
         $scope.isPost=false;
         $scope.dd = $stateParams.q;
@@ -99,54 +117,35 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
             $rootScope.apiFlrslt = $scope.selected;
             $rootScope.apiFlrmdl = $scope.model;
             seaPage = 0;
+            angular.element('.sub-menu').removeClass('ngshow');
             $scope.apiFilter($scope.ser_worddd, $scope.selected, $scope.model);
         }
         $scope.apiFilter = function (selSearch, seleCted, modelVal) {
 
             $scope.ddmodel = $.extend([], seleCted);
             $scope.dd = '';
-            $scope.ser_worddd = $route.current.params.q;
+            $scope.ser_worddd = $stateParams.q;
             selSearch = $scope.ser_worddd;
-
-            $http.get(api_url + "rewards/suggestfilter?query=" + $scope.ser_worddd + '&posts=All&page=' + seaPage, {
-                headers: {
-                    'DATA': angular.toJson(modelVal),
-                    'HAPPI-API-KEY': api_key
-                }
-            }).success(function (response) {
-                angular.element('.sub-menu').removeClass('ngshow');
-                if (response.status) {
-                    if (response.suggestion.length != 0) {
+            FilterService.getSuggestFilterPost2(seaPage,$scope.ser_worddd,modelVal).then(function (response) {
+                    //angular.element('.sub-menu').removeClass('ngshow');
+                if (response.data.status) {
+                    if (response.data.suggestion.length != 0) {
                         //from desc string taking #tags and inserting anchor tag dynamically
-                        angular.forEach(response.suggestion.posts, function (value, key) {
+                        angular.forEach(response.data.suggestion.posts, function (value, key) {
                             var hashData = [];
                             var val_desc = (value.description).split(" ");
-                            angular.forEach(val_desc, function (valdesc, ky) {
-                                var sds = valdesc.split("\n");
-                                angular.forEach(sds, function (valsds, k) {
-                                    var re = /(?:^|\W)#(\w+)(?!\w)/g, match1;
-                                    match1 = re.exec(valsds);
-                                    if (match1) {
-                                        var res = match1[0].replace(match1[0], '<a ng-href="#/search/hashtag/' + match1[1] + '" >' + match1[0] + '</a>');
-                                        $compile(res)($scope);
-                                        hashData.push(res);
-                                    } else {
-                                        hashData.push(valsds);
-                                    }
-                                });
-                            });
 
-                            response.suggestion.posts[key].description = hashData.join(' ');
+                            response.data.suggestion.posts[key].description = hashData.join(' ');
                         });
-                        if ((response.suggestion.posts).length != 0) {
+                        if ((response.data.suggestion.posts).length != 0) {
                             $rootScope.sealoadmore = true;
                         } else {
                             $rootScope.sealoadmore = false;
                         }
                         if (seaPage == 0) {
-                            $scope.getSuggPostData = response.suggestion.posts;
+                            $scope.getSuggPostData = response.data.suggestion.posts;
                         } else {
-                            $scope.getSuggPostData = ($scope.getSuggPostData).concat(response.suggestion.posts);
+                            $scope.getSuggPostData = ($scope.getSuggPostData).concat(response.data.suggestion.posts);
                         }
                         angular.forEach($scope.getSuggPostData, function (v, k) {
                             var splitRowObject = v.location.split(',');
@@ -156,7 +155,7 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
 //                                $scope.userpostLoad();
                     } else {
                         $rootScope.sealoadmore = false;
-                        $scope.getSuggPostData = response.suggestion;
+                        $scope.getSuggPostData = response.data.suggestion;
                     }
                 }
             });
@@ -169,8 +168,6 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
 
         //remove selected
         $scope.removeSelected = function (index) {
-
-            if ($scope.searchurl) {
                 if ($scope.isPost) {
                     var location = (location_area1 != '') ? location_area1 + ',' + location_city1 : '';
                     var location_lat = (location_city1 != '') ? lat : '';
@@ -201,9 +198,7 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
                 } else {
                     $state.go('timeline.post');
                 }
-            } else {
-                $state.go('timeline.post');
-            }
+
         }
 
         //follow and unfollow
@@ -240,7 +235,80 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
                 $scope.getSuggPostData = response.data.suggestion.posts;
             })
         }
+        $scope.filLoc = 0;
+        $scope.getGeoLoc = function () {
+            if ($scope.filLoc === 0) {
+                $scope.location = $scope.geoLoc;
+                location_area1 = $scope.geoLoc;
+                lat = $scope.getGeoLat;
+                lng = $scope.getGeoLng;
+                $scope.filLoc = 1;
+            } else {
+                $scope.location = '';
+                location_area1 = '';
+                lat = '';
+                lng = '';
+                $scope.filLoc = 0;
+            }
+        }
+//get location
 
+        var geo_lat = 0;
+        var geo_lng = 0;
+
+        function PositionUpdate(position) {
+            //happysty8@gmail.com
+            geo_lat = position.coords.latitude;
+            geo_lng = position.coords.longitude;
+            var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + geo_lat + "," + geo_lng + "&sensor=true&key=AIzaSyDGqM2CkJ6-iOYasbUGKB807d8Z8KdjoSU";
+            $http.get(url)
+                .then(function (result) {
+                    for (var i = 0; i < result.data.results[0].address_components.length; i++) {
+                        for (var b = 0; b < result.data.results[0].address_components[i].types.length; b++) {
+                            if ((result.data.results[0].address_components[i].types[1] == "sublocality") && (result.data.results[0].address_components[i].types[2] == "sublocality_level_1")) {
+                                $scope.area = result.data.results[0].address_components[i];
+                            }
+                            if ((result.data.results[0].address_components[i].types[0] == "locality") && (result.data.results[0].address_components[i].types[1] == "political")) {
+                                $scope.city = result.data.results[0].address_components[i];
+                            }
+                        }
+                    }
+                    var geoLocation = '';
+                    geoLocation = $scope.area.short_name + ',' + $scope.city.short_name;
+                    $rootScope.location = geoLocation;
+                    angular.element('#location').attr('placeholder', $rootScope.location);
+                    $scope.geoLoc = geoLocation;
+                    $scope.getGeoLat = geo_lat;
+                    $scope.getGeoLng = geo_lng;
+                });
+        }
+        if (navigator.geolocation) {
+//
+            navigator.geolocation.getCurrentPosition(PositionUpdate, showError, {
+                maximumAge: 60000,
+                timeout: 7000,
+                enableHighAccuracy: true
+            });
+//                    }
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    console.log("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    console.log("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    console.log("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    console.log("An unknown error occurred.");
+                    break;
+            }
+        }
     }]);
 
 

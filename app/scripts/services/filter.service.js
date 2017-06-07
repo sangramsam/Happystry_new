@@ -47,12 +47,36 @@ angular.module('Happystry.services')
             });
             return deferred.promise;
         };
+        function getSuggestFilterPost2(page,word,modalValue) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: Settings.BASE_URL + 'rewards/suggestfilter?query=' +word + '&posts=All&page=' + page,
+                headers: {
+                    'DATA': angular.toJson(modalValue),
+                    'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'
+                }
+            }).then(function (response, status, headers, config) {
+                deferred.resolve({
+                    status: status,
+                    data: response.data
+                });
+            }, function (response, status, headers, config) {
+                deferred.reject({
+                    status: status,
+                    data: response.data
+                });
+            });
+            return deferred.promise;
+        };
 
 
 
         return {
             getSuggestFilerUser:getSuggestFilerUser,
-            getSuggestFilerPost:getSuggestFilerPost
+            getSuggestFilerPost:getSuggestFilerPost,
+            getSuggestFilterPost2:getSuggestFilterPost2
+
         };
 
     });
