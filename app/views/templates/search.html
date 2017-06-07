@@ -2,10 +2,10 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" >
         <ul class="tab-btns post-user-sec">
             <li>
-                <a ng-class="isPost ? 'active' : ''" ng-click="isPost = true; isUser = false; allPosts(ser_worddd)" class="cursor-pointer">Posts</a>
+                <a ng-class="isPost ? 'active' : ''" ng-click="isPost = true; isUser = false; allPosts(dd)" class="cursor-pointer">Posts</a>
             </li>
             <li>
-                <a ng-class="isUser ? 'active' : ''" ng-click="isPost = false; isUser = true; allUsers(ser_worddd)" class="cursor-pointer">Users</a>
+                <a ng-class="isUser ? 'active' : ''" ng-click="isPost = false; isUser = true; allUsers(dd)" class="cursor-pointer">Users</a>
             </li>
         </ul>
         <div ng-cloak class="page-title-holder clearfix" ng-if="searchurl; isPost" id="searchPostUser">
@@ -38,7 +38,7 @@
                                                 </div>
                                             </div>
                                             <div class="pull-right forSale">
-                                                <input type="checkbox" name="for-sale" id="isForsale" ng-model="check.accepted" icheck/>
+                                                <input type="checkbox" name="for-sale" id="isForsale" ng-model="check.accepted"  style="position: absolute;opacity: 0;" icheck/>
                                                 <label for="for-sale">Shop</label>
                                             </div>
                                         </div>
@@ -86,7 +86,7 @@
             <ul ng-show="getSuggPostData" class="dynamic-grid grid margin-b-30 postfeeds_flex in_timeline" ag-id="postData">
                 <li ng-repeat="item in getSuggPostData| unique: 'post_id' |  filter:{ user_report: 0}  track by $id($index)" class="posts wow " my-posts ng-show="item.user_report == 0" ></li>
             </ul>
-            <div ng-show="!getSuggPostData" class="clearfix" style="position: relative; height: 50vh">
+            <div ng-show="getSuggPostData.length === 0" class="clearfix" style="position: relative; height: 50vh">
                 <div class="no-search-results ">
                     <span class="sprite no-search-icons"></span>
                     <h4>No results found</h4>

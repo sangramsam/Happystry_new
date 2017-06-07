@@ -1,5 +1,21 @@
+<style type="text/css">
+    .preloaderNew {
+        background-color: #fff;
+        background-image: url(/app/images/happystry.gif);
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+    }
+</style>
+
 <div class="margin-t-50" style="margin-top: 75px!important;">
-    <div class="container-medium clearfix profile-responsive">
+    <div  class="preloaderNew " ng-show="contentLoaded==false"></div>
+    <div class="container-medium clearfix profile-responsive" ng-show="contentLoaded==true">
         <div class="profile-details-holder">
             <div class="profile_cover_loader"
                  style="display: none;width:100%;position: absolute;height: 100%;z-index: 2;background: url(/assets/pages/images/happystry.gif) no-repeat scroll 50% 50% #fff;"></div>

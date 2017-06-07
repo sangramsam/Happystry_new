@@ -47,7 +47,7 @@
     </div>
     <div class="post-div" ng-if="TypeAheadData.posts != undefined">
         <div><a style="float:left;color:#8e8e8e;cursor:default;">Posts</a> <a  ui-sref="timeline.Postquery({q:searchval})" >All Posts</a></div>
-        <div class="list-group-item noTopBottomPad" ng-repeat="item in TypeAheadData.posts|filter:model  track by $index" style="cursor:pointer" ng-click="postclick(item.post_id)">
+        <div class="list-group-item noTopBottomPad" ng-repeat="item in TypeAheadData.posts|filter:model  track by $index" style="cursor:pointer" ui-sref="timeline.postdetails({post_id:item.post_id})">
             <div class="post-sec">
                 <div class="post-left"><img ng-src="{{item.post_image[0]}}"></div>
                 <div class="post-right">

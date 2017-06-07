@@ -2,6 +2,7 @@ angular.module('Happystry.controllers').controller('userprofileController', ['$s
     function ($scope, profileService, $http, Settings, ViewService, $stateParams,$state, roundProgressService, $location, likeFuntion, angularGridInstance, $rootScope, $window, $document) {
         var userId = $stateParams.id;
         $rootScope.dataLoaded = false;
+        $scope.contentLoaded=false;
         var page = 0;
         $scope.appsource = Settings.BASE_URL;
         console.log('state',$state);
@@ -10,6 +11,7 @@ angular.module('Happystry.controllers').controller('userprofileController', ['$s
             if (response.data.logged == false) {
                 $scope.logged_res = true;
             }
+            $scope.contentLoaded=true;
             console.log(response)
             angular.element('#autosugg').hide();
             $scope.getProfileDetails = response.data.userData;
@@ -21,28 +23,6 @@ angular.module('Happystry.controllers').controller('userprofileController', ['$s
                 if (splitRowObject.length > 0)
                     $scope.getProfileDetails.posts[k].location = splitRowObject[0];
             });
-            //from desc string taking #tags and inserting anchor tag dynamically
-            /*  angular.forEach($scope.getProfileDetails.posts, function (value, key) {
-             var hashData = [];
-             var val_desc = (value.description).split(" ");
-             angular.forEach(val_desc, function (valdesc, ky) {
-             var sds = valdesc.split("\n");
-             angular.forEach(sds, function (valsds, k) {
-             var re = /(?:^|\W)#(\w+)(?!\w)/g, match;
-             match = re.exec(valsds);
-             if (match) {
-             var res = match[0].replace(match[0], '<a ng-href="#/search/hashtag/' + match[1] + '" >' + match[0] + '</a>');
-             //                        $compile(res)($scope);
-             hashData.push(res);
-             } else {
-             hashData.push(valsds);
-             }
-             });
-             });
-
-             $scope.getProfileDetails.posts[key].description = hashData.join(' ');
-             });*/
-            //from desc string taking #tags and inserting anchor tag dynamically
             $rootScope.dataLoaded = true;
         }, function errorCallback(response) {
             $rootScope.dataLoaded = true;

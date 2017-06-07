@@ -1,9 +1,6 @@
 'use strict';
 angular.module('Happystry.services')
     .factory('profileService', function ($http, Settings, $state, Properties, roundProgressService, $log, $q) {
-
-
-
         function getProfileById(id,page) {
             var user_id=localStorage.getItem("user_id");
             //console.log("inside factory",OTPData);

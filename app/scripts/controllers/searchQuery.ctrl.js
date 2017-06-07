@@ -1,8 +1,8 @@
 
-angular.module('Happystry.controllers').controller('searchQueryController', ['$scope','$window','$document','$stateParams','$state', '$http','ViewService','FilterService',
-    function ($scope,$window,$document,$stateParams,$state, $http,ViewService,FilterService) {
-        angular.element('#autosugg').hide();
+angular.module('Happystry.controllers').controller('searchQueryController', ['$scope','$window','$document','$stateParams','$state', '$http','ViewService','FilterService','profileService',
+    function ($scope,$window,$document,$stateParams,$state, $http,ViewService,FilterService,profileService) {
         $scope.ddmodel = '';
+
         $scope.isUser=false;
         $scope.isPost=false;
         $scope.dd = $stateParams.q;
@@ -13,12 +13,15 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
             $event.stopPropagation();
         }
         if($state.current.name.split('.')[1]==='Userquery'){
+            angular.element('#autosugg').hide();
             $scope.isUser=true;
             FilterService.getSuggestFilerUser($scope.page,$scope.dd).then(function (response) {
                 $scope.getPostUserData=response.data.suggestion.users;
+
             });
         }
         if($state.current.name.split('.')[1]==='Postquery'){
+            angular.element('#autosugg').hide();
             $scope.isPost=true;
             FilterService.getSuggestFilerPost($scope.page,$scope.dd).then(function (response) {
                 $scope.getSuggPostData = response.data.suggestion.posts;
@@ -67,7 +70,7 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
 
             var collections = '';
             $scope.selected = [];
-            var selSearch = $route.current.params.q;
+            var selSearch = $stateParams.q;
             if ((angular.element('.collection-box').find('.checked')).length != 0) {
                 angular.forEach(angular.element('.collection-box').find('.checked'), function (value, key) {
                     if (key > 0) {
@@ -91,7 +94,7 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
             ($scope.selected).push((for_sale != 'N') ? 'Sale' : "");
             ($scope.forseled).push((for_sale != 'N') ? 'Sale' : "");
             ($scope.serseled).push(selSearch);
-            $scope.ser_worddd = $route.current.params.q;
+            $scope.ser_worddd = $stateParams.q;
             $rootScope.apiFlrwrd = $scope.ser_worddd;
             $rootScope.apiFlrslt = $scope.selected;
             $rootScope.apiFlrmdl = $scope.model;
@@ -163,6 +166,80 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
         }, function (response) {
         });
 
+
+        //remove selected
+        $scope.removeSelected = function (index) {
+
+            if ($scope.searchurl) {
+                if ($scope.isPost) {
+                    var location = (location_area1 != '') ? location_area1 + ',' + location_city1 : '';
+                    var location_lat = (location_city1 != '') ? lat : '';
+                    var location_lng = (location_city1 != '') ? lng : '';
+                    var for_sale = (angular.element('.forSale').find('.checked').length != 0) ? 'Y' : 'N';
+                    var collections = '';
+                    var selSearch = $stateParams.q;
+                    if ($stateParams.q === index) {
+                       $state.go('timeline.post');
+                    } else {
+                        $scope.splice = $scope.selected;
+                        $scope.selected = [];
+                        $scope.selected = $scope.splice;
+                        $scope.selected.splice($scope.selected.indexOf(index), 1);
+                        $scope.model = {
+                            collections: collections,
+                            location: location,
+                            lat: location_lat,
+                            lng: location_lng,
+                            for_sale: for_sale
+                        };
+                        if ($scope.selected.length === 1) {
+                            $state.go('timeline.post');
+                        } else {
+                            $scope.apiFilter(selSearch, $scope.selected, $scope.model);
+                        }
+                    }
+                } else {
+                    $state.go('timeline.post');
+                }
+            } else {
+                $state.go('timeline.post');
+            }
+        }
+
+        //follow and unfollow
+        $scope.userFollow = function (e, usrId) {
+            if ($scope.logged_res === true) {
+                $scope.loggin_pop(event);
+            } else {
+                var text = angular.element(e.currentTarget).find('a div').text();
+
+                if (text === 'Follow') {
+                    profileService.Follow(usrId).then(function (response) {
+                        angular.element(e.currentTarget).find('a div').text('Unfollow');
+                    });
+                } else {
+                    profileService.unFollow(usrId).then(function (response) {
+                        angular.element(e.currentTarget).find('a div').text('Follow');
+                    });
+                }
+            }
+        };
+        $scope.allUsers=function (word) {
+            console.log(word);
+            angular.element('#autosugg').hide();
+            $scope.isUser=true;
+            FilterService.getSuggestFilerUser($scope.page,word).then(function (response) {
+                $scope.getPostUserData=response.data.suggestion.users;
+            });
+        }
+        $scope.allPosts=function (word) {
+            console.log(word)
+            angular.element('#autosugg').hide();
+            $scope.isPost=true;
+            FilterService.getSuggestFilerPost($scope.page,word).then(function (response) {
+                $scope.getSuggPostData = response.data.suggestion.posts;
+            })
+        }
 
     }]);
 
