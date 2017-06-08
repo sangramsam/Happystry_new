@@ -6578,7 +6578,7 @@ and open the template in the editor.
     text-shadow: none;
     text-decoration: none;
     border-radius: 3px;
-    background-image: url("/assets/pages/images/f.png");
+    background-image: url("/app/images/f.png");
     background-repeat: no-repeat;
     background-position: 16px 50%;
     font-size: 14px;
@@ -6592,7 +6592,7 @@ and open the template in the editor.
             }*/ }
     .lp .fb:hover {
       background-color: #35599A;
-      background-image: url("/assets/pages/images/f.png");
+      background-image: url("/app/images/f.png");
       background-repeat: no-repeat;
       background-position: 16px 50%; }
     @media (max-width: 480px) {
@@ -7301,7 +7301,7 @@ and open the template in the editor.
   width: 40px;
   height: 29px;
   background-position: -115px -2px;
-  background-image: url(/app/images/sprite.png);
+  background-image: url(../images/sprite.png);
   background-repeat: no-repeat;
   position: absolute;
   top: 0;
@@ -7502,11 +7502,11 @@ p {
 
 /*select{
     background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 95% 50%;
-    -moz-appearance: none;
-    -webkit-appearance: none;
+    -moz-appearance: none; 
+    -webkit-appearance: none; 
     appearance: none;
      and then whatever styles you want
-        height: 34px;
+        height: 34px; 
         width: 100%;
         padding: 5px;
 }*/
@@ -7544,7 +7544,7 @@ p {
   margin-top: 40px; }
 
 .margin-t-90 {
-  margin-top: 114px; }
+  margin-top: 92px; }
 
 .margin-t-100 {
   margin-top: 100px; }
@@ -8250,7 +8250,7 @@ footer {
         font-family: "sf_ui_displaymedium";
         padding: 10px; }
         .card .like-comment-holder div.share-like a.liked .like-icon {
-          background-image: url(/app/images/liked.png);
+          background-image: url(../images/liked.png);
           background-repeat: no-repeat;
           background-position: 0 0;
           -webkit-animation: likeanimation .2s 1 ease-in-out;
@@ -8418,7 +8418,7 @@ footer {
                                                                   margin:0;
                                                                   li{
                                                                       display:inline-block;
-                                                                      padding:0;
+                                                                      padding:0; 
                                                                       span{
                                                                           position: relative;
                                                                           padding:7px 8px;
@@ -8488,7 +8488,7 @@ footer {
             padding: 10px 0;
             display: inline-block; }
         .container-medium .postdetails-holder ul li .card .discription-holder .discription p {
-          font-size: 13px; }
+          font-size: 18px; }
         .container-medium .postdetails-holder ul li .card .post-comment-holder {
           border-top: 1px solid #d7e7ec; }
           .container-medium .postdetails-holder ul li .card .post-comment-holder .header-hold {
@@ -9093,7 +9093,7 @@ a .reward-content p {
                       top: 2px;
                       margin: 5px;
                       cursor: pointer;
-
+  
                   }*/ }
   .menu.right ul li.autosearch div.input-group typeahead input {
     width: 400px !important;
@@ -9600,7 +9600,7 @@ textarea {
     top: -36px;
     left: auto; }
     .carousel .carousel-control.left .glyphicon-chevron-left {
-      background-image: url("/app/images/left.png");
+      background-image: url("../images/left.png");
       display: inline-block;
       width: 9px;
       height: 16px;
@@ -9611,7 +9611,7 @@ textarea {
     right: 10px;
     top: -36px; }
     .carousel .carousel-control.right .glyphicon-chevron-right {
-      background-image: url("/app/images/right.png");
+      background-image: url("../images/right.png");
       display: inline-block;
       width: 9px;
       height: 16px;
@@ -9818,7 +9818,7 @@ label {
     width: 20px;
     height: 20px;
     padding: 0 2px;
-    margin-right: 10px;
+    margin-right: 10px;        
     text-align: center;
     vertical-align: top;
     border-radius: 2px;
@@ -9832,7 +9832,7 @@ label {
     width: 20px;
     height: 20px;
     padding: 0 2px;
-    margin-right: 10px;
+    margin-right: 10px;        
     text-align: center;
     vertical-align: top;
     border-radius: 2px;
@@ -10036,7 +10036,7 @@ header {
       width: 20px;
       height: 20px;
       display: inline-block;
-      background-image: url(../images/sprite.png);
+      background-image: url(/app/images/sprite.png);
       background-repeat: no-repeat;
       position: absolute;
       left: 10px;
@@ -10050,7 +10050,7 @@ header {
       width: 20px;
       height: 20px;
       display: inline-block;
-      background-image: url(../images/sprite.png);
+      background-image: url(/app/images/sprite.png);
       background-repeat: no-repeat;
       position: absolute;
       left: 10px;

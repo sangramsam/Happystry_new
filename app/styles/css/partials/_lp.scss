@@ -176,7 +176,7 @@ and open the template in the editor.
         text-shadow: none;
         text-decoration: none;
         border-radius: 3px;
-        background-image: url('/assets/pages/images/f.png');
+        background-image: url('/app/images/f.png');
         background-repeat: no-repeat;
         background-position: 16px 50%;
         font-size: 14px;
@@ -185,7 +185,7 @@ and open the template in the editor.
         cursor: pointer;
         &:hover{
             background-color: #35599A;
-            background-image: url('/assets/pages/images/f.png');
+            background-image: url('/app/images/f.png');
             background-repeat: no-repeat;
             background-position: 16px 50%;
         }

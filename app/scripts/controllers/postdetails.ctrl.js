@@ -79,7 +79,7 @@ angular.module('Happystry.controllers')
                 }
             }, function errorCallback(response) {
             });
-
+            $scope.bookmark_id=0;
 
             //comment
             $scope.sendComment = function (postid, event) {
@@ -201,6 +201,7 @@ angular.module('Happystry.controllers')
             //bookmark
 
             $scope.bookmark = function (e) {
+                console.log($scope.bookmark_id);
                 if ($scope.bookmark_id != 0) {
                     Bookmark.deleteBookmark($scope.bookmark_id).then(function (response) {
                         $scope.bookmark_id = 0;
