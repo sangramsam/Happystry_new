@@ -453,8 +453,10 @@ angular.module('Happystry.controllers')
             /* scroll to end */
             var footer_distance = 70;
             var document_height = $(document).height();
+            if($scope.stateName==='login'){
+                var relative = $('.discover-more-relative').offset().top;
+            }
 
-            var relative = $('.discover-more-relative').offset().top;
 
             if (($('.discover-more-relative').isOnScreen() === true || $(this).scrollTop() >= relative) && scroll === true &&  ($scope.pageFlag < $scope.totalPosts)) {
                 scroll = false;
@@ -478,22 +480,25 @@ angular.module('Happystry.controllers')
 
         });
 
-        $.fn.isOnScreen = function () {
-            var win = $(window);
+        if($scope.stateName==='login'){
+            $.fn.isOnScreen = function () {
+                var win = $(document);
 
-            var viewport = {
-                top: win.scrollTop(),
-                left: win.scrollLeft()
+                var viewport = {
+                    top: win.scrollTop(),
+                    left: win.scrollLeft()
+                };
+                viewport.right = viewport.left + win.width();
+                viewport.bottom = viewport.top + win.height();
+
+                var bounds = this.offset();
+                bounds.right = bounds.left + this.outerWidth();
+                bounds.bottom = bounds.top + this.outerHeight();
+
+                return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
             };
-            viewport.right = viewport.left + win.width();
-            viewport.bottom = viewport.top + win.height();
+        }
 
-            var bounds = this.offset();
-            bounds.right = bounds.left + this.outerWidth();
-            bounds.bottom = bounds.top + this.outerHeight();
-
-            return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
-        };
         $scope.$on('$destroy', function() {
             $document.unbind('scroll');
         });

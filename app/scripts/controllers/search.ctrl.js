@@ -20,6 +20,7 @@ function ($scope,$window,$document,$stateParams,$state, $http,ViewService,ViewSe
     $scope.tag = $stateParams.tag;
     $scope.collection = $stateParams.collection;
     $scope.searchurl=true;
+    $scope.temp=$state.current.name.split('.')[2];
     console.log("search",$scope.tag,$scope.collection);
     $scope.SelectedHash =    $scope.tag;
     $scope.SelectedCollection = 'All';
@@ -72,7 +73,7 @@ function ($scope,$window,$document,$stateParams,$state, $http,ViewService,ViewSe
         /* scroll to end */
         var footer_distance = 80;
         var document_height = $(document).height();
-        console.log("scroll");
+        //console.log("scroll");
         var relative='';
         if($state.current.name.split('.')[2]==='search'){
             var relative = $('.loadmore-relative').offset().top;
@@ -91,9 +92,9 @@ function ($scope,$window,$document,$stateParams,$state, $http,ViewService,ViewSe
 
 
     });
-
+    if($scope.temp==='search'){
     $.fn.isOnScreen = function () {
-        var win = $(window);
+        var win = $(document);
 
         var viewport = {
             top: win.scrollTop(),
@@ -108,6 +109,8 @@ function ($scope,$window,$document,$stateParams,$state, $http,ViewService,ViewSe
 
         return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
     };
+}
+
     $scope.$on('$destroy', function() {
         $document.unbind('scroll');
     });
