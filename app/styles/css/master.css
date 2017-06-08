@@ -8250,7 +8250,7 @@ footer {
         font-family: "sf_ui_displaymedium";
         padding: 10px; }
         .card .like-comment-holder div.share-like a.liked .like-icon {
-          background-image: url(../images/liked.png);
+          background-image: url(/app/images/liked.png);
           background-repeat: no-repeat;
           background-position: 0 0;
           -webkit-animation: likeanimation .2s 1 ease-in-out;

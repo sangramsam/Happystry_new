@@ -801,7 +801,7 @@ footer{
                 padding: 10px;  
                 &.liked{
                     .like-icon{
-                        background-image: url(../images/liked.png);
+                        background-image: url(/app/images/liked.png);
                         background-repeat: no-repeat;
                         background-position: 0 0;
                         -webkit-animation: likeanimation .2s 1 ease-in-out;
