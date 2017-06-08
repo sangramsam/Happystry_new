@@ -5,6 +5,7 @@ angular.module('Happystry.controllers').controller('searchController', ['$scope'
 function ($scope,$window,$document,$stateParams,$state, $http,ViewService,ViewService2) {
     $scope.allusers = false;
     $scope.allposts = true;
+    $scope.contentLoaded=false;
     function resetProperty() {
         $scope.getPostData = [];
         $scope.getPromotedData = [];
@@ -25,6 +26,7 @@ function ($scope,$window,$document,$stateParams,$state, $http,ViewService,ViewSe
     if($scope.tag){
         resetProperty();
         ViewService.getFilterHashTag( $scope.tag,$scope.pageFlag).then(function (response) {
+            $scope.contentLoaded=true;
             scroll = true;
             $scope.totalPosts=response.data.post_count;
             $scope.pageFlag += 10;
@@ -33,6 +35,7 @@ function ($scope,$window,$document,$stateParams,$state, $http,ViewService,ViewSe
             //console.log("filter hashTag",$scope.getPostData, $scope.getPromotedData);
         })
     }else if($scope.collection){
+        $scope.contentLoaded=true;
         resetProperty();
         ViewService.getFilterCollections($scope.collection,$scope.pageFlag).then(function (response) {
             $scope.pageFlag += 10;

@@ -1,4 +1,19 @@
+<style type="text/css">
+    .preloaderNew {
+        background-color: #fff;
+        background-image: url(/app/images/happystry.gif);
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+    }
+</style>
 <div class="margin-t-90">
+    <div  class="preloaderNew " ng-show="contentLoaded==false"></div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" >
         <ul class="tab-btns post-user-sec">
             <li>
@@ -82,7 +97,7 @@
                 <span><a  ng-click="removeSelected(dd)">{{dd}}<span class="sprite small-close-icon cursor-pointer"></span></a></span>
             </div>
         </div>
-        <div ng-if="isPost" class="post-card-holder" ng-cloak id="suggPost">
+        <div ng-if="isPost" class="post-card-holder" ng-cloak id="suggPost" ng-show="contentLoaded==true">
             <ul ng-show="getSuggPostData" class="dynamic-grid grid margin-b-30 postfeeds_flex in_timeline" ag-id="postData">
                 <li ng-repeat="item in getSuggPostData| unique: 'post_id' |  filter:{ user_report: 0}  track by $id($index)" class="posts wow " my-posts ng-show="item.user_report == 0" ></li>
             </ul>
@@ -93,7 +108,7 @@
                 </div>
             </div>
         </div>
-        <div ng-if="isUser">
+        <div ng-if="isUser" ng-show="contentLoaded==true">
             <ul class="userData" ng-if="getPostUserData.length !== 0" ng-cloak>
                 <li ng-repeat="item in getPostUserData" class="clearfix">
                     <div class="pull-left">

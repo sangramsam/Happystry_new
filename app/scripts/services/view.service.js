@@ -34,6 +34,7 @@ angular.module('Happystry.services')
             $http({
                 method: 'GET',
                 url: Settings.BASE_URL + "post?page=" + args.page,
+                cache: true,
                 headers: {
                     'Content-Type': 'application/json',
                     'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'

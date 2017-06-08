@@ -6,6 +6,7 @@ angular.module('Happystry.controllers').controller('timelineController', ['Setti
         $scope.getPromotedData = [];
         $scope.loadmore = false;
         $scope.nomoreFeed=false;
+        $scope.contentLoaded=false;
         var scroll=true;
         ViewService.getTrendingHashTag().then(function (response) {
             $scope.getTrendingData = response.data.trending;
@@ -18,6 +19,7 @@ angular.module('Happystry.controllers').controller('timelineController', ['Setti
                 }else{
                     $scope.nomoreFeed=false;
                 }
+                $scope.contentLoaded=true;
                 $scope.totalPosts=response.data.post_count;
                 $scope.getPostData = response.data.Posts;
                 $scope.getPromotedData = response.data.Promoted;

@@ -4,6 +4,7 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
         $scope.ddmodel = '';
         angular.element('.error_collection').hide();
         $scope.serseled = [];
+        $scope.contentLoaded=false;
         $scope.colseled = [];
         $scope.forseled = [];
         $scope.locseled = [];
@@ -35,6 +36,7 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
             $scope.isUser=true;
             FilterService.getSuggestFilerUser($scope.page,$scope.dd).then(function (response) {
                 $scope.getPostUserData=response.data.suggestion.users;
+                $scope.contentLoaded=true;
 
             });
         }
@@ -43,6 +45,7 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
             $scope.isPost=true;
             FilterService.getSuggestFilerPost($scope.page,$scope.dd).then(function (response) {
                 $scope.getSuggPostData = response.data.suggestion.posts;
+                $scope.contentLoaded=true;
             })
         }
         $scope.showSubmenu = function () {
@@ -220,19 +223,23 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
             }
         };
         $scope.allUsers=function (word) {
+            $scope.contentLoaded=false;
             console.log(word);
             angular.element('#autosugg').hide();
             $scope.isUser=true;
             FilterService.getSuggestFilerUser($scope.page,word).then(function (response) {
                 $scope.getPostUserData=response.data.suggestion.users;
+                $scope.contentLoaded=true;
             });
         }
         $scope.allPosts=function (word) {
+            $scope.contentLoaded=false;
             console.log(word)
             angular.element('#autosugg').hide();
             $scope.isPost=true;
             FilterService.getSuggestFilerPost($scope.page,word).then(function (response) {
                 $scope.getSuggPostData = response.data.suggestion.posts;
+                $scope.contentLoaded=true;
             })
         }
         $scope.filLoc = 0;
