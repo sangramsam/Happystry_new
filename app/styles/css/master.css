@@ -7155,7 +7155,7 @@ and open the template in the editor.
   width: 40px;
   height: 29px;
   background-position: -115px -2px;
-  background-image: url(../images/sprite.png);
+  background-image: url(/app/images/sprite.png);
   background-repeat: no-repeat;
   position: absolute;
   top: 0;
@@ -7301,7 +7301,7 @@ and open the template in the editor.
   width: 40px;
   height: 29px;
   background-position: -115px -2px;
-  background-image: url(../images/sprite.png);
+  background-image: url(/app/images/sprite.png);
   background-repeat: no-repeat;
   position: absolute;
   top: 0;
