@@ -123,12 +123,15 @@ angular.module('Happystry.controllers')
         $scope.login = function () {
             LoginService.getLogin();
             CountryCode.getCountryCode().then(function (resposne) {
-                console.log("country code", resposne);
+               /// console.log("country code", resposne);
                 $scope.countryData = resposne.data;
             })
         };
 
-
+        CountryCode.getCountryCode().then(function (resposne) {
+            /// console.log("country code", resposne);
+            $scope.countryData = resposne.data;
+        })
         //OTP verification
         $scope.umobile = '';
         $scope.otpNo = '';
@@ -278,7 +281,7 @@ angular.module('Happystry.controllers')
                          close: null
                          }});*/
                         jQuery.fancybox.close();
-                        $state.go('timeline');
+                        $state.go('timeline.post', {}, {reload: 'timeline.post'}, {inherit: false}, {notify: true});
                     } else if (response.data.message == 'failed') {
                         if (response.data.type) {
                             angular.element('#errorphone1').text('Please enter valid otp');

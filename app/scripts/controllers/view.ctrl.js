@@ -1,5 +1,5 @@
-angular.module('Happystry.controllers').controller('timelineController', ['Settings', '$document', 'ViewService', '$scope', '$http', 'roundProgressService', 'likeFuntion', '$compile', '$rootScope', 'angularGridInstance', '$location', '$window', 'ViewService2', 'dynamicNotifications', '$localStorage',
-    function (Settings, $document, ViewService, $scope, $http, roundProgressService, likeFuntion, $compile, $rootScope, angularGridInstance, $location, $window, ViewService2, dynamicNotifications, $localStorage) {
+angular.module('Happystry.controllers').controller('timelineController', ['Settings','CountryCode', '$document', 'ViewService', '$scope', '$http', 'roundProgressService', 'likeFuntion', '$compile', '$rootScope', 'angularGridInstance', '$location', '$window', 'ViewService2', 'dynamicNotifications', '$localStorage',
+    function (Settings,CountryCode, $document, ViewService, $scope, $http, roundProgressService, likeFuntion, $compile, $rootScope, angularGridInstance, $location, $window, ViewService2, dynamicNotifications, $localStorage) {
         $scope.pageFlag = 0;
         $scope.totalPosts=0;
         $scope.getPostData = [];
@@ -8,6 +8,7 @@ angular.module('Happystry.controllers').controller('timelineController', ['Setti
         $scope.nomoreFeed=false;
         $scope.contentLoaded=false;
         var scroll=true;
+
         ViewService.getTrendingHashTag().then(function (response) {
             $scope.getTrendingData = response.data.trending;
         }, function (response) {

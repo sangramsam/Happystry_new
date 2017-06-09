@@ -12,6 +12,10 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
             });
             e.preventDefault();
         }
+        CountryCode.getCountryCode().then(function (resposne) {
+            /// console.log("country code", resposne);
+            $rootScope.countryData = resposne.data;
+        })
         function verifyUser() {
             UserVerify.verifyUser().then(function (res) {
                 console.log(res);
@@ -19,7 +23,7 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
                     $rootScope.logged_res = true;
                 } else {
                     if (res.data.user_details) {
-                        $scope.userData = res.data.user_details;
+                        $rootScope.userData = res.data.user_details;
                         $rootScope.umobile = res.data.user_details[0].mobile;
                         $rootScope.umcode = res.data.user_details[0].code;
                         $rootScope.umflag = res.data.user_details[0].flag;
@@ -295,7 +299,7 @@ angular.module('Happystry.controllers').controller('headerController', ['$scope'
                     console.log("OTP Verify response", response);
                     if (response.data.message == 'success') {
                         jQuery.fancybox.close();
-                        $state.go('timeline', {}, {reload: 'timeline'}, {inherit: false}, {notify: true});
+                        $state.go('timeline.post', {}, {reload: 'timeline.post'}, {inherit: false}, {notify: true});
                     } else if (response.data.message == 'failed') {
                         if (response.data.type) {
                             angular.element('#errorphone1').text('Please enter valid otp');
