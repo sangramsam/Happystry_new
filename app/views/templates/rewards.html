@@ -1,5 +1,20 @@
+<style type="text/css">
+    .preloaderNew {
+        background-color: #fff;
+        background-image: url(/app/images/happystry.gif);
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 4;
+    }
+</style>
 <div class="margin-t-50"  style="margin-top: 77px;!important;">
-    <div class="container-medium">
+    <div  class="preloaderNew " ng-show="contentLoaded==false"></div>
+    <div class="container-medium"  ng-show="contentLoaded==true">
         <div class="card reward-margin">
             <div class="row padding-0-15 tab-hold">
                 <div class="col-md-5">

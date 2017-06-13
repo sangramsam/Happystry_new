@@ -1,5 +1,21 @@
+<style type="text/css">
+    .preloaderNew {
+        background-color: #fff;
+        background-image: url(/app/images/happystry.gif);
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 4;
+    }
+</style>
+
 <div class="margin-t-90" >
-    <div class="container-medium clearfix"  >
+    <div  class="preloaderNew " ng-show="contentLoaded==false"></div>
+    <div class="container-medium clearfix" ng-show="contentLoaded==true"  >
         <div class="page-title-holder">
             Messages    </div>
         <div class="msg-row row">

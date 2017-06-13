@@ -6570,7 +6570,7 @@ and open the template in the editor.
     border-bottom: 1px solid #ccc;
     margin-top: 10px; }
   .lp .fb {
-    background-color: #3f62a2;
+    background-color: #F6903E;
     padding: 20px;
     padding-left: 36px;
     display: inline-block;
@@ -6591,7 +6591,7 @@ and open the template in the editor.
                 padding-left: 36px;
             }*/ }
     .lp .fb:hover {
-      background-color: #35599A;
+      background-color: #F6903E;
       background-image: url("/app/images/f.png");
       background-repeat: no-repeat;
       background-position: 16px 50%; }
@@ -8861,7 +8861,7 @@ footer {
         z-index: 0; }
         .collection-reward li .rewards-slider .card .reward-hold .carousel .carousel-control .glyphicon-chevron-right {
           right: -10px;
-          background-image: url(../images/slider-right-arrow.png);
+          background-image: url(/app/images/slider-right-arrow.png);
           display: inline-block;
           width: 50px;
           height: 80px;
@@ -8870,7 +8870,7 @@ footer {
             content: ""; }
         .collection-reward li .rewards-slider .card .reward-hold .carousel .carousel-control .glyphicon-chevron-left {
           left: -8px;
-          background-image: url(../images/slider-left-arrow.png);
+          background-image: url(/app/images/slider-left-arrow.png);
           display: inline-block;
           width: 50px;
           height: 80px;
@@ -9215,7 +9215,7 @@ textarea {
   border-bottom: 1px solid #ccc;
   width: 100%; }
   .pop-header figure {
-    background-image: url("../../images/profile_bg.png");
+    background-image: url("/app/images/profile_bg.png");
     background-repeat: no-repeat;
     width: 184px;
     height: 133px;
@@ -9322,7 +9322,7 @@ textarea {
 
 .fancybox-next span {
   right: -20px !important;
-  background-image: url(../images/slider-right-arrow.png) !important;
+  background-image: url(/app/images/slider-right-arrow.png) !important;
   display: inline-block !important;
   width: 50px !important;
   height: 80px !important;
@@ -9339,7 +9339,7 @@ textarea {
 
 .fancybox-prev span {
   left: -20px !important;
-  background-image: url(../images/slider-left-arrow.png) !important;
+  background-image: url(/app/images/slider-left-arrow.png) !important;
   display: inline-block !important;
   width: 50px !important;
   height: 80px !important;

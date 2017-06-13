@@ -1557,7 +1557,7 @@ footer{
                             z-index:0;
                             .glyphicon-chevron-right{
                                 right: -10px;
-                                background-image:url(../images/slider-right-arrow.png); 
+                                background-image:url(/app/images/slider-right-arrow.png);
                                 display: inline-block;
                                 width: 50px;
                                 height: 80px;
@@ -1568,7 +1568,7 @@ footer{
                             }
                             .glyphicon-chevron-left{
                                 left:-8px;
-                                background-image:url(../images/slider-left-arrow.png); 
+                                background-image:url(/app/images/slider-left-arrow.png);
                                 display: inline-block;
                                 width: 50px;
                                 height: 80px;
@@ -2097,7 +2097,7 @@ textarea{
     border-bottom: 1px solid #ccc;
     width: 100%;
     figure{
-        background-image: url("../../images/profile_bg.png");
+        background-image: url("/app/images/profile_bg.png");
         background-repeat: no-repeat;
         width: 184px;
         height: 133px;
@@ -2234,7 +2234,7 @@ textarea{
 
 .fancybox-next span {
     right: -20px !important;
-    background-image: url(../images/slider-right-arrow.png) !important;
+    background-image: url(/app/images/slider-right-arrow.png) !important;
     display: inline-block !important;
     width: 50px !important;
     height: 80px !important;
@@ -2251,7 +2251,7 @@ textarea{
 }
 .fancybox-prev span{
     left: -20px !important;
-    background-image: url(../images/slider-left-arrow.png) !important;
+    background-image: url(/app/images/slider-left-arrow.png) !important;
     display: inline-block !important;
     width: 50px !important;
     height: 80px !important;

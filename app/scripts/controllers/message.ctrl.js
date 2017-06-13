@@ -2,9 +2,11 @@ angular.module('Happystry.controllers').controller('messagesController', ['$scop
     function ($scope, notify, Settings, $http, $rootScope, msgServices, $location, $stateParams) {
         var user_id = localStorage.getItem("user_id");
         var usid = $stateParams.id;
+        $scope.contentLoaded=false;
         if ($stateParams.id) {
             notify.getMessagebyId(usid).then(function (response) {
                 if (response.data.status === true) {
+                    $scope.contentLoaded=true;
                     $scope.msgBox = true;
                     $scope.getNotificationDataAll = msgServices.notifyReadFxn(response.data.users.contact[0]);
                     $scope.getMsgContact = response.data.users.contact[0];
@@ -13,6 +15,7 @@ angular.module('Happystry.controllers').controller('messagesController', ['$scop
                 notify.getMessage().then(function successCallback(response) {
                     if (response.data.logged == false) {
                     } else {
+                        $scope.contentLoaded=true;
                         $scope.msgnotify = 0;
                         var getNotificationDataAll = msgServices.notifyListFxn(response.data.users.contact);
                         angular.forEach(getNotificationDataAll, function (value, key) {
@@ -31,6 +34,7 @@ angular.module('Happystry.controllers').controller('messagesController', ['$scop
             notify.getMessage().then(function (response) {
                 if (response.data.logged == false) {
                 } else {
+                    $scope.contentLoaded=true;
                     $scope.msgnotify = 0;
                     $scope.getNotificationDataAll = msgServices.notifyListFxn(response.data.users.contact);
                     angular.forEach($scope.getNotificationDataAll, function (value, key) {

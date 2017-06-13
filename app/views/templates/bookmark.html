@@ -1,5 +1,20 @@
+<style type="text/css">
+    .preloaderNew {
+        background-color: #fff;
+        background-image: url(/app/images/happystry.gif);
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 4;
+    }
+</style>
 <div class="margin-t-90" ng-cloak >
-<div    id="bookmarkWrap">
+    <div  class="preloaderNew " ng-show="contentLoaded==false"></div>
+<div    id="bookmarkWrap" ng-show="contentLoaded==true">
     <div class="page-title-holder">
         <h3 style="vertical-align: -webkit-baseline-middle;">Bookmarks</h3>
     </div>

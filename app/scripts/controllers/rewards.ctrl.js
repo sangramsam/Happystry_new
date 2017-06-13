@@ -4,8 +4,10 @@ angular.module('Happystry.controllers').controller('rewardsdetailsController', [
         $scope.limitTitle = 26;
         $rootScope.dataLoaded = false;
         var rewardId = $stateParams.id;
+        $scope.contentLoaded=false;
         if(rewardId){
             getRewards.getRewardsDetail(rewardId).then(function (response) {
+                $scope.contentLoaded=true;
                 console.log(response,"reward")
                 if (response.data.logged === false) {
                     $scope.logged_res = true;
@@ -16,7 +18,7 @@ angular.module('Happystry.controllers').controller('rewardsdetailsController', [
             });
         }else {
             getRewards.getRewardsData().then(function (response) {
-
+                $scope.contentLoaded=true;
                 $scope.getRewardsData = response.data.rewards;
                 $rootScope.dataLoaded = true;
             });
