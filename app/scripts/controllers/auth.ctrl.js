@@ -6,7 +6,7 @@
  * Controller of the Happystry used in login state
  */
 angular.module('Happystry.controllers')
-    .controller('AuthCtrl', ['$scope', '$http', 'userSubscription', 'OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService', 'ViewService', '$state', '$rootScope', 'Settings', '$window','$document', function ($scope, $http, userSubscription, OTP, OTPVerify, CountryCode, FacebookService, LoginService, ViewService, $state, $rootScope, Settings, $window,$document) {
+    .controller('AuthCtrl', ['$scope','UserVerify', '$http', 'userSubscription', 'OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService', 'ViewService', '$state', '$rootScope', 'Settings', '$window','$document', function ($scope,UserVerify, $http, userSubscription, OTP, OTPVerify, CountryCode, FacebookService, LoginService, ViewService, $state, $rootScope, Settings, $window,$document) {
         'use strict';
         $scope.pageFlag = 0;
         $scope.SelectedCollection = 'All';
@@ -121,11 +121,17 @@ angular.module('Happystry.controllers')
 
         //facebook login
         $scope.login = function () {
-            LoginService.getLogin();
             CountryCode.getCountryCode().then(function (resposne) {
-               /// console.log("country code", resposne);
+                /// console.log("country code", resposne);
                 $scope.countryData = resposne.data;
             })
+            if(localStorage.getItem('user_id')){
+                verifyUser();
+            }else{
+                LoginService.getLogin();
+
+            }
+
         };
 
         CountryCode.getCountryCode().then(function (resposne) {
@@ -505,6 +511,44 @@ angular.module('Happystry.controllers')
         $scope.$on('$destroy', function() {
             $document.unbind('scroll');
         });
+        function verifyUser() {
+            UserVerify.verifyUser().then(function (res) {
+                console.log(res);
+                if(!res.data.user_details && !res.data.logged ){
+                    $state.go('timeline.post');
+                }
+                if (res.data.logged === false) {
+                    $rootScope.logged_res = true;
+                } else {
+                    if (res.data.user_details) {
+                        $rootScope.userData = res.data.user_details;
+                        $rootScope.umobile = res.data.user_details[0].mobile;
+                        $rootScope.umcode = res.data.user_details[0].code;
+                        $rootScope.umflag = res.data.user_details[0].flag;
+                        $rootScope.ulocation = res.data.user_details[0].location;
+                        $rootScope.uemail = res.data.user_details[0].email;
+                        if (($rootScope.umobile == null || $rootScope.umobile == '') || ($rootScope.ulocation == null || $rootScope.ulocation == '') || ($rootScope.uemail == null || $rootScope.uemail == '')) {
+                            jQuery.fancybox({
+                                'href': '#contactInfo',
+                                'closeBtn': false,
+                                keys: {
+                                    close: null
+                                }
+                            });
+                        } else {
+                            jQuery.fancybox({
+                                'href': '#otp',
+                                'closeBtn': false,
+                                keys: {
+                                    close: null
+                                }
+                            });
+                        }
+                    }
+                }
 
+
+            })
+        }
     }]);
     

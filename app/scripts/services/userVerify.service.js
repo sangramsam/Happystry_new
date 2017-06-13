@@ -5,6 +5,7 @@
 angular.module('Happystry.services')
     .factory('UserVerify', function ($http, Settings, $state, $log, $q) {
         function verifyUser() {
+            console.log("userVerify called");
             var user_id=localStorage.getItem("user_id");
             console.log("userid",user_id);
             var header='';
@@ -20,7 +21,9 @@ angular.module('Happystry.services')
                     'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'
                 }
             }
+
             var deferred = $q.defer();
+            console.log("header",header);
             $http({
                 method: 'GET',
                 url: Settings.BASE_URL+ 'user/verifycheck',
