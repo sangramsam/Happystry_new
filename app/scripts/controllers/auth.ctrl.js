@@ -1,6 +1,5 @@
-
 angular.module('Happystry.controllers')
-    .controller('AuthCtrl', ['$scope','UserVerify', '$http', 'userSubscription', 'OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService', 'ViewService', '$state', '$rootScope', 'Settings', '$window','$document', function ($scope,UserVerify, $http, userSubscription, OTP, OTPVerify, CountryCode, FacebookService, LoginService, ViewService, $state, $rootScope, Settings, $window,$document) {
+    .controller('AuthCtrl', ['$scope', 'UserVerify', '$http', 'userSubscription', 'OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService', 'ViewService', '$state', '$rootScope', 'Settings', '$window', '$document', function ($scope, UserVerify, $http, userSubscription, OTP, OTPVerify, CountryCode, FacebookService, LoginService, ViewService, $state, $rootScope, Settings, $window, $document) {
         'use strict';
         $scope.pageFlag = 0;
         $scope.SelectedCollection = 'All';
@@ -33,7 +32,7 @@ angular.module('Happystry.controllers')
                 //console.log(response.data.Posts);
                 $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
-                $scope.totalPosts=response.data.post_count;
+                $scope.totalPosts = response.data.post_count;
             }, function (response) {
             });
         }
@@ -67,7 +66,7 @@ angular.module('Happystry.controllers')
             ViewService.getFilterCollections(coll_name, $scope.pageFlag).then(function (response) {
                 scroll = true;
                 $scope.pageFlag += 10;
-                $scope.totalPosts=response.data.post_count;
+                $scope.totalPosts = response.data.post_count;
                 $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
 
@@ -79,24 +78,26 @@ angular.module('Happystry.controllers')
             ViewService.getFilterCollections(coll_name, $scope.pageFlag).then(function (response) {
                 scroll = true;
                 $scope.pageFlag += 10;
-                $scope.totalPosts=response.data.post_count;
+                $scope.totalPosts = response.data.post_count;
                 $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
 
                 //console.log($scope.getPostData, $scope.getPromotedData);
             })
         }
+
         function loadDataHashTagFilter(hash_name) {
             ViewService.getFilterHashTag(hash_name, $scope.pageFlag).then(function (response) {
                 scroll = true;
                 $scope.pageFlag += 10;
-                $scope.totalPosts=response.data.post_count;
+                $scope.totalPosts = response.data.post_count;
                 $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
 
                 //console.log($scope.getPostData, $scope.getPromotedData);
             })
         }
+
         //hashtag filter
         $scope.hashFilter = function (hash_name) {
             resetProperty();
@@ -104,7 +105,7 @@ angular.module('Happystry.controllers')
             $scope.SelectedCollection = 'All';
             ViewService.getFilterHashTag(hash_name, $scope.pageFlag).then(function (response) {
                 scroll = true;
-                $scope.totalPosts=response.data.post_count;
+                $scope.totalPosts = response.data.post_count;
                 $scope.pageFlag += 10;
                 $scope.getPostData = ($scope.getPostData).concat(response.data.Posts);
                 $scope.getPromotedData = ($scope.getPromotedData).concat(response.data.Promoted);
@@ -119,9 +120,9 @@ angular.module('Happystry.controllers')
                 /// console.log("country code", resposne);
                 $scope.countryData = resposne.data;
             })
-            if(localStorage.getItem('user_id')){
+            if (localStorage.getItem('user_id')) {
                 verifyUser();
-            }else{
+            } else {
                 LoginService.getLogin();
 
             }
@@ -437,11 +438,11 @@ angular.module('Happystry.controllers')
         $scope.stateName = $state.current.name.split('.')[0];
         console.log($scope.stateName);
         //lazy loading
-        angular.element($document).on('scroll', function () {
-            var fixed='';
-                if($scope.stateName==='login'){
-                    var fixed = $(".discover-more-fixed").offset().top;
-                }
+        angular.element($window).on('scroll', function () {
+            var fixed = '';
+            if ($scope.stateName === 'login') {
+                var fixed = $(".discover-more-fixed").offset().top;
+            }
 
             // 315
             if ($(this).scrollTop() >= fixed) {
@@ -456,12 +457,12 @@ angular.module('Happystry.controllers')
             /* scroll to end */
             var footer_distance = 70;
             var document_height = $(document).height();
-            if($scope.stateName==='login'){
+            if ($scope.stateName === 'login') {
                 var relative = $('.discover-more-relative').offset().top;
             }
 
 
-            if (($('.discover-more-relative').isOnScreen() === true || $(this).scrollTop() >= relative) && scroll === true &&  ($scope.pageFlag < $scope.totalPosts)) {
+            if (($('.discover-more-relative').isOnScreen() === true || $(this).scrollTop() >= relative) && scroll === true && ($scope.pageFlag < $scope.totalPosts)) {
                 scroll = false;
                 console.log("called scroll");
                 if ($scope.SelectedCollection != 'All') {
@@ -475,15 +476,18 @@ angular.module('Happystry.controllers')
                 }
             }
 
-            if ($('.discover-more-relative').isOnScreen() === true || $(".discover-more-fixed").isOnScreen() === true || $('footer').isOnScreen() === true) {
+
+            if ($('.discover-more-fixed').isOnScreen() == true && $('footer').isOnScreen() == true ) {
+                console.log("called fb-fixed")
                 $('.fb-more').removeClass('fb-fixed');
-            } else if ($(".discover-more-fixed").isOnScreen() === false) {
+            } else if ($(".discover-more-fixed").isOnScreen() == false) {
                 $('.fb-more').addClass('fb-fixed');
+                console.log("called fb-fixed else")
             }
 
         });
 
-        if($scope.stateName==='login'){
+        if ($scope.stateName === 'login') {
             $.fn.isOnScreen = function () {
                 var win = $(document);
 
@@ -502,13 +506,13 @@ angular.module('Happystry.controllers')
             };
         }
 
-        $scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function () {
             $document.unbind('scroll');
         });
         function verifyUser() {
             UserVerify.verifyUser().then(function (res) {
                 console.log(res);
-                if(!res.data.user_details && !res.data.logged ){
+                if (!res.data.user_details && !res.data.logged) {
                     jQuery.fancybox.close();
                     $state.go('timeline.post');
                 }
