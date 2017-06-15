@@ -1,6 +1,6 @@
 angular.module('Happystry.controllers')
-    .controller('PostDetailsCtrl', ['$scope','Bookmark', 'comment','Report', 'PostInner', 'postDataUpdate', '$rootScope', 'ViewService', '$timeout', '$state', '$log', '$http', '$q', '$sce', '$filter', '$stateParams', '$compile',
-        function ($scope,Bookmark, comment,Report ,PostInner, postDataUpdate, $rootScope, ViewService, $timeout, $state, $log, $http, $q, $sce, $filter, $stateParams, $compile) {
+    .controller('PostDetailsCtrl', ['$scope','Bookmark','$document', 'comment','Report', 'PostInner', 'postDataUpdate', '$rootScope', 'ViewService', '$timeout', '$state', '$log', '$http', '$q', '$sce', '$filter', '$stateParams', '$compile',
+        function ($scope,Bookmark,$document, comment,Report ,PostInner, postDataUpdate, $rootScope, ViewService, $timeout, $state, $log, $http, $q, $sce, $filter, $stateParams, $compile) {
             'use strict';
             ViewService.getFeeds({page: 0}).then(function (response) {
                 $scope.getPostData = response.data.Posts;
@@ -32,53 +32,62 @@ angular.module('Happystry.controllers')
             $scope.logged_res = false;
             var postId = $stateParams.post_id;
             var page = 0;
-            PostInner.getInnerPost(postId, page).then(function successCallback(response) {
-                if (response.data.message === "failed") {
-                    $state.go('timeline');
-                } else {
-                    $scope.contentLoaded=true;
-                    if (response.data.logged === false) {
-                        $scope.logged_res = true;
-                        console.log("login",$scope.logged_res);
-                    }
-                    $scope.postdetails = response.data.post;
-                    $scope.postdetailsDesc = $scope.postdetails.posts[0].description;
-                    $scope.twrpostdetailsDesc = ($scope.postdetails.posts[0].description).substring(0, 50) + (($scope.postdetails.posts[0].description).length > 50 ? '...' : '');
-                    $scope.postdetailsImg = $scope.postdetails.posts[0].post_image[0];
-                    $scope.postdetailsLocation = $scope.postdetails.posts[0].location;
-                    $scope.postdetailsCmts = $scope.postdetails.comments;
-                    var splitRowObject = $scope.postdetailsLocation.split(',');
-                    if (splitRowObject.length > 0)
-                        $scope.postdetailsLocation = splitRowObject[0];
-                    //from desc string taking #tags and inserting anchor tag dynamically
-                    var hashData = [];
-                    var val_desc = ($scope.postdetails.posts[0].description).split(" ");
-                    $scope.postdetails.posts[0].description = hashData.join(' ');
-
-
-                    $scope.similar_feeds = response.data.post.similar_feeds;
-                    $scope.totalPosts = response.data.post.similar_feeds.length;
-                    angular.forEach($scope.similar_feeds, function (v, k) {
-                        var splitRowObject = v.location.split(',');
-                        if (splitRowObject.length > 0)
-                            $scope.similar_feeds[k].location = splitRowObject[0];
-                    });
-
-                    //from desc string taking #tags and inserting anchor tag dynamically
-                    //$scope.shareUrl = api_url + "#/postdetails/" + $scope.postdetails.posts[0].post_id;
-                    $scope.checkcomments = response.data.post.comments.length === 0;
-                    if ($scope.postdetails.posts[0].user_like === 0) {
-                        angular.element('.sj_like1').find('a.like-unlike').addClass('like');
+            var scroll = true;
+            lazyloadingforPostInnerdata();
+            function lazyloadingforPostInnerdata(){
+                PostInner.getInnerPost(postId, page).then(function successCallback(response) {
+                    if (response.data.message === "failed") {
+                        $state.go('timeline');
                     } else {
-                        angular.element('.sj_like1').find('a.like-unlike').addClass('liked');
+                        $scope.contentLoaded=true;
+                        page += 10;
+                        scroll = true;
+                        if (response.data.logged === false) {
+                            $scope.logged_res = true;
+                            console.log("login",$scope.logged_res);
+                        }
+
+
+                        $scope.postdetails = response.data.post;
+                        $scope.postdetailsDesc = $scope.postdetails.posts[0].description;
+                        $scope.twrpostdetailsDesc = ($scope.postdetails.posts[0].description).substring(0, 50) + (($scope.postdetails.posts[0].description).length > 50 ? '...' : '');
+                        $scope.postdetailsImg = $scope.postdetails.posts[0].post_image[0];
+                        $scope.postdetailsLocation = $scope.postdetails.posts[0].location;
+                        $scope.postdetailsCmts = $scope.postdetails.comments;
+                        var splitRowObject = $scope.postdetailsLocation.split(',');
+                        if (splitRowObject.length > 0)
+                            $scope.postdetailsLocation = splitRowObject[0];
+                        //from desc string taking #tags and inserting anchor tag dynamically
+                        var hashData = [];
+                        var val_desc = ($scope.postdetails.posts[0].description).split(" ");
+                        $scope.postdetails.posts[0].description = hashData.join(' ');
+
+
+                        $scope.similar_feeds = response.data.post.similar_feeds;
+                        $scope.totalPosts = response.data.post.similar_feeds.length;
+                        angular.forEach($scope.similar_feeds, function (v, k) {
+                            var splitRowObject = v.location.split(',');
+                            if (splitRowObject.length > 0)
+                                $scope.similar_feeds[k].location = splitRowObject[0];
+                        });
+
+                        //from desc string taking #tags and inserting anchor tag dynamically
+                        //$scope.shareUrl = api_url + "#/postdetails/" + $scope.postdetails.posts[0].post_id;
+                        $scope.checkcomments = response.data.post.comments.length === 0;
+                        if ($scope.postdetails.posts[0].user_like === 0) {
+                            angular.element('.sj_like1').find('a.like-unlike').addClass('like');
+                        } else {
+                            angular.element('.sj_like1').find('a.like-unlike').addClass('liked');
+                        }
+                        if ($scope.postdetails.posts[0].bookmark_flag === 1) {
+                            $scope.bookmark_id = $scope.postdetails.posts[0].bookmark_id
+                            $scope.bookmarked = true;
+                        }
                     }
-                    if ($scope.postdetails.posts[0].bookmark_flag === 1) {
-                        $scope.bookmark_id = $scope.postdetails.posts[0].bookmark_id
-                        $scope.bookmarked = true;
-                    }
-                }
-            }, function errorCallback(response) {
-            });
+                }, function errorCallback(response) {
+                });
+            }
+
             $scope.bookmark_id=0;
 
             //comment
@@ -246,4 +255,42 @@ angular.module('Happystry.controllers')
                    $state.go('timeline.post')
                 }, function errorCallback(response) {});
             }
+
+            //lazy loading
+            angular.element($document).on('scroll', function () {
+                /* scroll to end */
+                var footer_distance = 80;
+                var document_height = $(document).height();
+
+                var relative = $('.loadmore-relative').offset().top;
+
+                if (($('.loadmore-relative').isOnScreen() === true || $(this).scrollTop() >= relative) && scroll === true) {
+                    console.log("scroll called !!");
+                    scroll = false;
+                    lazyloadingforPostInnerdata();
+                }
+
+
+            });
+
+            $.fn.isOnScreen = function () {
+                var win = $(window);
+
+                var viewport = {
+                    top: win.scrollTop(),
+                    left: win.scrollLeft()
+                };
+                viewport.right = viewport.left + win.width();
+                viewport.bottom = viewport.top + win.height();
+
+                var bounds = this.offset();
+                bounds.right = bounds.left + this.outerWidth();
+                bounds.bottom = bounds.top + this.outerHeight();
+
+                return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+            };
+            $scope.$on('$destroy', function() {
+                $document.unbind('scroll');
+            });
+
         }]);

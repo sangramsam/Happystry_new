@@ -314,7 +314,7 @@
         <div class="first-filter" >
         <div class="container"   >
             <ul>
-                <li ng-class="{'SelectedCollection': SelectedCollection === 'All'}" ng-click="collectionFilter('All')">All</li>
+                <li ng-class="{'SelectedCollection': SelectedCollection === 'All'}" ng-click="collectionFilter('All')" ng-if="getCollectionData">All</li>
                 <li ng-repeat="coll in getCollectionData track by $index" ng-if="coll.collection_api_name!='Happystreet' " ng-click="collectionFilter(coll.collection_api_name)" ng-class="{SelectedCollection: coll.collection_api_name === SelectedCollection}">
                     {{coll.collection_api_name}}
                 </li>
