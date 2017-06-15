@@ -1,10 +1,4 @@
-/**
- * @name Happystry.controller:AuthCtrl
- * @description
- * # AuthCtrl
- * @author Anand Tiwari <anand.tiwari@appinessworld.com>
- * Controller of the Happystry used in login state
- */
+
 angular.module('Happystry.controllers')
     .controller('AuthCtrl', ['$scope','UserVerify', '$http', 'userSubscription', 'OTP', 'OTPVerify', 'CountryCode', 'FacebookService', 'LoginService', 'ViewService', '$state', '$rootScope', 'Settings', '$window','$document', function ($scope,UserVerify, $http, userSubscription, OTP, OTPVerify, CountryCode, FacebookService, LoginService, ViewService, $state, $rootScope, Settings, $window,$document) {
         'use strict';
@@ -515,6 +509,7 @@ angular.module('Happystry.controllers')
             UserVerify.verifyUser().then(function (res) {
                 console.log(res);
                 if(!res.data.user_details && !res.data.logged ){
+                    jQuery.fancybox.close();
                     $state.go('timeline.post');
                 }
                 if (res.data.logged === false) {
