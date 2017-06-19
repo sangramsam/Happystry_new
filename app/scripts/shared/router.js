@@ -44,7 +44,7 @@ angular.module('Happystry.router', [])
                 }
             }
         }).state('login.term', {
-            url: '/terms_condition',
+            url: 'terms_condition',
             views: {
                 '': {
                     templateUrl: 'public/shared/controlDashboard.html'
@@ -55,7 +55,7 @@ angular.module('Happystry.router', [])
                 }
             }
         }).state('login.policy', {
-            url: '/policy',
+            url: 'policy',
             views: {
                 '': {
                     templateUrl: 'public/shared/controlDashboard.html'
