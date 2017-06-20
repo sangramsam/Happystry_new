@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5cdaa253-4fae-4ff3-bbaa-92fe9549702d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/shared/router.js" afterPath="$PROJECT_DIR$/app/scripts/shared/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -618,7 +616,7 @@
       <workItem from="1497588983406" duration="6181000" />
       <workItem from="1497609625288" duration="2651000" />
       <workItem from="1497844790534" duration="5067000" />
-      <workItem from="1497931965066" duration="3552000" />
+      <workItem from="1497931965066" duration="3611000" />
     </task>
     <task id="LOCAL-00001" summary="bug fix in auth control">
       <created>1497502777232</created>
@@ -648,11 +646,18 @@
       <option name="project" value="LOCAL" />
       <updated>1497935173525</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="bug fixing in routing">
+      <created>1497936618284</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1497936618284</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="394446000" />
+    <option name="totallyTimeSpent" value="394505000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -756,7 +761,8 @@
     <MESSAGE value="bug fix in auth control" />
     <MESSAGE value="lazy loading in post details page" />
     <MESSAGE value="bux fix in landing page scroll with fb-fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="bux fix in landing page scroll with fb-fix" />
+    <MESSAGE value="bug fixing in routing" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fixing in routing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
