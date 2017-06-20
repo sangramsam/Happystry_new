@@ -2,6 +2,8 @@
 angular.module('Happystry.controllers')
     .controller('aboutUs', ['$scope', '$http', 'userSubscription', '$rootScope', 'Settings', function ($scope, $http, userSubscription, $rootScope, Settings) {
         'use strict';
+
+        $rootScope.showLp=true;
         $scope.submitSub = function (email) {
             var subEmail = email;
             var valid = 0;
