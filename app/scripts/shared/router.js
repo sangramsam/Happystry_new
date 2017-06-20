@@ -25,7 +25,7 @@ angular.module('Happystry.router', [])
             url: 'aboutUs',
             views: {
                 '': {
-                    templateUrl: 'public/shared/controlDashboard.html'
+                    templateUrl: '/app/views/controlDashboard.html'
                 },
                 'body@login': {
                     templateUrl: "/app/views/templates/aboutus.html",
@@ -36,7 +36,7 @@ angular.module('Happystry.router', [])
             url: 'contact_us',
             views: {
                 '': {
-                    templateUrl: 'public/shared/controlDashboard.html'
+                    templateUrl: '/app/views/controlDashboard.html'
                 },
                 'body@login': {
                     templateUrl: "/app/views/templates/contactus.html",
@@ -47,7 +47,7 @@ angular.module('Happystry.router', [])
             url: 'terms_condition',
             views: {
                 '': {
-                    templateUrl: 'public/shared/controlDashboard.html'
+                    templateUrl: '/app/views/controlDashboard.html'
                 },
                 'body@login': {
                     templateUrl: "/app/views/templates/terms.html",
@@ -58,7 +58,7 @@ angular.module('Happystry.router', [])
             url: 'policy',
             views: {
                 '': {
-                    templateUrl: 'public/shared/controlDashboard.html'
+                    templateUrl: '/app/views/controlDashboard.html'
                 },
                 'body@login': {
                     templateUrl: "/app/views/templates/policy.html",
