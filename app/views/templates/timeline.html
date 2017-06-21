@@ -20,7 +20,6 @@
             <h3>Search results</h3>
             <div class="lists">
 <!--
-                <span ng-if="geoGlobal != ''"><a>Near me<span ng-click="removeNearMe()" class="sprite small-close-icon"></span></a></span>
 -->
                 <span><a ui-sref="timeline.post" ui-sref-opts="{reload: true}">{{tag || collection}}<span class="sprite small-close-icon"></span></a></span>
             </div>
@@ -32,7 +31,6 @@
             <div class="lists">
                 <span ng-repeat="hash in getTrendingData">
                     <a ng-if="hash.trend_name.indexOf('#') != 0" ui-sref="timeline.post.search({tag:hash.tag_name})">#{{hash.tag_name}}</a>
-                    <!--<a ng-href="/search/hashtag/{{hash.tag_name| lowercasenospace}}">#{{hash.tag_name}}</a>-->
                 </span>
             </div>
         </div>

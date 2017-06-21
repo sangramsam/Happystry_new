@@ -1,10 +1,9 @@
-
-angular.module('Happystry.controllers').controller('searchQueryController', ['$scope','$rootScope','$window','$document','$stateParams','$state', '$http','ViewService','FilterService','profileService',
-    function ($scope,$rootScope,$window,$document,$stateParams,$state, $http,ViewService,FilterService,profileService) {
+angular.module('Happystry.controllers').controller('searchQueryController', ['$scope', 'Location', '$rootScope', '$window', '$document', '$stateParams', '$state', '$http', 'ViewService', 'FilterService', 'profileService',
+    function ($scope, Location, $rootScope, $window, $document, $stateParams, $state, $http, ViewService, FilterService, profileService) {
         $scope.ddmodel = '';
         angular.element('.error_collection').hide();
         $scope.serseled = [];
-        $scope.contentLoaded=false;
+        $scope.contentLoaded = false;
         $scope.colseled = [];
         $scope.forseled = [];
         $scope.locseled = [];
@@ -22,31 +21,31 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
         var Cpage = 0;
         var Hpage = 0;
         var simiFeeds = [];
-        $scope.isUser=false;
-        $scope.isPost=false;
+        $scope.isUser = false;
+        $scope.isPost = false;
         $scope.dd = $stateParams.q;
         //console.log('$stateParams',$stateParams.q);
-        $scope.page=0;
+        $scope.page = 0;
         $scope.fcClk = function ($event) {
             angular.element('.sub-menu').removeClass('ngshow');
             angular.element($event.currentTarget).next('.sub-menu').addClass('ngshow');
             $event.stopPropagation();
         }
-        if($state.current.name.split('.')[1]==='Userquery'){
+        if ($state.current.name.split('.')[1] === 'Userquery') {
             angular.element('#autosugg').hide();
-            $scope.isUser=true;
-            FilterService.getSuggestFilerUser($scope.page,$scope.dd).then(function (response) {
-                $scope.getPostUserData=response.data.suggestion.users;
-                $scope.contentLoaded=true;
+            $scope.isUser = true;
+            FilterService.getSuggestFilerUser($scope.page, $scope.dd).then(function (response) {
+                $scope.getPostUserData = response.data.suggestion.users;
+                $scope.contentLoaded = true;
 
             });
         }
-        if($state.current.name.split('.')[1]==='Postquery'){
+        if ($state.current.name.split('.')[1] === 'Postquery') {
             angular.element('#autosugg').hide();
-            $scope.isPost=true;
-            FilterService.getSuggestFilerPost($scope.page,$scope.dd).then(function (response) {
+            $scope.isPost = true;
+            FilterService.getSuggestFilerPost($scope.page, $scope.dd).then(function (response) {
                 $scope.getSuggPostData = response.data.suggestion.posts;
-                $scope.contentLoaded=true;
+                $scope.contentLoaded = true;
             })
         }
         $scope.showSubmenu = function () {
@@ -130,8 +129,8 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
             $scope.dd = '';
             $scope.ser_worddd = $stateParams.q;
             selSearch = $scope.ser_worddd;
-            FilterService.getSuggestFilterPost2(seaPage,$scope.ser_worddd,modelVal).then(function (response) {
-                    //angular.element('.sub-menu').removeClass('ngshow');
+            FilterService.getSuggestFilterPost2(seaPage, $scope.ser_worddd, modelVal).then(function (response) {
+                //angular.element('.sub-menu').removeClass('ngshow');
                 if (response.data.status) {
                     if (response.data.suggestion.length != 0) {
                         //from desc string taking #tags and inserting anchor tag dynamically
@@ -172,36 +171,36 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
 
         //remove selected
         $scope.removeSelected = function (index) {
-                if ($scope.isPost) {
-                    var location = (location_area1 != '') ? location_area1 + ',' + location_city1 : '';
-                    var location_lat = (location_city1 != '') ? lat : '';
-                    var location_lng = (location_city1 != '') ? lng : '';
-                    var for_sale = (angular.element('.forSale').find('.checked').length != 0) ? 'Y' : 'N';
-                    var collections = '';
-                    var selSearch = $stateParams.q;
-                    if ($stateParams.q === index) {
-                       $state.go('timeline.post');
-                    } else {
-                        $scope.splice = $scope.selected;
-                        $scope.selected = [];
-                        $scope.selected = $scope.splice;
-                        $scope.selected.splice($scope.selected.indexOf(index), 1);
-                        $scope.model = {
-                            collections: collections,
-                            location: location,
-                            lat: location_lat,
-                            lng: location_lng,
-                            for_sale: for_sale
-                        };
-                        if ($scope.selected.length === 1) {
-                            $state.go('timeline.post');
-                        } else {
-                            $scope.apiFilter(selSearch, $scope.selected, $scope.model);
-                        }
-                    }
-                } else {
+            if ($scope.isPost) {
+                var location = (location_area1 != '') ? location_area1 + ',' + location_city1 : '';
+                var location_lat = (location_city1 != '') ? lat : '';
+                var location_lng = (location_city1 != '') ? lng : '';
+                var for_sale = (angular.element('.forSale').find('.checked').length != 0) ? 'Y' : 'N';
+                var collections = '';
+                var selSearch = $stateParams.q;
+                if ($stateParams.q === index) {
                     $state.go('timeline.post');
+                } else {
+                    $scope.splice = $scope.selected;
+                    $scope.selected = [];
+                    $scope.selected = $scope.splice;
+                    $scope.selected.splice($scope.selected.indexOf(index), 1);
+                    $scope.model = {
+                        collections: collections,
+                        location: location,
+                        lat: location_lat,
+                        lng: location_lng,
+                        for_sale: for_sale
+                    };
+                    if ($scope.selected.length === 1) {
+                        $state.go('timeline.post');
+                    } else {
+                        $scope.apiFilter(selSearch, $scope.selected, $scope.model);
+                    }
                 }
+            } else {
+                $state.go('timeline.post');
+            }
 
         }
 
@@ -223,12 +222,12 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
                 }
             }
         };
-        $scope.allUsers=function (word) {
-            $state.go('timeline.Userquery', {q : word});
+        $scope.allUsers = function (word) {
+            $state.go('timeline.Userquery', {q: word});
 
         }
-        $scope.allPosts=function (word) {
-            $state.go('timeline.Postquery', {q : word});
+        $scope.allPosts = function (word) {
+            $state.go('timeline.Postquery', {q: word});
         }
         $scope.filLoc = 0;
         $scope.getGeoLoc = function () {
@@ -237,71 +236,16 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
                 location_area1 = $scope.geoLoc;
                 lat = $scope.getGeoLat;
                 lng = $scope.getGeoLng;
+                console.log("location", Location.getLocationName());
+                //$rootScope.locationNew = Location.getLocationName();
+                angular.element('#loc').attr('placeholder', Location.getLocationName());
                 $scope.filLoc = 1;
+
             } else {
                 $scope.location = '';
-                location_area1 = '';
                 lat = '';
                 lng = '';
                 $scope.filLoc = 0;
-            }
-        }
-//get location
-
-        var geo_lat = 0;
-        var geo_lng = 0;
-
-        function PositionUpdate(position) {
-            //happysty8@gmail.com
-            geo_lat = position.coords.latitude;
-            geo_lng = position.coords.longitude;
-            var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + geo_lat + "," + geo_lng + "&sensor=true&key=AIzaSyDGqM2CkJ6-iOYasbUGKB807d8Z8KdjoSU";
-            $http.get(url)
-                .then(function (result) {
-                    for (var i = 0; i < result.data.results[0].address_components.length; i++) {
-                        for (var b = 0; b < result.data.results[0].address_components[i].types.length; b++) {
-                            if ((result.data.results[0].address_components[i].types[1] == "sublocality") && (result.data.results[0].address_components[i].types[2] == "sublocality_level_1")) {
-                                $scope.area = result.data.results[0].address_components[i];
-                            }
-                            if ((result.data.results[0].address_components[i].types[0] == "locality") && (result.data.results[0].address_components[i].types[1] == "political")) {
-                                $scope.city = result.data.results[0].address_components[i];
-                            }
-                        }
-                    }
-                    var geoLocation = '';
-                    geoLocation = $scope.area.short_name + ',' + $scope.city.short_name;
-                    $rootScope.location = geoLocation;
-                    angular.element('#location').attr('placeholder', $rootScope.location);
-                    $scope.geoLoc = geoLocation;
-                    $scope.getGeoLat = geo_lat;
-                    $scope.getGeoLng = geo_lng;
-                });
-        }
-        if (navigator.geolocation) {
-//
-            navigator.geolocation.getCurrentPosition(PositionUpdate, showError, {
-                maximumAge: 60000,
-                timeout: 7000,
-                enableHighAccuracy: true
-            });
-//                    }
-        } else {
-            console.log("Geolocation is not supported by this browser.");
-        }
-        function showError(error) {
-            switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    console.log("User denied the request for Geolocation.");
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    console.log("Location information is unavailable.");
-                    break;
-                case error.TIMEOUT:
-                    console.log("The request to get user location timed out.");
-                    break;
-                case error.UNKNOWN_ERROR:
-                    console.log("An unknown error occurred.");
-                    break;
             }
         }
     }]);
