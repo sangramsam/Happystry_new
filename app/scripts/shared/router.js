@@ -14,10 +14,10 @@ angular.module('Happystry.router', [])
                 title: 'Login',
                 views: {
                     '': {
-                        templateUrl: '/app/views/controlDashboard.html'
+                        templateUrl: '/app/views/templates/controlDashboard.html'
                     },
                     'body@login': {
-                        templateUrl: "/app/views/login.html",
+                        templateUrl: "/app/views/templates/login.html",
                         controller: "AuthCtrl"
                     }
                 }
@@ -25,7 +25,7 @@ angular.module('Happystry.router', [])
             url: 'aboutUs',
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'body@login': {
                     templateUrl: "/app/views/templates/aboutus.html",
@@ -36,7 +36,7 @@ angular.module('Happystry.router', [])
             url: 'contact_us',
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'body@login': {
                     templateUrl: "/app/views/templates/contactus.html",
@@ -47,7 +47,7 @@ angular.module('Happystry.router', [])
             url: 'terms_condition',
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'body@login': {
                     templateUrl: "/app/views/templates/terms.html",
@@ -58,7 +58,7 @@ angular.module('Happystry.router', [])
             url: 'policy',
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'body@login': {
                     templateUrl: "/app/views/templates/policy.html",
@@ -69,7 +69,7 @@ angular.module('Happystry.router', [])
             .state('timeline', {
                 views: {
                     '': {
-                        templateUrl: '/app/views/controlDashboard.html'
+                        templateUrl: '/app/views/templates/controlDashboard.html'
                     },
                     'body@timeline': {
                         templateUrl: "/app/views/templates/dashboard.html"
@@ -82,7 +82,7 @@ angular.module('Happystry.router', [])
             url: "/timeline",
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'container@timeline': {
                     templateUrl: "/app/views/templates/timeline.html",
@@ -95,7 +95,7 @@ angular.module('Happystry.router', [])
             url: "/rewards",
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'container@timeline': {
                     templateUrl: "/app/views/templates/rewards.html",
@@ -108,7 +108,7 @@ angular.module('Happystry.router', [])
             url: "/notifications",
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'container@timeline': {
                     templateUrl: "/app/views/templates/notification.html",
@@ -121,7 +121,7 @@ angular.module('Happystry.router', [])
             url: "/message/:id",
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'container@timeline': {
                     templateUrl: "/app/views/templates/message.html",
@@ -134,7 +134,7 @@ angular.module('Happystry.router', [])
             url: "/profile/:id",
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'container@timeline': {
                     templateUrl: "/app/views/templates/profile.html",
@@ -147,7 +147,7 @@ angular.module('Happystry.router', [])
             url: "/editProfile",
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'container@timeline': {
                     templateUrl: "/app/views/templates/editProfile.html",
@@ -160,7 +160,7 @@ angular.module('Happystry.router', [])
             url: "/editProfile",
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'container@timeline': {
                     templateUrl: "/app/views/templates/editProfile.html",
@@ -173,7 +173,7 @@ angular.module('Happystry.router', [])
             url: "/bookmark",
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'container@timeline': {
                     templateUrl: "/app/views/templates/bookmark.html",
@@ -186,7 +186,7 @@ angular.module('Happystry.router', [])
             url: "/rewardDetails/:id",
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'container@timeline': {
                     templateUrl: "/app/views/templates/rewardDetails.html",
@@ -200,7 +200,7 @@ angular.module('Happystry.router', [])
                 url: '/search/hashtag/:tag',
                 views: {
                     '': {
-                        templateUrl: '/app/views/controlDashboard.html'
+                        templateUrl: '/app/views/templates/controlDashboard.html'
                     },
                     'container@timeline': {
                         templateUrl: "/app/views/templates/timeline.html",
@@ -213,7 +213,7 @@ angular.module('Happystry.router', [])
             url: '/search/collection/:collection',
             views: {
                 '': {
-                    templateUrl: '/app/views/controlDashboard.html'
+                    templateUrl: '/app/views/templates/controlDashboard.html'
                 },
                 'container@timeline': {
                     templateUrl: "/app/views/templates/timeline.html",
@@ -227,10 +227,10 @@ angular.module('Happystry.router', [])
                 url: "/postdetails/:post_id",
                 views: {
                     '': {
-                        templateUrl: '/app/views/controlDashboard.html'
+                        templateUrl: '/app/views/templates/controlDashboard.html'
                     },
                     'container@timeline': {
-                        templateUrl: "/app/views/postdetails.html",
+                        templateUrl: "/app/views/templates/postdetails.html",
                         controller: "PostDetailsCtrl"
                     }
 
@@ -241,7 +241,7 @@ angular.module('Happystry.router', [])
                 url: "/new-Post",
                 views: {
                     '': {
-                        templateUrl: '/app/views/controlDashboard.html'
+                        templateUrl: '/app/views/templates/controlDashboard.html'
                     },
                     'container@timeline': {
                         templateUrl: "/app/views/templates/newPost.html",
@@ -255,7 +255,7 @@ angular.module('Happystry.router', [])
                 url: "/edit-Post/:id",
                 views: {
                     '': {
-                        templateUrl: '/app/views/controlDashboard.html'
+                        templateUrl: '/app/views/templates/controlDashboard.html'
                     },
                     'container@timeline': {
                         templateUrl: "/app/views/templates/editPost.html",
@@ -268,7 +268,7 @@ angular.module('Happystry.router', [])
                 url: "/search/query/user/:q",
                 views: {
                     '': {
-                        templateUrl: '/app/views/controlDashboard.html'
+                        templateUrl: '/app/views/templates/controlDashboard.html'
                     },
                     'container@timeline': {
                         templateUrl: "/app/views/templates/search.html",
@@ -281,7 +281,7 @@ angular.module('Happystry.router', [])
                 url: "/search/query/post/:q",
                 views: {
                     '': {
-                        templateUrl: '/app/views/controlDashboard.html'
+                        templateUrl: '/app/views/templates/controlDashboard.html'
                     },
                     'container@timeline': {
                         templateUrl: "/app/views/templates/search.html",

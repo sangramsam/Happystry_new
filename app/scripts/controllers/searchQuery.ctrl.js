@@ -25,6 +25,7 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
         $scope.isUser=false;
         $scope.isPost=false;
         $scope.dd = $stateParams.q;
+        //console.log('$stateParams',$stateParams.q);
         $scope.page=0;
         $scope.fcClk = function ($event) {
             angular.element('.sub-menu').removeClass('ngshow');
@@ -223,24 +224,11 @@ angular.module('Happystry.controllers').controller('searchQueryController', ['$s
             }
         };
         $scope.allUsers=function (word) {
-            $scope.contentLoaded=false;
-            console.log(word);
-            angular.element('#autosugg').hide();
-            $scope.isUser=true;
-            FilterService.getSuggestFilerUser($scope.page,word).then(function (response) {
-                $scope.getPostUserData=response.data.suggestion.users;
-                $scope.contentLoaded=true;
-            });
+            $state.go('timeline.Userquery', {q : word});
+
         }
         $scope.allPosts=function (word) {
-            $scope.contentLoaded=false;
-            console.log(word)
-            angular.element('#autosugg').hide();
-            $scope.isPost=true;
-            FilterService.getSuggestFilerPost($scope.page,word).then(function (response) {
-                $scope.getSuggPostData = response.data.suggestion.posts;
-                $scope.contentLoaded=true;
-            })
+            $state.go('timeline.Postquery', {q : word});
         }
         $scope.filLoc = 0;
         $scope.getGeoLoc = function () {
