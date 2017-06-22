@@ -142,6 +142,30 @@ angular.module('Happystry.services')
             });
             return deferred.promise;
         }
+        function showLike(postId) {
+            var user_id=localStorage.getItem("user_id");
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: Settings.BASE_URL + "post/likes?post_id=" + postId,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'User-Id':user_id,
+                    'HAPPI-API-KEY': 'TRR36-PDTHB-9XBHC-PPYQK-GBPKQ'
+                }
+            }).then(function (response, status, headers, config) {
+                deferred.resolve({
+                    status: status,
+                    data: response.data
+                });
+            }, function (response, status, headers, config) {
+                deferred.reject({
+                    status: status,
+                    data: response.data
+                });
+            });
+            return deferred.promise;
+        }
 
 
         return {
@@ -149,7 +173,8 @@ angular.module('Happystry.services')
             editComment:editComment,
             deleteComment:deleteComment,
             seeMoreComment:seeMoreComment,
-            sendLike:sendLike
+            sendLike:sendLike,
+            showLike:showLike
         }
 
     });

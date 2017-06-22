@@ -207,6 +207,19 @@ angular.module('Happystry.controllers')
                     })
                 }
             };
+            $scope.likepost = function (postid) {
+                $scope.loader = true;
+                var postId = postid;
+               comment.showLike(postId).then(function(response) {
+                   console.log(response);
+                    $scope.loader = false;
+                    $scope.getLikePopupData = response.data.likeDetails;
+                    setTimeout(function () {
+                        $.fancybox("#likes");
+                    }, 500);
+                }, function errorCallback(response) {
+                });
+            };
             //bookmark
 
             $scope.bookmark = function (e) {

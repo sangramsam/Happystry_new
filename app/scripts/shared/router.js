@@ -1,10 +1,4 @@
-/**
- * @name Happystry
- * @description
- * # Happystry
- * @author Anand Tiwari <anand.tiwari@appinessworld.com>
- * Main router of the application.
- */
+
 
 angular.module('Happystry.router', [])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
